@@ -1,0 +1,333 @@
+<ion-content class="detail-padding">
+  <!-- Product Image Panel -->
+  <div class="image-content">
+    <div class="image-panel">
+      <!-- Product Video -->
+      <video class="product-video" [src]="video" controls autoplay *ngIf="isVideoPanel == true"></video>
+      <!-- <img class="product-image" #img [src]="image" [alt]="name" (click)="openZoomModal(image)"
+        *ngIf="isVideoPanel == false" (error)="img.src='./assets/images/thumbnail.png'"> -->
+      <!-- Product Images -->
+      <ion-slides pager="true" class="home-slideshow image-panel" *ngIf="isVideoPanel == false">
+        <ion-slide *ngFor="let image of images" (click)="openZoomModal(image.image)">
+          <ion-img class="home-slideshow-slide" src="{{image.image}}"></ion-img>
+        </ion-slide>
+        <ion-slide *ngIf="images.length == 0" (click)="openZoomModal(image)">
+          <ion-img class="home-slideshow-slide" src="{{image}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+      <!-- Product Details Action -->
+      <ion-button class="back-button ios-top-margin" (click)="back()">
+        <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+      </ion-button>
+      <ion-button class="product-favourite ios-top-margin" *ngIf="!profileService.isLogin"
+        (click)="otherService.openSign()">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="product-favourite ios-top-margin" *ngIf="profileService.isLogin"
+        [class.product-on-my-favourite]="isFavorite == 1" (click)="favouriteProduct()">
+        <ion-icon name="heart-outline" *ngIf="isFavorite == 0"></ion-icon>
+        <ion-icon name="heart" *ngIf="isFavorite == 1"></ion-icon>
+      </ion-button>
+      <ion-button class="product-share" (click)="share()">
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-button>
+      <!-- Count Images -->
+      <div class="image-count" *ngIf="isVideoPanel == false">
+        1 / {{images.length || 1}}
+      </div>
+    </div>
+    <!-- Thumbnails -->
+    <div class="thumbnail-panel" *ngIf="video">
+      <div class="thumbnail-tabs">
+        <button class="thumbnail" (click)="isVideoPanel = true" [class.thumbnail-active]="isVideoPanel == true">
+          {{'video' | translate}}
+        </button>
+        <button class="thumbnail" (click)="isVideoPanel = false" [class.thumbnail-active]="isVideoPanel == false">
+          {{'images' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Product Title -->
+  <section class="product-name">
+    <p class="product-title">
+      {{name}}
+      <span class="product-quantity" *ngIf="quantity> 0 && quantity < 1000">
+        {{'quantity' | translate}} : {{quantity}}
+      </span>
+      <span class="product-quantity-stock" *ngIf="quantity == 0">
+        {{'outOfStock' | translate}}
+      </span>
+      <span class="product-quantity" *ngIf="quantity> 1000">
+        {{'quantity' | translate}} : {{'alwaysAvailable' | translate}}
+      </span>
+    </p>
+  </section>
+  <!-- Show Product Id for IT-Support and Mardin Account -->
+  <button class="product-id ion-activatable" (click)="copy()"
+    *ngIf="(profileService.userId() === 156715) || (profileService.userId() ===  157394)">
+    <span>{{productId}}</span>
+    <ion-icon name="copy-outline"></ion-icon>
+    <ion-ripple-effect></ion-ripple-effect>
+    <input type="text" id="productId" [value]="productId" style="position: absolute; opacity: 0; pointer-events: none;"
+      readonly>
+  </button>
+  <!-- Product Description & Specification & Reviews -->
+  <section class="product-section">
+    <!-- Tabs -->
+    <div class="product-section-tabs">
+      <button class="product-section-tab" [class.section-active-tab]="sectionTab == 'description'"
+        (click)="sectionTab = 'description'">
+        {{'description' | translate}}
+      </button>
+      <button class="product-section-tab" [class.section-active-tab]="sectionTab == 'specifications'"
+        (click)="sectionTab = 'specifications'">
+        {{'specifications' | translate}}
+      </button>
+      <button class="product-section-tab" [class.section-active-tab]="sectionTab == 'rating'"
+        (click)="sectionTab = 'rating'">
+        {{'ratings' | translate}} {{avgRating > 0 ? avgRating : ''}}
+      </button>
+    </div>
+    <!-- Product Description -->
+    <div class="product-description" [innerText]="description" *ngIf="sectionTab == 'description'"></div>
+    <div class="product-does-not" *ngIf="sectionTab == 'description' && !description">
+      {{'doesNotDescription' | translate}}
+    </div>
+    <!-- Product Specification -->
+    <div *ngIf="sectionTab == 'specifications'">
+      <div class="specification-list" *ngFor="let item of specifications">
+        <label class="specification-label">{{item.getChara.title}}</label>
+        <label class="specification-title">{{item.chara_value}}</label>
+      </div>
+    </div>
+    <div class="product-does-not" *ngIf="sectionTab == 'specifications' && specifications == 0">
+      {{'doesNotSpecifications' | translate}}
+    </div>
+    <!-- Product Reviews -->
+    <div *ngIf="sectionTab == 'rating'">
+      <div class="ratings-panel">
+        <div class="ratings-number">
+          {{avgRating}}
+          <p class="rating-number-text">{{countRating}} {{'ratings' | translate}}</p>
+        </div>
+        <div class="ratings-star-panel">
+          <div class="ratings-star-range" *ngFor="let item of ratingRange">
+            <span> {{item.rating}} <img src="./assets/images/ratings/star-fill.svg" alt=""></span>
+            <span class="star-rating" style="--get-star-range: {{item.ratio}}%"></span>
+          </div>
+        </div>
+        <button class="reviews-writing" (click)="writeReview()" *ngIf="myReviews.length == 0 && profileService.isLogin">
+          {{'writeReview' | translate}}
+        </button>
+      </div>
+      <div class="reviews-panel" *ngIf="myReviews.length> 0 || reviews.length > 0">
+        <section class="review-section" *ngFor="let item of myReviews">
+          <div class="review-section-header">
+            <img class="review-section-image" src="{{item.user.profile_picture}}" #avatar
+              (error)="avatar.src= './assets/avatar/avatar.svg'" alt="{{item.user.nickname}}">
+            <div class="review-title-panel">
+              <div class="review-title-name">{{item.user.nickname}}</div>
+              <div class="review-title-meta">
+                <div class="review-title-star">
+                  <span *ngFor="let star of [1, 2, 3, 4, 5]">
+                    <img *ngIf="star <= item.rating" src="./assets/images/ratings/star-fill.svg" alt="{{item.rating}}">
+                    <img *ngIf="star> item.rating" src="./assets/images/ratings/star.svg" alt="{{item.rating}}">
+                  </span>
+                  <div class="review-date">{{item.ctime}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="review-description">{{item.description}}</div>
+          <div class="review-images">
+            <img *ngFor="let img of item.reviewImage" src="{{img.image}}" alt="{{img.id}}"
+              (click)="openZoomModal(img.image)">
+          </div>
+          <div class="review-action">
+            <div class="review-action-like">
+              <img src="./assets/images/like.svg" alt="">
+              <span>{{item.countLiked}}</span>
+            </div>
+            <button class="review-action-like" (click)="writeReview(false)">
+              <img src="./assets/images/edit.svg" alt="">
+              <span>{{'edit' | translate}}</span>
+            </button>
+            <button class="review-action-delete" (click)="deleteMyReview(item.id)">
+              <img src="./assets/images/delete.svg" alt="">
+              <span>{{'delete' | translate}}</span>
+            </button>
+          </div>
+        </section>
+        <section class="review-section" *ngFor="let item of reviews">
+          <div class="review-section-header">
+            <img class="review-section-image" src="{{item.user.profile_picture}}" #avatar
+              (error)="avatar.src= './assets/avatar/avatar.svg'" alt="{{item.user.nickname}}">
+            <div class="review-title-panel">
+              <div class="review-title-name">
+                {{item.user.nickname}}
+                <span class="review-product-bought">
+                  <img src="./assets/images/bought.png" *ngIf="item.bought_product">
+                  <img src="./assets/images/not-bought.png" *ngIf="!item.bought_product">
+                  {{item.bought_product ? ('boughtIt' | translate) : ('notBoughtIt'| translate)}}
+                </span>
+              </div>
+              <div class="review-title-meta">
+                <div class="review-title-star">
+                  <span *ngFor="let star of [1, 2, 3, 4, 5]">
+                    <img *ngIf="star <= item.rating" src="./assets/images/ratings/star-fill.svg" alt="{{item.rating}}">
+                    <img *ngIf="star> item.rating" src="./assets/images/ratings/star.svg" alt="{{item.rating}}">
+                  </span>
+                  <div class="review-date">{{item.ctime}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="review-description">{{item.description}}</div>
+          <div class="review-images">
+            <img *ngFor="let img of item.reviewImage" src="{{img.image}}" alt="{{img.id}}"
+              (click)="openZoomModal(img.image)">
+          </div>
+          <div class="review-action">
+            <button class="review-action-like" [class.review-action-liked]="item.reviewLiked"
+              (click)="likeReview(item.id)">
+              <img src="./assets/images/like.svg" alt="">
+              <span>{{item.countLiked}}</span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+  <!-- Product Color & Size -->
+  <section class="product-section">
+    <!-- Color -->
+    <p class="product-section-title" *ngIf="colorSkeleton.length > 1 || colors.length> 1">
+      {{'selectColor' | translate}}
+    </p>
+    <div class="product-section-content product-section-color" *ngIf="colors.length> 1">
+      <div class="product-color" *ngFor="let item of colors" [class.color-active]="productColor == item"
+        (click)="productColor= item; changeColor(item)" style="--bg-color: {{item.color_hex}}">
+        <img [src]="item.thumb">
+      </div>
+    </div>
+    <div class="product-section-content product-section-color" *ngIf="colors.length == 0">
+      <ion-thumbnail slot="start" class="product-section-image" *ngFor="let
+            item of colorSkeleton">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+    </div>
+    <!-- Size -->
+    <p class="product-section-title">{{'selectSize' | translate}}</p>
+    <div class="product-section-size">
+      <button class="size-button" *ngFor="let item of sizes" [class.size-active]="productSize == item"
+        [class.size-out-of-stock]="item.quantity == 0" (click)="selectSize(item)">
+        {{item.value || item.t_size}}
+      </button>
+    </div>
+    <span class="product-size-stock" *ngIf="quantity == 0">
+      {{'outOfStock' | translate}}
+    </span>
+  </section>
+  <!-- Product Price -->
+  <section class="product-section-price">
+    <div class="product-stock">
+      <div class="product-price">
+        <div class="product-price-value" *ngIf="!discount">
+          {{otherService.comma(price, currency_id)}}<span>{{otherService.currency}}</span>
+        </div>
+        <div class="product-discount" *ngIf="discount">
+          <p class="product-price-new">{{otherService.comma(calcDiscount(price, percentage), currency_id)}}
+            <span>{{otherService.currency}}</span>
+          </p>
+          <div class="product-price-old">
+            <span>{{otherService.comma(price, currency_id)}}</span> -{{percentage}}%
+            <div *ngIf="discount" class="discount-time">{{discountTime}} </div>
+          </div>
+        </div>
+        <p class="product-point" *ngIf="asPoint">{{point | number}} pt.</p>
+      </div>
+      <div class="product-action" *ngIf="!productOnMyCart && quantity != 0">
+        <button class="product-action-button" [class.product-action-disabled]="productCount == 1"
+          [disabled]="productCount == 1" (click)="productCount = productCount - 1">
+          <ion-icon name="remove-outline"></ion-icon>
+        </button>
+        <span>{{productCount}}</span>
+        <button class="product-action-button" (click)="productCount = productCount + 1"
+          [class.product-action-disabled]="productCount >= quantity" [disabled]="productCount >= quantity">
+          <ion-icon name="add-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
+    <div class="product-sold" *ngIf="!productOnMyCart && quantity != 0">
+      <button class="submit-button" [disabled]="!market" (click)="buyNow()">
+        {{'buyNow' | translate}}
+      </button>
+      <button class="submit-button action-icon" [disabled]="!market" (click)="addProductToCart()">
+        <ion-icon name="cart-outline"></ion-icon>
+      </button>
+    </div>
+    <!-- If Product On My Cart -->
+    <div class="product-on-your-cart" *ngIf="productOnMyCart && quantity != 0">
+      {{'productOnYorCart' | translate}}
+    </div>
+  </section>
+  <!-- Note Section -->
+  <section class="product-section" *ngIf="isReturned != null">
+    <div class="product-section-note">
+      <span class="note">{{'note' | translate}}</span>
+      <hr>
+      <div class="product-section-delivery" *ngIf="isReturned != null">
+        <ion-icon name="reload-outline"></ion-icon>
+        <p>{{isReturned}}</p>
+      </div>
+      <hr *ngIf="canBuyWithZoodpay">
+      <div class="product-section-delivery" *ngIf="canBuyWithZoodpay">
+        <img src="./assets/others/zoodpay.png" class="zood-pay" alt="zoodpay">
+        <p>{{'installment' | translate}}</p>
+      </div>
+    </div>
+  </section>
+  <!-- Market Coupons -->
+  <!-- <div class="market-coupons" *ngIf="marketCoupons !== null" translate
+      [translateParams]="{ amount: otherService.comma(marketCoupons.amount, currency), value: otherService.comma(marketCoupons.value, currency) }">
+      marketCouponsMessage
+    </div> -->
+  <!-- Shop and Brand -->
+  <section class="product-filter" *ngIf="market || brand">
+    <div class="product-filter-item" *ngIf="market">
+      <span class="product-filter-title">{{'shop' | translate}}</span>
+      <button (click)="openShop()">
+        <img src="{{market?.logo || './assets/avatar/avatar.svg'}}" alt="{{name}}">
+        <p>{{market?.title}}</p>
+        <ion-icon name="{{icons.detailIcon()}}"></ion-icon>
+      </button>
+    </div>
+    <div class="space" *ngIf="market && brand"></div>
+    <div class="product-filter-item" *ngIf="brand">
+      <span class="product-filter-title">{{'brand' | translate}}</span>
+      <button (click)="openBrand()">
+        <img src="{{brand?.image || './assets/avatar/avatar.svg'}}" alt="{{name}}">
+        <p>{{brand?.name}}</p>
+        <ion-icon name="{{icons.detailIcon()}}"></ion-icon>
+      </button>
+    </div>
+  </section>
+  <!-- Product Ratings & Reviews -->
+  <!-- Product Similar -->
+  <section class="section-panel product-similar" *ngIf="similarProducts.length> 0">
+    <div class="section-header" routerLink="grocery">
+      <p class="section-title">{{'similarProduct' | translate}}</p>
+    </div>
+    <ion-slides [options]="productSlidesOption">
+      <ion-slide *ngFor="let item of similarProducts">
+        <zi-card [item]="item"></zi-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="productSlidesOption" *ngIf="similarProducts.length < 1">
+      <ion-slide *ngFor="let item of [].constructor(5)">
+        <zi-card-skeleton></zi-card-skeleton>
+      </ion-slide>
+    </ion-slides>
+  </section>
+</ion-content>

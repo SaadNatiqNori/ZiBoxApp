@@ -1,0 +1,41 @@
+// Modal
+.content {
+  position: relative;
+  display: block;
+  height: 100%;
+  background-color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.back-button {
+  z-index: 2;
+}
+
+.refer-padding {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: 75px;
+  padding: 15px;
+}
+
+.loginForm {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+}
+
+.note {
+  position: relative;
+  display: block;
+  margin-top: 25px;
+  font-size: 12px;
+  color: #000;
+}
+
+.note>span {
+  color: #ff3334;
+}

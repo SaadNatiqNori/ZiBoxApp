@@ -1,0 +1,70 @@
+<!-- Title bar -->
+<ion-toolbar class="grocery-toolbar">
+  <div class="grocery-toolbar-panel">
+    <button class="grocery-toolbar-button ion-activatable" title="Sell on ZiBox" routerLink="../">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <div class="grocery-toolbar-title">{{'food' | translate}}</div>
+  </div>
+</ion-toolbar>
+<ion-content class="grocery-padding">
+  <!-- Section Categories -->
+  <div class="section-panel">
+    <div class="section-header">
+      <p class="section-title">{{'categories' | translate}}</p>
+    </div>
+    <div class="section-categories" *ngIf="categories.length > 0">
+      <div class="section-category-item" *ngFor="let item of categories" (click)="openCategory(item)"
+        style="--category-background-color: {{item.bg_color}}">
+        <div class="section-category-image">
+          <img src="{{item.icon_square}}" alt="">
+        </div>
+        <label class="section-category-title">{{item.name}}</label>
+      </div>
+    </div>
+    <div class="section-categories" *ngIf="categories.length < 1">
+      <div class="section-category-item" *ngFor="let item of [].constructor(4)">
+        <ion-skeleton-text class="section-category-image" [animated]="true" style="width: 100%;"></ion-skeleton-text>
+        <ion-skeleton-text class="section-category-title" [animated]="true" style="width: 60%;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+  <hr class="gray-line">
+  <!-- All Grocery Products -->
+  <div class="section-panel" id="productPanel">
+    <div class="section-header">
+      <p class="section-title">{{'products' | translate}}</p>
+      <select class="section-sort" #so (change)="filter(so.value)">
+        <option value="newly_arrived">{{'newlyArrived' | translate}}</option>
+        <option value="low_to_high">{{'lowToHigh' | translate}}</option>
+        <option value="high_to_low">{{'highToLow' | translate}}</option>
+      </select>
+    </div>
+    <div class="product-container" *ngIf="items.length > 0">
+      <zi-card *ngFor="let item of items" [item]="item"></zi-card>
+    </div>
+    <div class="empty-items" *ngIf="items.length == 0 && !isLoading">
+      <img src="./assets/gif/no-products-found.gif" alt="">
+      {{'noProductsFound' | translate}}
+    </div>
+    <div class="product-container" *ngIf="items.length < 1 && isLoading">
+      <zi-card-skeleton *ngFor="let item of [].constructor(12)"></zi-card-skeleton>
+    </div>
+    <!-- Infinity Scrolling -->
+    <ion-infinite-scroll class="scroll-loading" loadingSpinner="bubbles" (ionInfinite)="onIonInfinite($event)"
+      *ngIf="items.length > 0">
+      <ion-infinite-scroll-content *ngIf="pageNumber <= pageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="pageNumber > pageCount && items.length > 10" (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+  </div>
+  <!-- Pull Down to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-Log_out">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Log_out" data-name="Log out" clip-path="url(#clip-Log_out)">
+    <g id="Iconly_Bulk_Logout" data-name="Iconly/Bulk/Logout" transform="translate(-2 -2)">
+      <g id="Logout" transform="translate(2 2)">
+        <path id="Fill-1" d="M0,5.336A5.391,5.391,0,0,1,5.429,0h5.953A5.377,5.377,0,0,1,16.8,5.324V18.664A5.39,5.39,0,0,1,11.369,24H5.418A5.377,5.377,0,0,1,0,18.676V5.336Z" opacity="0.4"/>
+        <path id="Fill-3" d="M22.375,10.082,18.96,6.591a.883.883,0,0,0-1.273,0,.942.942,0,0,0,0,1.307l1.871,1.912H7.7a.924.924,0,0,0,0,1.848H19.561L17.69,13.571a.942.942,0,0,0,0,1.307.882.882,0,0,0,1.273,0l3.415-3.49a.94.94,0,0,0,0-1.309" transform="translate(1.36 1.264)"/>
+      </g>
+    </g>
+  </g>
+</svg>

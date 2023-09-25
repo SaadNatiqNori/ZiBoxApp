@@ -1,0 +1,72 @@
+<!-- Custom Toolbar -->
+<ion-toolbar class="custom-toolbar">
+  <div class="custom-toolbar-panel">
+    <ion-button class="custom-toolbar-button white-toolbar-button"  (click)="close()">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+    </ion-button>
+    <p class="custom-toolbar-title">{{"filter.filter" | translate}}</p>
+  </div>
+</ion-toolbar>
+<!-- My Favourites Content -->
+<ion-content class="fashion-filter-padding">
+  <section class="filter-section">
+    <p class="filter-section-title">{{'gender' | translate}}</p>
+    <div class="filter-section-select">
+      <button [class.filter-select]="gender == 'men'" (click)="changeGender('men')">
+        {{'filter.men' | translate}}
+      </button>
+      <button [class.filter-select]="gender == 'women'" (click)="changeGender('women')">
+        {{'filter.women' | translate}}
+      </button>
+      <button [class.filter-select]="gender == 'boys'" (click)="changeGender('boys')">
+        {{'filter.boys' | translate}}
+      </button>
+      <button [class.filter-select]="gender == 'girls'" (click)="changeGender('girls')">
+        {{'filter.girls' | translate}}
+      </button>
+    </div>
+  </section>
+  <section class="filter-section" *ngIf="gender">
+    <p class="filter-section-title">{{'categories' | translate}}</p>
+    <div class="filter-section-select">
+      <button *ngFor="let item of categoriesData" [class.filter-select]="chooseCategories.indexOf(item.id) > -1"
+        (click)="selectCategory(item.id)">{{item.category_name}}</button>
+    </div>
+    <div class="filter-section-select" *ngIf="categoriesData.length < 1">
+      <button *ngFor="let item of [1,2,3,4,5]">
+        <ion-skeleton-text animated="true"></ion-skeleton-text>
+      </button>
+    </div>
+  </section>
+  <section class="filter-section" *ngIf="gender == 'men' || gender == 'women'">
+    <p class="filter-section-title">{{'size' | translate}}</p>
+    <div class="filter-section-select">
+      <button *ngFor="let item of sizesData" [class.filter-select]="chooseSizes.indexOf(item.t_size) > -1"
+        (click)="selectSize(item.t_size)">{{item.t_size}}</button>
+    </div>
+    <div class="filter-section-select" *ngIf="sizesData.length < 1">
+      <button *ngFor="let item of [1,2,3]">
+        <ion-skeleton-text animated="true"></ion-skeleton-text>
+      </button>
+    </div>
+  </section>
+  <section class="filter-section" *ngIf="gender && priceRange.max_price > 0">
+    <p class="filter-section-title">{{'price' | translate}}</p>
+    <div class="filter-range">
+      <span>{{otherService.comma(minPrice)}}</span>
+      <ion-range [dualKnobs]="true" [min]="priceRange.min_price" [max]="priceRange.max_price"
+        [value]="{ lower: priceRange.min_price, upper: priceRange.max_price }"
+        (ionChange)="onPriceChange($event)"></ion-range>
+      <span>{{otherService.comma(maxPrice)}}</span>
+    </div>
+  </section>
+</ion-content>
+
+<footer class="product-footer filter-footer">
+  <ion-button class="product-footer-button" (click)="clearFilter()">
+    {{'clear' | translate}}
+  </ion-button>
+  <ion-button class="product-footer-button" (click)="applyFilter()">
+    {{'apply' | translate}}
+  </ion-button>
+</footer>

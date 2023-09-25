@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ZiBox</string>
+    <string name="title_activity_main">ZiBox</string>
+    <string name="package_name">com.ionicframework.zitrade271041</string>
+    <string name="custom_url_scheme">com.ionicframework.zitrade271041</string>
+    <!-- Facebook -->
+    <string name="facebook_app_id">1862394173879972</string>
+    <string name="facebook_client_token">[CLIENT_TOKEN]</string>
+    <!-- Google -->
+    <string name="server_client_id">691527637295-280dl992d8h6uqtajbv094h1k5c4dn48.apps.googleusercontent.com</string>
+</resources>

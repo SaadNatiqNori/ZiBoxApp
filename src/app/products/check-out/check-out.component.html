@@ -1,0 +1,217 @@
+<div class="content">
+  <ion-button class="back-button ios-top-margin" (click)="close()">
+    <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+  </ion-button>
+  <div class="cart-padding">
+    <h1 class="page-title">{{'cart' | translate}}</h1>
+    <div class="check-out-products">
+      <div class="check-out-products-panel">
+        <div class="check-out-product" *ngFor="let item of products">
+          <img src="{{item.thumb}}" [alt]="item.title">
+          <img class="zood-pay" src="./assets/others/zoodpay.png" alt="zoodpay" *ngIf="item.zoodpay_status">
+          <div class="check-out-product-information">
+            <span>{{item.title}}</span>
+            <span *ngIf="!item.discount">{{item.count}} x {{otherService.comma(item.price, item.currency)}}
+              {{this.otherService.currency}}</span>
+            <span *ngIf="item.discount">
+              {{item.count}} x
+              {{otherService.comma(calcDiscount(item.price, item.percentage || item.discount.percentage),
+              item.currency)}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Point Products -->
+    <p class="check-out-section-title" *ngIf="pointProducts.length > 0">{{'buyByPoint' | translate}}</p>
+    <div class="check-out-point-products" *ngIf="pointProducts.length > 0">
+      <div class="check-out-products-panel">
+        <div class="check-out-point-product" *ngFor="let item of pointProducts" (click)="pointProduct(item)">
+          <img src="{{item.thumb}}" alt="">
+          <div class="check-out-point-product-information">
+            <span>1 x {{item.point}} pt.</span>
+            <span>{{'size' | translate}}: {{item.choose_size}}</span>
+          </div>
+          <span class="point-product" [class.point-product-selected]="item.choose_size_id == pointProductId"></span>
+        </div>
+      </div>
+    </div>
+    <div class="price-convert-to-point" *ngIf="productPointValue">
+      <span>{{otherService.comma(''+productPointPrice, productPointCurrency)}} {{this.otherService.currency}}</span>
+      <ion-icon name="swap-horizontal-outline"></ion-icon>
+      <span>{{productPointValue}} pt.</span>
+    </div>
+    <div class="split"></div>
+    <!-- Address -->
+    <p class="check-out-section-title">{{'address' | translate}}</p>
+    <div class="check-out-section-address">
+      <div class="control-style control-dropdown">
+        <select class="control-select" #selectAddress (change)="changeAddress(selectAddress.value)">
+          <option *ngFor="let item of addresses" [selected]="item.as_default" [value]="item.city">{{getAddress(item)}}
+          </option>
+        </select>
+      </div>
+      <button class="check-out-add-address" (click)="openEditModal()" *ngIf="addresses.length < 5"
+        [disabled]="addAddressIsLoading">
+        <ion-icon name="add-outline"></ion-icon>
+        <div class="button-loading" *ngIf="addAddressIsLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <!-- Note -->
+    <p class="check-out-section-title">{{'note' | translate}}</p>
+    <div class="control-style">
+      <textarea class="control-textarea" placeholder="{{'noteQuestion' | translate}}"
+        [(ngModel)]="description"></textarea>
+    </div>
+    <div class="split"></div>
+    <!-- Delivery Type -->
+    <p class="check-out-section-title">{{'deliveryType' | translate}}</p>
+    <div>
+      <div class="radio-style" (click)="selectDeliveryType('same_day')">
+        <input type="radio" name="deliveryType" id="sameDayDelivery" [checked]="deliveryType == 'same_day'">
+        <label for="sameDayDelivery"></label>
+        <label for="sameDayDelivery"><label for="sameDayDelivery">{{'sameDayDelivery' | translate}}</label></label>
+      </div>
+      <div class="radio-style" (click)="selectDeliveryType('week')">
+        <input type="radio" name="deliveryType" id="weekDelivery" [checked]="deliveryType == 'week'">
+        <label for="weekDelivery"></label>
+        <label for="weekDelivery"><label for="weekDelivery">{{'weekDelivery' | translate}}</label></label>
+      </div>
+    </div>
+    <div class="split"></div>
+    <!-- Promotion Code -->
+    <p class="check-out-section-title">{{'promotionCode' | translate}}</p>
+    <div class="check-out-section-address" *ngIf="promotionCodePrice == 0">
+      <div class="control-style">
+        <input type="text" class="control-input" [(ngModel)]="promotionCode">
+      </div>
+      <button class="check-out-add-address" (click)="applyPromotionCode(promotionCode)" *ngIf="addresses.length < 5"
+        [disabled]="promotionCode.length < 3 || promotionCodeLoading">
+        <ion-icon name="checkmark-outline"></ion-icon>
+        <div class="button-loading" *ngIf="promotionCodeLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <div class="check-out-section-address" *ngIf="promotionCodePrice > 0">
+      <div class="control-style">
+        <div class="control-value">
+          {{promotionCode}} ({{promotionCodePrice > 0? otherService.comma(promotionCodePrice.toString(), { id:
+          otherService.currency }) : 0}}
+          {{otherService.currency}})
+        </div>
+      </div>
+      <button class="check-out-delete-promotion" (click)="removePromotionCode()" *ngIf="addresses.length < 5"
+        [disabled]="promotionCode.length < 3 || promotionCodeLoading">
+        <ion-icon name="close-outline"></ion-icon>
+        <div class="button-loading" *ngIf="promotionCodeLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <div class="split"></div>
+    <!-- Payment Type -->
+    <p class="check-out-section-title">{{'paymentType' | translate}}</p>
+    <div>
+      <div class="radio-style" (click)="selectPayment('cash')">
+        <input type="radio" name="payment" id="cash" [checked]="paymentType == 'cash'">
+        <label for="cash"></label>
+        <label for="cash"><label for="cash">{{'cash' | translate}}</label></label>
+      </div>
+      <div class="radio-style" *ngFor="let item of paymentMethod" (click)="selectPayment(item.method)">
+        <input type="radio" name="payment" [id]="item.method" [checked]="paymentType == item.method">
+        <label [for]="item.method"></label>
+        <label [for]="item.method">
+          <img [src]="item.icon" [alt]="item.method">
+        </label>
+      </div>
+      <div class="radio-style" (click)="selectPayment('zoodpay')" *ngIf="canPayWithZoodpay">
+        <input type="radio" name="payment" id="zoodpay" [checked]="paymentType == 'zoodpay'">
+        <label for="zoodpay"></label>
+        <label for="zoodpay">
+          <img src="https://dev-zimarketplace.s3.eu-central-1.amazonaws.com/others/QY8Byak2zi.png" style="height: 14px;" alt="zoodpay">
+        </label>
+      </div>
+    </div>
+    <div class="split"></div>
+    <!-- Price -->
+    <section class="price-section">
+      <div class="check-out-payment">
+        <span class="check-out-payment-title">{{'total' | translate}}: </span>
+        <span class="check-out-payment-price">{{otherService.comma(total)}} {{otherService.currency}}</span>
+      </div>
+      <div class="check-out-payment">
+        <span class="check-out-payment-title">{{'delivery' | translate}}: </span>
+        <span class="check-out-payment-price">{{+cityPrice > 0 ? '+ ' + otherService.comma(cityPrice, { id: 4 }) : 0}}
+          {{otherService.currency}}</span>
+      </div>
+      <div class="check-out-payment" *ngIf="productPointValue">
+        <span class="check-out-payment-title">{{'points' | translate}}: </span>
+        <span class="check-out-payment-price">
+          {{productPointValue}} pt.
+          ( -{{otherService.comma(''+productPointPrice, productPointCurrency)}} {{this.otherService.currency}})
+        </span>
+      </div>
+      <div class="check-out-payment">
+        <span class="check-out-payment-title">{{'promotionCode' | translate}}: </span>
+        <span class="check-out-payment-price">
+          {{promotionCodePrice > 0? '-' +
+          otherService.comma(promotionCodePrice.toString(), { id: otherService.currency }) : 0}}
+          {{otherService.currency}}
+        </span>
+      </div>
+      <hr>
+      <div class="check-out-payment-total">
+        <span class="check-out-payment-title">{{'totalToPay' | translate}}: </span>
+        <span class="check-out-payment-price">{{calcPrices()}} {{otherService.currency}}</span>
+      </div>
+    </section>
+    <!-- Submit -->
+    <button class="submit-button ion-activatable" (click)="submit()"
+      [disabled]="addresses.length == 0 || addAddressIsLoading || isLoading">
+      {{'submit' | translate}}
+      <div class="button-loading" *ngIf="isLoading">
+        <svg viewBox="0 0 50 50">
+          <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+        </svg>
+      </div>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- Loading -->
+    <div class="button-loading page-loading" *ngIf="cardIsLoading">
+      <svg viewBox="0 0 50 50">
+        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+      </svg>
+      {{'pleaseWait' | translate}}
+    </div>
+  </div>
+</div>
+<!-- Successfully Order Modal -->
+<div class="central-modal-window" [class.show-central-modal]="isSuccessfull">
+  <div class="central-modal-content">
+    <div class="central-modal-image">
+      <img src="./assets/orders/successfully.png">
+    </div>
+    <p class="central-modal-title">{{'congratulation' | translate}}</p>
+    <p class="central-modal-meta"></p>
+    <p>{{'orderMessage' | translate}}</p>
+    <footer class="central-modal-footer">
+      <button class="central-modal-button-border ion-activatable" (click)="openPage('/home/marketplace')">
+        {{'platforms.marketplace' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+      <button class="central-modal-button ion-activatable" (click)="openPage('/menu/my-orders')">
+        {{'myOrders' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </footer>
+  </div>
+</div>

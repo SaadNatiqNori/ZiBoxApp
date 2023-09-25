@@ -1,0 +1,107 @@
+.sign-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+  background-color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.logo {
+  position: relative;
+  display: block;
+  width: 75px;
+  margin: 100px auto 50px auto;
+}
+
+.title,
+.meta {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  text-align: justify;
+  text-align-last: center;
+}
+
+.title {
+  font-weight: 900;
+  margin-bottom: 15px;
+}
+
+.meta {
+  font-size: 14px;
+  margin-bottom: 50px;
+}
+
+.sign-button {
+  position: relative;
+  display: flex;
+  grid-template-columns: 22px auto;
+  place-items: center;
+  place-content: center;
+  width: 100%;
+  max-width: 350px;
+  height: 46px;
+  margin: 15px auto;
+  padding: 10px 5px;
+  color: #000;
+  font-size: 14px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.sign-button img {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin: 0 5px;
+}
+
+.sign-button span {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 5px;
+  text-align: center;
+}
+
+// Pages
+.pages {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 0;
+  left: 100%;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.pages-rtl {
+  left: 0;
+  right: 100%;
+}
+
+.active-page {
+  left: 0;
+  opacity: 1;
+  pointer-events: all;
+  z-index: 1;
+}
+
+.pages-rtl.active-page {
+  right: 0;
+}

@@ -1,0 +1,71 @@
+<!-- My Points Content -->
+<ion-content class="ion-padding">
+  <div class="toolbar">
+    <div class="toolbar-background"></div>
+    <ion-button class="back-button ios-top-margin" routerLink="../">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+    </ion-button>
+    <div class="points">
+      <div class="my-points">
+        <span>{{minPoint}}</span>
+        <div class="circle-panel">
+          <svg viewBox="0 0 300 300">
+            <circle cx="100" cy="100" r="57" fill="none" stroke="#EEEEEE" stroke-width="20" stroke-dasharray="270,20000"
+              transform="rotate(135,100,100)" />
+            <circle cx="100" cy="100" r="57" id="circleValue" fill="none" stroke="#99cc00" stroke-width="20"
+              stroke-dasharray="0,20000" transform="rotate(135,100,100)" />
+            <circle cx="100" cy="100" r="57" fill="none" stroke="#FFFFFF" stroke-width="24" stroke-dasharray="2 52"
+              transform="rotate(135,100,100)" />
+            <text text-anchor="middle" x="100" y="83" style="font-size: 12px;">{{'points' | translate}}</text>
+            <text id="myPoints" text-anchor="middle" x="100" y="115" style="font-size: 30px;">{{points}}</text>
+          </svg>
+        </div>
+        <span>{{maxPoint}}</span>
+      </div>
+      <label>1 <span>pt.</span> = 1,000 <span>IQD</span></label>
+      <button class="how-to-get-button ion-activatable" (click)="openReferFriendModals()">
+        {{'howToGetIt' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </div>
+    <div class="point-slides">
+      <div class="point-slide">
+        {{'ziCreditslideOne' | translate}}
+        </div>
+      <!-- <div class="point-slide">
+        {{'ziCreditslideTwo' | translate}}
+      </div> -->
+      <div class="point-slide">
+        {{'ziCreditslideThree' | translate}}
+      </div>
+    </div>
+  </div>
+  <!-- Point Products -->
+  <div class="section-panel" id="productPanel">
+    <div class="section-header">
+      <p class="section-title">{{'shopByPoint' | translate}}</p>
+    </div>
+    <div class="product-container">
+      <zi-card *ngFor="let item of items" [item]="item" [isPoint]="true"></zi-card>
+    </div>
+    <div class="product-container" *ngIf="items.length < 1">
+      <zi-card-skeleton *ngFor="let item of [0,1,2,3,4,5,6,7,8,9]"></zi-card-skeleton>
+    </div>
+    <!-- Infinity Scrolling -->
+    <ion-infinite-scroll class="scroll-loading" loadingSpinner="bubbles" (ionInfinite)="onIonInfinite($event)"
+      *ngIf="items.length > 0">
+      <ion-infinite-scroll-content *ngIf="pageNumber <= pageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="pageNumber > pageCount && items.length > 10" (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+  </div>
+  <!-- Pull Down to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+</ion-content>

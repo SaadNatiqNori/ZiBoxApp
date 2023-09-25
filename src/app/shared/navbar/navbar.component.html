@@ -1,0 +1,57 @@
+<div slot="bottom" id="menuNavbar" class="menu-navbar"
+  [class.hide-search]="router.url.includes('product') && !router.url.includes('products')">
+  <!-- Home -->
+  <button class="menu-button ion-activatable" [class.active-menu]="router.url.includes('home')"
+    (click)="navigateRoot('home/marketplace')">
+    <img [src]="router.url.includes('home')? 'assets/navbar/home.svg' : 'assets/navbar/home-outline.svg'">
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+  <!-- Message -->
+  <button class="menu-button ion-activatable" [class.active-menu]="router.url.includes('categories')"
+    (click)="navigateRoot('filter/categories')">
+    <img [src]="router.url.includes('filter')? 'assets/navbar/category.svg' : 'assets/navbar/category-outline.svg'">
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+  <!-- Cart -->
+  <div></div>
+  <!-- Live -->
+  <button class="menu-button ion-activatable" [class.active-menu]="router.url.includes('live')"
+    (click)="navigateRoot('live')">
+    <img [src]="router.url.includes('live')? 'assets/navbar/live.svg' : 'assets/navbar/live-outline.svg'">
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+  <!-- Menu -->
+  <button class="menu-button ion-activatable" [class.active-menu]="router.url.includes('menu')"
+    (click)="navigateRoot('menu')">
+    <img [src]="router.url.includes('menu')? 'assets/navbar/menu.svg' : 'assets/navbar/menu-outline.svg'">
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+  <img src="assets/navbar/fire.gif" alt="Newroz" class="newroz" *ngIf="showNewroz">
+  <!-- Cart Button -->
+  <button class="menu-card-button ion-activatable" [class.active-menu-card]="router.url.includes('cart')"
+    [class.active-menu-ramadan]="router.url.includes('cart') && showRamadan" [class.ramadan]="showRamadan"
+    (click)="navigateRoot('cart')">
+    <ion-img [src]="router.url.includes('cart')? 'assets/navbar/cart.svg' : 'assets/navbar/cart-outline.svg'">
+    </ion-img>
+    <img src="assets/navbar/moon.gif" alt="Ramadan" *ngIf="showRamadan">
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+</div>
+<!-- Update Modal -->
+<div class="central-modal-window" [class.show-central-modal]="showUpdate">
+  <div class="central-modal-content">
+    <div class="central-modal-image-animation">
+      <img src="./assets/update/refresh.png" alt="Update Application">
+      <img src="./assets/update/setting.png" alt="Update Application">
+    </div>
+    <p class="central-modal-title">ZiBox</p>
+    <p class="central-modal-meta" [translate]="'version'" [translateParams]="{value:version}"></p>
+    <p>{{'updateMessage' | translate}}</p>
+    <footer class="central-modal-footer">
+      <button class="central-modal-button ion-activatable" (click)="update()">
+        {{'update' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </footer>
+  </div>
+</div>

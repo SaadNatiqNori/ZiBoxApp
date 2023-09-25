@@ -1,0 +1,18 @@
+<ion-app [dir]="otherService.direction" *ngIf="!otherService.languageIsChanging
+  && !otherService.firstTimeLaunch && otherService.checkInternet">
+  <ion-router-outlet></ion-router-outlet>
+  <zi-tabs></zi-tabs>
+</ion-app>
+<!-- Language Change Animation -->
+<div class="change-language" *ngIf="otherService.languageIsChanging">
+  <div class="change-language-animation">
+    <ion-icon name="globe-outline"></ion-icon>
+  </div>
+</div>
+<!-- Check Internet Connection -->
+<div class="internet-connection" *ngIf="!otherService.checkInternet">
+  <img src="../assets/gif/internet.gif" alt="">
+  <p>{{'checkInternetConnection' | translate}}</p>
+</div>
+<!-- Onboarding -->
+<zi-onboarding *ngIf="otherService.firstTimeLaunch"></zi-onboarding>

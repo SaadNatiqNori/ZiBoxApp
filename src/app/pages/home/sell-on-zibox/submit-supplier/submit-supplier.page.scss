@@ -1,0 +1,304 @@
+.submit-padding {
+  --padding-top: 15px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --padding-bottom: 90px;
+  --color: #000;
+  --background: #fff;
+}
+
+/* #region Submit Supplier Title*/
+.submit-become-supplier {
+  position: relative;
+  display: block;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 900;
+  border-top: 15px solid var(--ion-color-primary);
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+.submit-become-supplier hr {
+  margin-bottom: 0;
+  background-color: #ddd;
+}
+
+.submit-become-supplier>span {
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.submit-become-supplier>span>span {
+  color: #ff3334;
+  font-weight: 900;
+}
+
+/* #endregion Submit Supplier Title*/
+
+/* #region Market Logo*/
+.profile-panel {
+  margin: 35px auto;
+}
+
+.profile-iformation {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto min-content;
+  margin: 20px 15px 40px 15px;
+}
+
+ion-thumbnail {
+  position: relative;
+  margin: auto;
+  --size: 130px;
+  --border-radius: 100px;
+  padding: 5px;
+  border: 2px dashed var(--ion-color-primary);
+}
+
+.edit-button {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: -25px;
+  --color: #fff;
+  --padding-top: 5px;
+  --padding-bottom: 5px;
+  --padding-start: 5px;
+  --padding-end: 5px;
+  --border-radius: 50px;
+  --border-color: #fff;
+  --border-style: solid;
+  --border-width: 3px;
+  --box-shadow: none;
+  --background: #0c1a35;
+  --background-hover: transparent;
+  --background-activated: #000;
+  --background-focused: transparent;
+  transition: all 0.3s linear;
+}
+
+.edit-button img {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.account-title {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/* #endregion Market Logo*/
+
+/* #region Input Style*/
+.login-input-style {
+  position: relative;
+  margin: 30px 0 10px 0;
+}
+
+.login-two-input-style {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+}
+
+.login-input-title {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  height: 20px;
+  margin: auto;
+  top: 10px;
+  padding: 0 15px;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.phone-input-style .login-input-title {
+  padding-left: 60px;
+}
+
+.login-input-note {
+  margin: 4px 0;
+  color: #666;
+  font-size: 12px;
+}
+
+.phone-input-style .phone-code-style {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  direction: ltr;
+  width: 55px;
+  margin: auto;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  padding-left: 10px;
+  border-radius: 4px 0 0 4px;
+  overflow: hidden;
+}
+
+.login-input-text {
+  position: relative;
+  display: grid;
+  align-content: center;
+  width: 100%;
+  height: 40px;
+  top: 0;
+  bottom: 0;
+  padding: 10px 15px;
+  resize: none;
+  border: 1px solid #e7eaed;
+  border-radius: 5px;
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.phone-input-style .login-input-text {
+  padding-inline-start: 60px;
+  direction: ltr;
+}
+
+.login-input-text:focus {
+  border-color: #7b8fc6;
+}
+
+.login-input-text:focus+.login-input-title,
+.login-input-text:valid+.login-input-title {
+  top: -20px;
+  padding: 0;
+  font-size: 12px;
+}
+
+.required {
+  color: #ff3334;
+}
+
+/* #endregion Input Style*/
+
+/* #region Submit Supplier Map*/
+.submit-supplier-map {
+  width: 100%;
+  height: 200px;
+  margin: 20px auto;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+/* #endregion Submit Supplier Map*/
+
+.submit-supplier {
+  position: relative;
+  display: block;
+  width: auto;
+  padding: 15px 30px;
+  color: #fff;
+  border-radius: 5px;
+  background-color: var(--ion-color-primary);
+}
+
+.submit-supplier:disabled {
+  opacity: 0.5;
+  color: #fff;
+  background-color: #999;
+}
+
+
+
+
+
+
+
+
+
+
+.success-animation {
+  position: fixed;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  grid-gap: 10px;
+  gap: 10px;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 25px;
+  line-height: 30px;
+  background-color: #fff;
+}
+
+.checkmark {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 4;
+  stroke: #4bb71b;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  box-shadow: inset 0px 0px 0px #4bb71b;
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+  position: relative;
+  top: 5px;
+  right: 5px;
+  margin: 0 auto;
+}
+
+.checkmark circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-miterlimit: 10;
+  stroke: #4bb71b;
+  fill: #fff;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+
+}
+
+.checkmark path {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+
+  0%,
+  100% {
+    transform: none;
+  }
+
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #4bb71b;
+  }
+}

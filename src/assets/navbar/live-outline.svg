@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="clip-Live_Stream">
+      <rect width="20" height="20"/>
+    </clipPath>
+  </defs>
+  <g id="Live_Stream" data-name="Live Stream" clip-path="url(#clip-Live_Stream)">
+    <g id="signal-stream" transform="translate(-22.878 -78.376)">
+      <path id="Path_2" data-name="Path 2" d="M230.013,218.184a.519.519,0,0,1,0,.9l-.869.5-.869.5a.518.518,0,0,1-.775-.448v-2.01a.518.518,0,0,1,.775-.448l.869.5Z" transform="translate(-195.721 -130.23)" fill="none" stroke="#6d6d6d" stroke-width="1"/>
+      <path id="Path_3" data-name="Path 3" d="M411.331,83.8a9.051,9.051,0,0,1-.031,13.447" transform="translate(-372.05 -2.114)" fill="none" stroke="#6d6d6d" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Path_4" data-name="Path 4" d="M26.53,95.152A9.056,9.056,0,0,1,26.565,81.6" transform="translate(0)" fill="none" stroke="#6d6d6d" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Path_5" data-name="Path 5" d="M338.2,158.1a4.983,4.983,0,0,1,0,7.631" transform="translate(-301.958 -73.52)" fill="none" stroke="#6d6d6d" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Path_6" data-name="Path 6" d="M129.938,164.725A4.983,4.983,0,0,1,129.93,157" transform="translate(-100.365 -72.463)" fill="none" stroke="#6d6d6d" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

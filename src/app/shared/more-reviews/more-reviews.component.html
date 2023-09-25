@@ -1,0 +1,109 @@
+<!-- Custom Toolbar -->
+<ion-toolbar class="custom-toolbar">
+  <div class="custom-toolbar-panel">
+    <ion-button class="custom-toolbar-button white-toolbar-button"  (click)="close()">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+    </ion-button>
+    <p class="custom-toolbar-title">{{productName}}</p>
+  </div>
+</ion-toolbar>
+<!-- Ratings and Reviews -->
+<ion-content class="reviews-paading">
+  <div class="ratings-panel">
+    <div class="ratings-number">
+      {{avgRating}}
+      <p class="rating-number-text">{{countRating}} {{'ratings' | translate}}</p>
+    </div>
+    <div class="ratings-star-panel">
+      <div class="ratings-star-range" *ngFor="let item of ratingRange">
+        <span> {{item.rating}} <img src="./assets/images/ratings/star-fill.svg" alt=""></span>
+        <span class="star-rating" style="--get-star-range: {{item.ratio}}%"></span>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-panel">
+    <section class="review-section" *ngFor="let item of reviews">
+      <div class="review-section-header">
+        <img class="review-section-image" src="{{item.user.profile_picture}}" #avatar
+          (error)="avatar.src = './assets/avatar/avatar.svg'" alt="{{item.user.nickname}}">
+        <div class="review-title-panel">
+          <div class="review-title-name">
+            {{item.user.nickname}}
+            <span class="review-product-bought">
+              <img src="../../../assets/images/bought.png" *ngIf="item.bought_product">
+              <img src="../../../assets/images/not-bought.png" *ngIf="!item.bought_product">
+              {{item.bought_product ? ('boughtIt') : ('notBoughtIt') | translate}}
+            </span>
+          </div>
+          <div class="review-title-meta">
+            <div class="review-title-star">
+              <span *ngFor="let star of [1, 2, 3, 4, 5]">
+                <img *ngIf="star <= item.rating" src="./assets/images/ratings/star-fill.svg" alt="{{item.rating}}">
+                <img *ngIf="star > item.rating" src="./assets/images/ratings/star.svg" alt="{{item.rating}}">
+              </span>
+              <div class="review-date">{{item.ctime}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="review-description">{{item.description}}</div>
+      <div class="review-images">
+        <img *ngFor="let img of item.reviewImage" src="{{img.image}}" alt="{{img.id}}" (click)="openZoomModal(img.image)">
+      </div>
+      <div class="review-action">
+        <button class="review-action-like" [class.review-action-liked]="item.reviewLiked" (click)="likeReview(item.id)">
+          <img src="../../../assets/images/like.svg" alt="">
+          <span>{{item.countLiked}}</span>
+        </button>
+      </div>
+    </section>
+    <div *ngIf="reviews.length < 1">
+      <section class="review-section" *ngFor="let item of [0, 1, 2]">
+        <div class="review-section-header">
+          <ion-thumbnail slot="start" class="review-section-image">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+          <div class="review-title-panel">
+            <div class="review-title-name">
+              <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              <span class="review-product-bought">
+                <ion-skeleton-text [animated]="true" style="width: 20%;"></ion-skeleton-text>
+              </span>
+            </div>
+            <div class="review-title-meta">
+              <div class="review-title-star">
+                <span *ngFor="let star of [1, 2, 3]">
+                  <img src="./assets/images/ratings/star.svg">
+                </span>
+                <div class="review-date">
+                  <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="review-description">
+          <ion-skeleton-text [animated]="true" style="width: 100%;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 100%;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+        </div>
+        <div class="review-images">
+          <ion-thumbnail slot="start" *ngFor="let img of [0, 1, 2, 3, 4]">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+        </div>
+        <div class="review-action">
+          <button class="review-action-like">
+            <img src="../../../assets/images/like.svg" alt="">
+            <span>
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>

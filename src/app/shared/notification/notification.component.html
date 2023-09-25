@@ -1,0 +1,35 @@
+<ion-content class="ion-padding">
+  <div class="wrapper">
+    <h1>{{'notification' | translate}}</h1>
+    <ion-list *ngIf="items.length > 0">
+      <ion-item *ngFor="let item of items" button="true" detail="false"
+        (click)="openDetailModal(item)">
+        <ion-avatar slot="start">
+          <img src="{{item?.image}}" #notification (error)="notification.src = './assets/avatar/avatar.svg'"/>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{item?.title}}</h2>
+          <p>{{item?.text}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <div *ngIf="items.length < 1">{{'noNotification' | translate}}</div>
+  </div>
+</ion-content>
+
+<!-- Notification Details -->
+<ion-modal [isOpen]="isNotificationOpen" (willDismiss)="closeNotificationModal()" [swipeToClose]="true">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{selectedNotification.title}}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeNotificationModal()">{{'close' | translate}}</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <p>{{selectedNotification.text}}</p>
+    </ion-content>
+  </ng-template>
+</ion-modal>

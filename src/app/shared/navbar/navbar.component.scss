@@ -1,0 +1,121 @@
+.menu-navbar {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr 60px 1fr 1fr;
+  width: calc(100% - 20px);
+  max-width: 500px;
+  height: 60px;
+  margin: auto;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  color: #fff;
+  background-color: #fff;
+  border-radius: 10px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25));
+  transition: all 0.3s ease-in-out;
+}
+
+.hide-search {
+  bottom: -75px;
+}
+
+.menu-button {
+  position: relative;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  background: transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.menu-button img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.menu-button::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 4px;
+  bottom: 0;
+  border-radius: 5px 5px 0 0;
+  background-color: var(--ion-color-primary);
+  transition: all 0.3s ease-in-out;
+}
+
+.active-menu::after {
+  width: 28px;
+}
+
+.menu-card-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  left: calc(50% - 48px / 2);
+  bottom: 6px;
+  color: #fff;
+  border: 3px solid #ccc;
+  border-radius: 10px;
+  transform: rotate(45deg);
+  background-color: #6d6d6d;
+  overflow: hidden;
+}
+
+.menu-card-button ion-img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  transform: rotate(-45deg);
+}
+
+.active-menu-card {
+  border-color: #e0efb5;
+  background-color: var(--ion-color-primary);
+}
+
+// Newroz
+.newroz {
+  position: fixed;
+  display: block;
+  width: 100px;
+  margin: auto;
+  left: 0;
+  right: 12px;
+  bottom: 30px;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.hide-search .newroz {
+  opacity: 0;
+}
+
+.newroz+.active-menu-card {
+  border-color: #ff9627;
+  background-color: #ff6600;
+}
+
+// Ramadan
+.active-menu-ramadan {
+  border-color: #c3d3ff;
+  background-color: #7B8FC6;
+}
+
+.ramadan img {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transform: rotate(-90deg);
+}

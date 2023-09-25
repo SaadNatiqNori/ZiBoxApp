@@ -1,0 +1,181 @@
+<div class="content">
+  <ion-button class="back-button ios-top-margin" (click)="close()">
+    <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+  </ion-button>
+  <div class="address-padding">
+    <form [formGroup]="addressForm" class="loginForm" autocomplete="off">
+      <h1 class="page-title">{{'contact' | translate}}</h1>
+      <div class="control-style">
+        <label class="control-title">{{'fullname' | translate}} <span class="required">*</span></label>
+        <input class="control-input" type="text" formControlName="contact_name" placeholder="ex. Jon Doe">
+      </div>
+      <div class="control-style">
+        <label class="control-title">{{'phone' | translate}} <span class="required">*</span></label>
+        <button class="control-button ion-activatable" id="open-phone-modal">
+          {{'+' + addressForm.get('country_code').value + ' ' + addressForm.get('mobile_phone').value}}
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </div>
+      <div class="split"></div>
+      <!-- Address -->
+      <h1 class="page-title">{{'address' | translate}}</h1>
+      <div id="{{mapId}}" class="product-market-map address-map">
+        <div class="turn-off-location" *ngIf="!isTurnOnLoaction">
+          {{'turnOnLocation' | translate}}
+        </div>
+        <ion-skeleton-text [animated]="true" *ngIf="isLoading"></ion-skeleton-text>
+      </div>
+      <div class="control-style control-dropdown">
+        <label class="control-title">{{'city' | translate}} <span class="required">*</span></label>
+        <select class="control-select" formControlName="city">
+          <option *ngFor="let item of cities" value="{{item.city_name}}">{{item.city_name}}</option>
+        </select>
+      </div>
+      <div class="control-style">
+        <label class="control-title">{{'locality' | translate}} <span class="required">*</span></label>
+        <input class="control-input" type="text" formControlName="locality">
+      </div>
+      <div class="control-style control-dropdown">
+        <label class="control-title">{{'residentialType' | translate}} <span class="required">*</span></label>
+        <select class="control-select" formControlName="residential_type" #residentialType>
+          <option value="building" checked>{{'building' | translate}}</option>
+          <option value="house">{{'house' | translate}}</option>
+          <option value="office">{{'office' | translate}}</option>
+        </select>
+      </div>
+      <div class="control-style">
+        <label class="control-title">{{'area' | translate}} <span class="required">*</span></label>
+        <input class="control-input" type="text" formControlName="area_name">
+      </div>
+      <div class="control-style">
+        <label class="control-title">{{'street' | translate}} <span class="required">*</span></label>
+        <input class="control-input" type="text" formControlName="street">
+      </div>
+      <div class="control-style" *ngIf="residentialType.value != 'house'">
+        <label class="control-title" *ngIf="residentialType.value == 'building'">
+          {{'buildingName' | translate}} <span class="required">*</span>
+        </label>
+        <label class="control-title" *ngIf="residentialType.value == 'office'">
+          {{'officeName' | translate}} <span class="required">*</span>
+        </label>
+        <input class="control-input" type="text" formControlName="building_name">
+      </div>
+      <div class="control-style" *ngIf="residentialType.value  == 'building'">
+        <label class="control-title">{{'floorNumber' | translate}} <span class="required">*</span></label>
+        <input class="control-input" type="text" formControlName="floor_number">
+      </div>
+      <div class="control-style">
+        <label class="control-title" *ngIf="residentialType.value == 'building'">{{'apartmentNumber' | translate}} <span
+            class="required">*</span></label>
+        <label class="control-title" *ngIf="residentialType.value == 'house'">{{'houseNumber' | translate}} <span
+            class="required">*</span></label>
+        <label class="control-title" *ngIf="residentialType.value == 'office'">{{'officeNumber' | translate}} <span
+            class="required">*</span></label>
+        <input class="control-input" type="text" formControlName="apartment_number">
+      </div>
+      <div class="control-style">
+        <label class="control-title">{{'nearestPoint' | translate}} <span class="required">*</span></label>
+        <input class="control-input" type="text" formControlName="nearest_point">
+      </div>
+      <div class="checkbox-style">
+        <input type="checkbox" id="as_default" formControlName="as_default" checked>
+        <label for="as_default"></label>
+        <label for="as_default">{{'asDefault' | translate}}</label>
+      </div>
+      <button class="submit-button ion-activatable" (click)="confirm()" [disabled]="!addressForm.valid || isLoading">
+        {{'save' | translate}}
+        <div class="button-loading" *ngIf="isLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </form>
+  </div>
+  <!-- Phone Modal -->
+  <ion-modal trigger="open-phone-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <div class="content">
+        <ion-button class="back-button ios-top-margin" (click)="close()">
+          <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+        </ion-button>
+        <!-- Phone Number -->
+        <div class="phone-padding" [ngStyle]="{'pointer-events': phoneIsActive? 'all' : 'none'}">
+          <form [formGroup]="phoneForm" class="loginForm" autocomplete="off">
+            <h1 class="page-title">{{'changePhone' | translate}}</h1>
+            <div class="control-style control-with-code">
+              <label class="control-title">{{'phone' | translate}}</label>
+              <div class="ion-activatable" id="phone-code-modal" expand="block">
+                +{{phoneCode}}
+                <ion-ripple-effect></ion-ripple-effect>
+              </div>
+              <input class="control-input" type="tel" formControlName="phone" placeholder="7xx xxx xxxx">
+            </div>
+            <button class="submit-button ion-activatable" (click)="sendVerfication()"
+              [disabled]="!phoneForm.valid || canResend == false">
+              {{'send' | translate}} {{durationToResend}}
+              <div class="button-loading" *ngIf="isVerificationLoading">
+                <svg viewBox="0 0 50 50">
+                  <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                </svg>
+              </div>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+          </form>
+          <!-- Country Phone Number Code -->
+          <ion-modal #modal trigger="phone-code-modal" [initialBreakpoint]="0.50"
+            [breakpoints]="[0, 0.25, 0.5, 0.75, 1]">
+            <ng-template>
+              <ion-content>
+                <ion-searchbar placeholder="Search" show-clear-button="focus" (click)="modal.setCurrentBreakpoint(1)"
+                  (ionChange)="handleChange($event)"></ion-searchbar>
+                <ion-list>
+                  <ion-item *ngFor="let item of phoneCodeSearch" button="true" detail="false"
+                    (click)="selectCountry(item)">
+                    <ion-label class="country-information">
+                      <p>{{item.name}}</p>
+                      <p>+{{item.code}}</p>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
+        </div>
+        <!-- Verification Code -->
+        <div class="code-padding" [class.show-change]="!phoneIsActive"
+          [class.change-rtl]="otherService.direction == 'rtl'">
+          <form [formGroup]="verificationForm" class="loginForm" autocomplete="off">
+            <h1 class="page-title">{{'changePhone' | translate}}</h1>
+            <div class="show-phone-number ion-activatable" (click)="phoneIsActive = true">
+              {{'+' + phoneCode + '' + phoneForm.get('phone').value}} <img src="./assets/images/edit.svg" alt="">
+              <ion-ripple-effect></ion-ripple-effect>
+            </div>
+            <div class="control-style">
+              <label class="control-title">{{'writeVerificationCode' | translate}}</label>
+              <input class="control-input input-code" type="text" formControlName="code" placeholder="xxxxxx"
+                minlength="6" maxlength="6" (keyup)="autoSubmitCode()">
+            </div>
+            <button class="submit-button ion-activatable" (click)="changePhone()" [disabled]="!verificationForm.valid">
+              {{'submit' | translate}}
+              <div class="button-loading" *ngIf="isLoading">
+                <svg viewBox="0 0 50 50">
+                  <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                </svg>
+              </div>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+            <div class="resend-panel">
+              {{'didnotReceiveCode'|translate}}
+              <button class="ion-activatable" (click)="resendCode()" [disabled]="!canResend || isVerificationLoading">
+                {{'resend'| translate}} {{durationToResend}}
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+</div>

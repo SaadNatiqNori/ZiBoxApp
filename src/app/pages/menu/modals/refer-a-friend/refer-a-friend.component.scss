@@ -1,0 +1,104 @@
+// Modal
+.content {
+  position: relative;
+  display: block;
+  height: 100%;
+  background-color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.back-button {
+  z-index: 2;
+}
+
+.refer-padding {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: 75px;
+  padding: 15px;
+}
+
+.page-content {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  color: #000;
+}
+
+.page-content>img {
+  position: relative;
+  display: block;
+  max-width: 275px;
+  width: calc(100% - 40px);
+  margin: auto;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 900;
+  margin: 30px 0;
+}
+
+.list {
+  position: relative;
+  display: flex;
+  margin-top: 20px;
+  place-items: baseline;
+}
+
+.list .icon {
+  flex: 0 0 26px;
+}
+
+.list img {
+  width: 14px;
+  height: 14px;
+}
+
+.list .list-text {
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.list-meta {
+  text-align: justify;
+  line-height: 20px;
+}
+
+.invited-by {
+  position: relative;
+  color: #000;
+  height: auto;
+  margin-top: -10px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background-color: #f9f9f9;
+  user-select: none;
+}
+
+.invitation-code {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  place-content: center;
+  height: 70px;
+  margin-top: 30px;
+  color: var(--ion-color-primary);
+  font-size: 12px;
+  border-radius: 10px;
+  background-color: #f5fae5;
+  user-select: none;
+  overflow: hidden;
+}
+
+.invitation-code p {
+  font-size: 18px;
+  margin: 5px 0 0 0;
+}

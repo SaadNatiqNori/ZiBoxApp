@@ -1,0 +1,24 @@
+<div class="content">
+  <ion-button class="back-button ios-top-margin" (click)="close()">
+    <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+  </ion-button>
+  <div class="refer-padding">
+    <form [formGroup]="invitationForm" class="loginForm" autocomplete="off">
+      <h1 class="page-title">{{'whoReferYou' | translate}}</h1>
+      <div class="control-style">
+        <label class="control-title">{{'invitationCode' | translate}} <span class="required">*</span></label>
+        <input class="control-input" type="text" formControlName="invition_code" placeholder="ex. ZiBox-000000">
+      </div>
+      <button class="submit-button ion-activatable" (click)="confirm()" [disabled]="!invitationForm.valid || isLoading">
+        {{'apply' | translate}}
+        <div class="button-loading" *ngIf="isLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+      <div class="note">{{'note' | translate}}. <span>*</span> {{'referNote' | translate}}</div>
+    </form>
+  </div>
+</div>

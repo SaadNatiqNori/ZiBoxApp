@@ -1,0 +1,55 @@
+<!-- Title bar -->
+<ion-toolbar class="search-result-toolbar">
+  <div class="search-result-toolbar-panel">
+    <button class="search-result-toolbar-button ion-activatable" title="Sell on ZiBox" routerLink="../../">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <div class="search-result-toolbar-title">{{this.searchText}}</div>
+  </div>
+</ion-toolbar>
+<ion-content class="search-result-padding">
+  <div class="section-panel">
+    <div class="section-header" *ngIf="items.length > 0">
+      <div class="search-result">{{'searchResults' | translate : ({value:resultCount})}}</div>
+      <select class="section-sort" #so (change)="filter(so.value)">
+        <option value="newly_arrived">{{'newlyArrived' | translate}}</option>
+        <option value="low_to_high">{{'lowToHigh' | translate}}</option>
+        <option value="high_to_low">{{'highToLow' | translate}}</option>
+      </select>
+    </div>
+    <div class="search-result" *ngIf="items.length < 1 && isLoading">
+      <ion-skeleton-text [animated]="true" style="width: 60%; height: 16px;"></ion-skeleton-text>
+    </div>
+    <div class="product-container" *ngIf="items.length > 0">
+      <zi-card *ngFor="let item of items" [item]="item"></zi-card>
+    </div>
+    <!-- No Products Found -->
+    <div class="empty-items" *ngIf="items.length == 0 && !isLoading">
+      <img src="./assets/gif/no-products-found.gif" alt="">
+      {{'noProductsFound' | translate}}
+      <ion-button class="back-button" (click)="back()">
+        <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+      </ion-button>
+    </div>
+    <!-- Loading -->
+    <div class="product-container" *ngIf="items.length < 1 && isLoading">
+      <zi-card-skeleton *ngFor="let item of [].constructor(4)"></zi-card-skeleton>
+    </div>
+    <!-- Infinity Scrolling -->
+    <ion-infinite-scroll class="scroll-loading green-color" loadingSpinner="bubbles"
+      (ionInfinite)="onIonInfinite($event)" *ngIf="items.length > 0">
+      <ion-infinite-scroll-content *ngIf="pageNumber <= pageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="pageNumber > pageCount && items.length > 10" (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+  </div>
+  <!-- Pull Down to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>

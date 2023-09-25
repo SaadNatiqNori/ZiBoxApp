@@ -1,0 +1,62 @@
+{
+  "title": "ZiBox'ta satış yapın",
+  "description": "E-Ticaret işimizde tedarikçi olun ve hızla büyüyen çevrimiçi pazardan yararlanın. Tedarikçileri Irak'taki müşterilerle buluşturan lider bir E-ticaret platformuyuz. Satıcılara,  ürünlerini ve hizmetlerini Iraklı bir izleyici kitlesine sergilemeleri için çok çeşitli fırsatlar sunuyoruz. Platformumuz kolay entegrasyon, esnek ödeme seçenekleri ve gerçek zamanlı analitik ve raporlama sunar.  Çevrimiçi varlığınızı büyütmek, satışları artırmak ve erişiminizi genişletmek için bize katılın.",
+  "image": "./assets/images/sell-on-zibox/sell-and-buy.jpg",
+  "card": [
+    {
+      "title": "Tüm Irak'ta Al/Sat!",
+      "image": "./assets/images/sell-on-zibox/map.png"
+    },
+    {
+      "title": "Tüm şehirlerde binlerce izleyici",
+      "image": "./assets/images/sell-on-zibox/residents.png"
+    },
+    {
+      "title": "Ödeme yöntemlerinin çeşitleri",
+      "image": "./assets/images/sell-on-zibox/payment.svg"
+    }
+  ],
+  "grow": "ZIBOX İLE İŞİNİZİ BÜYÜTÜN",
+  "steps": [
+    {
+      "title": "1. ADIM: SANAL MAĞAZANIZI OLUŞTURUN",
+      "image": "./assets/images/sell-on-zibox/register.svg",
+      "steps": [
+        "İşinizi kaydedin ve mağazanızı ZiBox'ta ÜCRETSİZ oluşturun.",
+        "Ürünlerinizi yüksek kaliteli bir fotoğrafla yükleyin, yoksa ekibimiz size bu konuda yardımcı olacaktır.",
+        "Ürünleriniz 2016'dan beri en büyük E-ticaret platformunda sergilenecektir."
+      ]
+    },
+    {
+      "title": "2. ADIM: BİZDEN DESTEK ALIN!",
+      "image": "./assets/images/sell-on-zibox/support.svg",
+      "steps": [
+        "Eğitim için profesyonel ekibimiz sizinle iletişime geçecektir.",
+        "Ürün görünürlüğünüzü artırmak için ekibimiz tarafından yüksek kaliteli ürün fotoğraf çekimi yaptırın.",
+        "Veri giriş ekibimiz ürün açıklamanızı üç dilde (Kürtçe, Arapça ve İngilizce) sağlayacaktır."
+      ]
+    },
+    {
+      "title": "3. ADIM: SİPARİŞ ALIMINIZI PLANLAYIN :",
+      "image": "./assets/images/sell-on-zibox/order.svg",
+      "steps": [
+        "Mağazanız hazır olduğunda, tüm ZiBox müşterileri tarafından görülebilecektir.",
+        "🔔🔔 bir siparişiniz varsa, bunu mağaza portalınızda takipedebilirsiniz.",
+        "Ürününüzü şoförlerimiz tarafından teslim alınmak üzere hazırlayın.",
+        "Ürünlerinizi ZiBox özel kutu ve paketlerimizde ÜCRETSİZ paketliyoruz!!",
+        "Siparişiniz müşterilere zamanında ve güler yüzle ulaşacaktır 😊"
+      ]
+    },
+    {
+      "title": "4. ADIM: HAKLARINIZI ALIN VE DAHA BÜYÜYÜN",
+      "image": "./assets/images/sell-on-zibox/grow-your-business.svg",
+      "steps": [
+        "Program ihtiyaçlarınıza göre her satın alma işlemi için PARAYI 💵💵 alacaksınız.",
+        "Endişelenme! Güvenli teslimatı garanti edeceğiz ve bozuk vakaları halledeceğiz.",
+        "Panik yapma! Yanlış sipariş olmadıkça öğelerinizi iade etmeyeceğiz."
+      ]
+    }
+  ],
+  "hurry": "Acele edin! Ve kendinizi kaydedin. hadi rakamlardan konuşalım",
+  "further": "Daha fazla yardım için <a href='tel:+9647707778844'>07707778844</a> - <a href='tel:+9647500078844'>07500078844</a> numaralı telefondan bizi aramaktan çekinmeyin.Veya bize e-posta gönderin: <a href='mailto:sales@zibox.io'>sales@zibox.io</a>"
+}

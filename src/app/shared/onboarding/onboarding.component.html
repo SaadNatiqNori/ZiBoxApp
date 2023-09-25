@@ -1,0 +1,124 @@
+<div *ngIf="welcomeDelay" class="onboarding" [class.onboarding-fade-out]="closeOnboarding">
+  <!-- Welcome -->
+  <div class="welcome-panel">
+    <p style="--delay: 0.0s">Welcome to</p>
+    <p class="welcome-zibox" style="--delay: 0.2s">ZiBox E-Commerce</p>
+    <p style="--delay: 0.5s">Cross Platforms</p>
+  </div>
+  <!-- Language -->
+  <div class="language-panel" [class.hide-language-panel]="slide.indexOf('permission') > -1">
+    <div class="select-language">
+      <h1>Choose the Language</h1>
+      <h3>Select the language to get started</h3>
+      <div class="language-content">
+        <button *ngFor="let item of languages; index as i" class="language-item"
+          [class.active-language]="selectLanguage == item.code" (click)="selectLanguage = item.code"
+          style="--delay: 6.{{i}}s">{{item.label}}</button>
+      </div>
+      <button class="next-button ion-activatable" (click)="changeLanguage()">
+        Next
+        <ion-ripple-effect></ion-ripple-effect>
+        <div class="button-loading" *ngIf="langIsLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="permission-panel" [class.show-permission-panel]="slide.indexOf('permission') > -1">
+    <div class="permission-background"></div>
+    <div class="permission-gradient"></div>
+    <!-- Location -->
+    <div class="permission-content" [class.show-panel]="slide.indexOf('location') > -1">
+      <button (click)="skipLocation()" class="onboarding-skip">{{'skip' | translate}}</button>
+      <img src="./assets/first-launch/location.svg" alt="">
+      <h1>{{'location' | translate}}</h1>
+      <p>{{'locationMessage' | translate}}</p>
+      <button class="next-button ion-activatable" (click)="allowLocation()">
+        {{'continue' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+        <div class="button-loading" *ngIf="allowLocationLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <!-- Notification -->
+    <div class="permission-content" [class.show-panel]="slide.indexOf('notification') > -1">
+      <button (click)="skipNotification()" class="onboarding-skip">{{'skip' | translate}}</button>
+      <img src="../../../assets/first-launch/notification.svg" alt="">
+      <h1>{{'notification' | translate}}</h1>
+      <p>{{'notificationMessage' | translate}}</p>
+      <button class="next-button ion-activatable" (click)="allowNotification()">
+        {{'continue' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+        <div class="button-loading" *ngIf="allowNotificationLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <!-- Voice -->
+    <div class="permission-content" [class.show-panel]="slide.indexOf('voice') > -1">
+      <button (click)="skipVoice()" class="onboarding-skip">{{'skip' | translate}}</button>
+      <img src="../../../assets/first-launch/voice.svg" alt="">
+      <h1>{{'voice' | translate}}</h1>
+      <p>{{'voiceMessage' | translate}}</p>
+      <button class="next-button ion-activatable" (click)="allowVoice()">
+        {{'continue' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+        <div class="button-loading" *ngIf="allowVoiceLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+
+    <div class="dots">
+      <span class="dot" [class.active-dot]="slide.indexOf('location') > -1"></span>
+      <span class="dot" [class.active-dot]="slide.indexOf('notification') > -1"></span>
+      <span class="dot" [class.active-dot]="slide.indexOf('voice') > -1"></span>
+      <!-- <span class="dot" [class.active-dot]="slide.indexOf('camera') > -1"></span> -->
+    </div>
+  </div>
+  <!-- Allow Location -->
+  <!-- <div class="location-panel" [class.show-location-panel]="slide.indexOf('location') > -1">
+    <div class="modal-content">
+      <img src="./assets/first-launch/allow-location.webp" alt="">
+      <p class="welcome-modal-title">{{'location' | translate}}</p>
+      <p class="welcome-modal-meta">{{'locationMessage' | translate}}</p>
+      <button class="welcome-modal-button" (click)="allowLocation()">
+        <img src="./assets/first-launch/location.svg" alt="">
+        {{'allowLocation' | translate}}
+        <div class="button-loading" *ngIf="allowLocationLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <button (click)="skipLocation()" class="onboarding-skip">{{'skip' | translate}}</button>
+  </div> -->
+  <!-- Allow Notification -->
+  <!-- <div class="notification-panel" [class.show-notification-panel]="slide.indexOf('notification') > -1">
+    <div class="modal-content">
+      <img src="./assets/first-launch/allow-notification.webp" alt="">
+      <p class="welcome-modal-title">{{'notification' | translate}}</p>
+      <p class="welcome-modal-meta">{{'notificationMessage' | translate}}</p>
+      <button class="welcome-modal-button" (click)="allowNotification()">
+        <img src="./assets/first-launch/notification.svg" alt="">
+        {{'allowNotification' | translate}}
+        <div class="button-loading" *ngIf="allowNotificationLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <button (click)="skipNotification()" class="onboarding-skip">{{'skip' | translate}}</button>
+  </div> -->
+</div>

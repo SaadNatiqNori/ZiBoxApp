@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-Sign_In_Forget_Password_Verification_code_1">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Sign_In_Forget_Password_Verification_code_1" data-name="Sign In – Forget Password – Verification code – 1" clip-path="url(#clip-Sign_In_Forget_Password_Verification_code_1)">
+    <g id="Bag" transform="translate(1.2)">
+      <path id="Combined-Shape" d="M16.9,5c1.517,0,3.107,1.092,3.669,3.744h0l.923,7.434C22.175,21.024,19.449,23,15.79,23H5.842C2.173,23-.638,21.635.126,16.178h0l.933-7.434C1.536,6.015,3.18,5,4.718,5H16.9ZM7.316,9a1.092,1.092,0,1,0,1.061,1.092h0L8.369,9.95A1.072,1.072,0,0,0,7.316,9Zm6.947,0a1.092,1.092,0,1,0,1.061,1.092A1.076,1.076,0,0,0,14.263,9Z" transform="translate(0 1)"/>
+      <path id="Path_34167" d="M15.969,5.729A.6.6,0,0,1,15.916,6H14.192a.778.778,0,0,1-.052-.271,4.181,4.181,0,0,0-8.361,0,.779.779,0,0,1,0,.271H4.012a.778.778,0,0,1,0-.271A6,6,0,0,1,16,5.729Z" transform="translate(0.8)" opacity="0.4"/>
+    </g>
+  </g>
+</svg>

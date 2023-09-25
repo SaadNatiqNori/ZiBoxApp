@@ -1,0 +1,86 @@
+<ion-content class="brands-padding">
+  <!-- Search Panel -->
+  <div class="search-panel">
+    <input type="search" class="search" placeholder="{{'search' | translate}}" [(ngModel)]="searchWord"
+      (keyup)="onSearch()" (keyup.enter)="onSearch()" enterkeyhint="search">
+    <svg class="search-icon" viewBox="0 0 512 512">
+      <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor"
+        stroke-miterlimit="10" stroke-width="32" />
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"
+        d="M338.29 338.29L448 448" />
+    </svg>
+    <div class="button-loading search-loading" *ngIf="isLoading">
+      <svg viewBox="0 0 50 50">
+        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+      </svg>
+    </div>
+  </div>
+  <!-- Section Zibox Exclusive Brands -->
+  <div class="section-panel" *ngIf="(ziBoxBrandsItems.length > 0 || ziBoxBrandsLoading) && !searchWord">
+    <div class="section-header">
+      <p class="section-title">{{'ziboxBrands' | translate}}</p>
+    </div>
+    <div class="brand-container">
+      <div class="brand-item" *ngFor="let item of ziBoxBrandsItems" (click)="openBrand(item)">
+        <div class="brand-image">
+          <img [src]="item.image? item.image : './assets/avatar/avatar.svg'">
+        </div>
+        <label class="brand-name">{{item.name}}</label>
+      </div>
+    </div>
+    <div class="brand-container" *ngIf="ziBoxBrandsItems.length < 1">
+      <div class="brand-item" *ngFor="let item of [].constructor(4)">
+        <ion-skeleton-text class="brand-image" [animated]="true" style="width: 100%; height: 90px;"></ion-skeleton-text>
+        <ion-skeleton-text class="brand-name" [animated]="true" style="width: 60%;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+  <!-- Section Brands -->
+  <div class="section-panel" id="brandPanel">
+    <div class="section-header">
+      <p class="section-title" *ngIf="!searchWord">
+        {{'otherBrands' | translate}}
+      </p>
+      <p class="section-title" *ngIf="searchWord">
+        {{'allBrands' | translate}}
+      </p>
+    </div>
+    <div class="brand-container" *ngIf="items.length > 0">
+      <div class="brand-item" *ngFor="let item of items" (click)="openBrand(item)">
+        <div class="brand-image">
+          <img [src]="item.image? item.image : './assets/avatar/avatar.svg'">
+        </div>
+        <label class="brand-name">{{item.name}}</label>
+      </div>
+    </div>
+    <div class="brand-container" *ngIf="items.length < 1 && isLoading">
+      <div class="brand-item" *ngFor="let item of [].constructor(10)">
+        <ion-skeleton-text class="brand-image" [animated]="true" style="width: 100%; height: 90px;"></ion-skeleton-text>
+        <ion-skeleton-text class="brand-name" [animated]="true" style="width: 60%;"></ion-skeleton-text>
+      </div>
+    </div>
+    <!-- Infinity Scrolling -->
+    <ion-infinite-scroll class="scroll-loading" loadingSpinner="bubbles" (ionInfinite)="onIonInfinite($event)"
+      *ngIf="items.length > 0">
+      <ion-infinite-scroll-content *ngIf="pageNumber <= pageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="pageNumber > pageCount && items.length > 10"
+        (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+  </div>
+  <!-- Not Found -->
+  <div class="section-panel" *ngIf="searchWord && items.length < 1 && !isLoading">
+    <div class="empty-items">
+      <img src="./assets/gif/no-products-found.gif">
+      {{'noBrandsFound' | translate}}
+    </div>
+  </div>
+  <!-- Pull Down to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>

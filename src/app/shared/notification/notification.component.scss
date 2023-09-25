@@ -1,0 +1,20 @@
+.ion-padding {
+  --color: #000;
+  --background: #fff;
+}
+
+ion-list {
+  background: #fff;
+}
+
+ion-item {
+  --border-color: #dedede;
+  --color: #000;
+  --background: #fff;
+}
+
+ion-item ion-icon {
+  font-size: 20px;
+  margin-inline-end: 15px;
+  color: #888;
+}

@@ -1,0 +1,23 @@
+<!-- Custom Toolbar -->
+<ion-toolbar class="custom-toolbar">
+  <div class="custom-toolbar-panel">
+    <div class="filter-tabs">
+      <button class="filter-tab ion-activatable" (click)="navigateRoot('filter/categories')"
+        [class.active-filter-tab]="router.url.includes('categories') || router.url.includes('category')">
+        {{'categories' | translate}}
+      </button>
+      <button class="filter-tab ion-activatable" (click)="navigateRoot('filter/brands')"
+        [class.active-filter-tab]="router.url.includes('brands') || router.url.includes('brand')">
+        {{'brands' | translate}}
+      </button>
+      <button class="filter-tab ion-activatable" (click)="navigateRoot('filter/shops')"
+        [class.active-filter-tab]="router.url.includes('shops') || router.url.includes('shop')">
+        {{'shops' | translate}}
+      </button>
+    </div>
+  </div>
+</ion-toolbar>
+<!-- Category Content -->
+<ion-content class="message-padding">
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-content class="sell-on-zibox-padding">
+  <ion-button class="back-button ios-top-margin" routerLink="../marketplace">
+    <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+  </ion-button>
+  <img [src]="data.image" [alt]="data.title">
+  <h1>{{'platforms.sellonzibox' | translate}}</h1>
+  <p>{{data.description}}</p>
+  <div class="become-supplier-register">
+    {{data.hurry}}
+    <button class="become-supplier-register-botton" routerLink="submit">{{'registerHere' | translate}}</button>
+  </div>
+  <div class="feature-card" *ngFor="let item of data.card">
+    <div class="card-title">{{item.title}}</div>
+    <img [src]="item.image" [alt]="item.title">
+  </div>
+  <div class="become-supplier-panel">
+    <h1>{{data.grow}}</h1>
+    <div class="become-supplier-section" *ngFor="let item of data.steps">
+      <div class="become-supplier-title">{{item.title}}</div>
+      <ul>
+        <li *ngFor="let step of item.steps">{{step}}</li>
+      </ul>
+      <img [src]="item.image" [alt]="item.title">
+    </div>
+  </div>
+  <div class="become-supplier-register">
+    {{data.hurry}}
+    <button class="become-supplier-register-botton" routerLink="submit">{{'registerHere' | translate}}</button>
+  </div>
+  <p [innerHTML]="data.further"></p>
+</ion-content>

@@ -1,0 +1,28 @@
+.company-padding {
+  --color: #000;
+  --background: #fff;
+}
+
+.company-section {
+  margin-bottom: 5px;
+}
+
+.company-title {
+  margin: 15px;
+  margin-bottom: 5px;
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+ion-list,
+ion-item {
+  --color: #000;
+  --background: #fff;
+  background: #fff;
+  --border-color: #ddd;
+}
+
+ion-item ion-icon{
+  color: #888;
+}

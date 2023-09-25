@@ -1,0 +1,108 @@
+.market-padding{
+  --padding-bottom: 70px;
+  --color: #000;
+  --background: #f5f5f5;
+  user-select: none;
+}
+
+.market-header {
+  display: block;
+  min-height: 200px;
+}
+
+.market-cover {
+  display: block;
+  width: 100%;
+  height: calc(100vw / 3);
+  background-color: var(--ion-color-primary);
+  object-fit: cover;
+}
+
+.market-profile {
+  display: grid;
+  padding: 0 15px;
+  justify-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+  background: #fff;
+}
+
+.market-profile img {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-top: -50px;
+  border: 5px solid #eee;
+  border-radius: 100%;
+  background-color: #fff;
+  object-fit: cover;
+}
+
+.market-information {
+  padding: 10px;
+}
+
+.market-title {
+  font-weight: 900;
+}
+
+.market-meta {
+  font-size: 14px;
+}
+
+.market-details {
+  display: grid;
+  grid-template-columns: repeat(3, calc(100% / 3));
+  width: 100%;
+  margin: 15px;
+  place-content: space-around;
+}
+
+.market-details>div {
+  display: grid;
+  place-items: center;
+  gap: 5px;
+  border-inline-end: 1px solid #eee;
+}
+
+.market-details>div:last-child {
+  border-inline-end: none;
+}
+
+.market-details>hr {
+  width: 1px;
+  height: 100%;
+  margin: 0 10px;
+  background-color: #eee;
+}
+
+.market-details .market-detail-number {
+  display: grid;
+  font-weight: 900;
+}
+
+.market-details .market-detail-text {
+  color: #555;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.market-coupons {
+  margin: 0 15px;
+}
+
+.market-section-title {
+  margin: 15px;
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.gray-line{
+  margin-bottom: 10px;
+}
+
+.empty-items {
+  height: 200px;
+}

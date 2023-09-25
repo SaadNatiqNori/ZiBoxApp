@@ -1,0 +1,62 @@
+{
+  "title": "Firotin & Kirîn",
+  "description": "Di karsaziya meya E-Bazirganî de bibin dabînker û ji bazara serhêl  ku bi lez mezin dibe sûd werbigirin. Em platformek E-Bazirganî ya pêşengin ku dabînkeran bi xerîdarên ji seranserê Iraqê ve girêdidin. Em gelek derfetan pêşkêşî dabînkeran dikin ku berhem û karûbarên xwe ji temaşevanên Îraqî re nîşan bidin. Platforma me yekbûnek hêsan pêşkêşî dike, ve bijarkên dravdana maqûl , analîz û raporkirina wextên rast. Tevlî me bibin û hebûna xwe ya serhêl mezin bikin, Firotana xwe zêde bikin û gihîştina xwe berfireh bikin.",
+  "image": "./assets/images/sell-on-zibox/sell-and-buy.jpg",
+  "card": [
+    {
+      "title": "Kirîn û firotin li seranserê Iraqê!",
+      "image": "./assets/images/sell-on-zibox/map.png"
+    },
+    {
+      "title": "Bi hezaran temaşevan li hemû bajaran",
+      "image": "./assets/images/sell-on-zibox/residents.png"
+    },
+    {
+      "title": "Gelek cureyên dravdanê",
+      "image": "./assets/images/sell-on-zibox/payment.svg"
+    }
+  ],
+  "grow": "Bi ZiBox ê re karsaziya xwe mezin bikin",
+  "steps": [
+    {
+      "title": "Asta 1ê : Xwe tomar bikin",
+      "image": "./assets/images/sell-on-zibox/register.svg",
+      "steps": [
+        "Karsaziya xwe tomar bikin  ku ji we re profîlek firoşkar çêbikin",
+        "Berhemên xwe bi wêneyek kalîteya bilind bar bikin an jî tîmê me dê di wê de ji we re bibe alîkar.",
+        "Berhemên we li ser yek ji mezintirîn platformên e-bazirganiyê de nîşan bidin ku di sala 2016 Ew tê nîşandan."
+      ]
+    },
+    {
+      "title": "Asta 2ê : Ji me piştgiriyê bigirin!",
+      "image": "./assets/images/sell-on-zibox/support.svg",
+      "steps": [
+        "Tîma meya profesyonel dê ji bo perwerdehiyê bi we re têkilî daynin.",
+        "Ji aliyê tîmê me ve wênekêşana berhema kalîteyê bilind  bistînin da ku dîtina berhemê xwe zêde bikin.",
+        "Tîma me ya daxilkirdna datayan  bi sê zimanan (Kurdî, Erebî û Îngilîzî) nasîna berhema we pêşkêş bike."
+      ]
+    },
+    {
+      "title": "Asta 3ê : Dema hilgirtina  berheman destnîşan bikin:",
+      "image": "./assets/images/sell-on-zibox/order.svg",
+      "steps": [
+        "Dema ku dikana we amade ye, ew ê ji hemî xerîdarên Zibox re xuya bibe.",
+        "🔔🔔 Te fermanek wergirtiye Em ê li ber dikana we rakin.",
+        "Berhema xwe amade bikin ku ji aliyê Şofêr me ve were berhev kirin.",
+        "Berhemên xwe di qut û pakêtên me yên taybetî yên ZiBox bi BELAŞ dipêçin!!",
+        "Siparîşa we dê di wextê xwe de bi rûyekî xweş 😊 bigihîje xerîdaran."
+      ]
+    },
+    {
+      "title": "Asta 4ê : Mafê xwe bidin û mezintir bibin",
+      "image": "./assets/images/sell-on-zibox/grow-your-business.svg",
+      "steps": [
+        "Hûn ji her kirînê  pereyê 💵💵 xwe distînin li gorî hewcedariyên nexşeya xwe.",
+        "Em radestkirina bi ewle ya tiştan garantî dikin û bi her rewşên şikestî Bi hev re dicivin.",
+        "Xwe hêrs neke! Em tiştên we ve negerînin heya ku xwestin we xelet nebin."
+      ]
+    }
+  ],
+  "hurry": "Lez be! Û xwe tomar bike. Werin em li ser van $$-hejmaran bipeyivin",
+  "further": "ji bo arîkariya bêtir dudilî nebin bi me re li ser van jimare ya <a href='tel:+9647707778844'>07707778844</a> - <a href='tel:+9647500078844'>07500078844</a> telefon bikin. An jî emaila me : <a href='mailto:sales@zibox.io'>sales@zibox.io</a>"
+}

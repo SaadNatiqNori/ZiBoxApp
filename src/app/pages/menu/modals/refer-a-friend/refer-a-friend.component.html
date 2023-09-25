@@ -1,0 +1,55 @@
+<div class="content">
+  <ion-button class="back-button ios-top-margin" (click)="close()">
+    <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+  </ion-button>
+  <div class="refer-padding">
+    <div class="page-content">
+      <img src="./assets/images/refer-a-friend/refer-a-friend.gif">
+      <div class="title">{{'referTitle' | translate}}</div>
+      <!-- You are Referred by -->
+      <div class="invited-by" *ngIf="profileService.invitedBy()">
+        {{'referedBy' | translate}} {{profileService.inviterName()}}
+      </div>
+      <div class="list">
+        <div class="icon"><img src="./assets/images/refer-a-friend/share.svg"></div>
+        <div class="text">
+          <div class="list-text">{{'referOneTitle' | translate}}</div>
+          <div class="list-meta">{{'referOneText' | translate}}</div>
+        </div>
+      </div>
+      <div class="list">
+        <div class="icon"><img src="./assets/images/refer-a-friend/gift.svg"></div>
+        <div class="text">
+          <div class="list-text">{{'referTwoTitle' | translate}}</div>
+          <div class="list-meta">{{'referTwoText' | translate}}</div>
+        </div>
+      </div>
+      <div class="list">
+        <div class="icon"><img src="./assets/images/refer-a-friend/smiles.svg"></div>
+        <div class="text">
+          <div class="list-text">{{'referThreeTitle' | translate}}</div>
+          <div class="list-meta">{{'referThreeText' | translate}}</div>
+        </div>
+      </div>
+      <div class="list">
+        <div class="icon"><img src="./assets/images/refer-a-friend/arrows-repeat.svg"></div>
+        <div class="text">
+          <div class="list-text">{{'referFourTitle' | translate}}</div>
+          <div class="list-meta">{{'referFourText' | translate}}</div>
+        </div>
+      </div>
+      <div class="invitation-code ion-activatable" (click)="copyCode()">
+        {{'invitationCode' | translate}}
+        <p>{{profileService.invitionCode()}}</p>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+      <input type="text" id="invitationCode" [value]="profileService.invitionCode()"
+        style="position: absolute; opacity: 0;" readonly>
+      <!-- share -->
+      <button class="submit-button ion-activatable" (click)="share()">
+        {{'share' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </div>
+  </div>
+</div>

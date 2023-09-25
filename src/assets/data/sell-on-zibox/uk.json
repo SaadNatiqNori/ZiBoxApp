@@ -1,0 +1,62 @@
+{
+  "title": "Sell & Buy",
+  "description": "Become a supplier in our E-Commerce business and take advantage of the rapidly growing online market. We are a leading E-Commerce platform that connects suppliers with customers from all over Iraq. We offer a wide range of opportunities for suppliers to showcase their products and services to an Iraqi audience. Our platform offers easy integration, flexible payment options, and real-time analytics and reporting. Join us and grow your online presence, increase your sales and expand your reach.",
+  "image": "./assets/images/sell-on-zibox/sell-and-buy.jpg",
+  "card": [
+    {
+      "title": "Across all Iraq!",
+      "image": "./assets/images/sell-on-zibox/map.png"
+    },
+    {
+      "title": "Thousands of viewers through all cities",
+      "image": "./assets/images/sell-on-zibox/residents.png"
+    },
+    {
+      "title": "Variant of payment methods",
+      "image": "./assets/images/sell-on-zibox/payment.svg"
+    }
+  ],
+  "grow": "Grow your business with ZiBox",
+  "steps": [
+    {
+      "title": "Step 1 : Create your Virtual Store",
+      "image": "./assets/images/sell-on-zibox/register.png",
+      "steps": [
+        "Register your business and create your shop in ZiBox FOR FREEEE.",
+        "Upload your products with a high-quality photo or our team will help you with it.",
+        "Your products will display in one of the largest E-commerce platform since 2016"
+      ]
+    },
+    {
+      "title": "Step 2 : Get Support From us!",
+      "image": "./assets/images/sell-on-zibox/support.svg",
+      "steps": [
+        "Our professional team will contact you for training.",
+        "Get high- quality product photoshoot by our team to Increase your product visibility.",
+        "Our data entry team will provide your product description in three languages (Kurdish, Arabic and English)"
+      ]
+    },
+    {
+      "title": "Step 3 : Schedule your order pickup:",
+      "image": "./assets/images/sell-on-zibox/order.svg",
+      "steps": [
+        "Once your shop is ready, it will be visible for all ZiBox customers.",
+        "🔔🔔 you got an order, you will get it in your shop portal.",
+        "Get your product ready to be collected by our drivers.",
+        "Wrapping your products in our ZiBox special boxes and packages FOR FREEEEE!!",
+        "Your order will arrive to customers hand on time with a smile 😊"
+      ]
+    },
+    {
+      "title": "Step 4 : Get your Right & Grow Greater",
+      "image": "./assets/images/sell-on-zibox/grow-your-business.svg",
+      "steps": [
+        "You will get your MONEY 💵💵 for every purchase upon your schedule needs.",
+        "Don’t worry! We will guarantee safety delivery and handle any broken cases.",
+        "Don’t panic! We will not return your items unless its wrong order."
+      ]
+    }
+  ],
+  "hurry": "Hurry up! And register yourself. & Let’s talk numbers $$",
+  "further": "For any further assistance don’t hesitate to call us on <a href='tel:+9647707778844'>07707778844</a> - <a href='tel:+9647500078844'>07500078844</a>. Or email us: <a href='mailto:sales@zibox.io'>sales@zibox.io</a>"
+}

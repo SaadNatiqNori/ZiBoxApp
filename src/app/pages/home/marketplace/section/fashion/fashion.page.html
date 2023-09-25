@@ -1,0 +1,76 @@
+<!-- Title bar -->
+<ion-toolbar class="fashion-toolbar">
+  <div class="fashion-toolbar-panel">
+    <button class="fashion-toolbar-button ion-activatable" title="Sell on ZiBox" routerLink="../">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <div class="fashion-toolbar-title">{{'platforms.fashion' | translate}}</div>
+  </div>
+</ion-toolbar>
+<ion-content class="fashion-padding">
+  <!-- Categories -->
+  <div class="section-panel" *ngIf="subCategories.length > 0 || categoriesIsLoading">
+    <div class="section-header">
+      <p class="section-title">{{'categories' | translate}}</p>
+    </div>
+    <div class="section-categories" *ngIf="subCategories.length > 0">
+      <div class="section-category-item" *ngFor="let item of subCategories" (click)="openCategory(item)">
+        <div class="section-category-image">
+          <img src="{{item.icon || item.icon_square}}" alt="">
+        </div>
+        <label class="section-category-title">{{item.name}}</label>
+      </div>
+    </div>
+    <div class="section-categories" *ngIf="subCategories.length < 1 && categoriesIsLoading">
+      <div class="section-category-item" *ngFor="let item of [].constructor(4)">
+        <ion-skeleton-text class="section-category-image" [animated]="true" style="width: 100%;"></ion-skeleton-text>
+        <ion-skeleton-text class="section-category-title" [animated]="true" style="width: 60%;"></ion-skeleton-text>
+      </div>
+    </div>
+    <hr class="gray-line">
+  </div>
+  <!-- Section Products -->
+  <div class="section-panel" id="productPanel">
+    <div class="section-header">
+      <p class="section-title">{{'products' | translate}}</p>
+    </div>
+    <div class="product-container" *ngIf="items.length > 0">
+      <zi-card *ngFor="let item of items" [item]="item"></zi-card>
+    </div>
+    <div class="empty-items" *ngIf="items.length == 0 && !isLoading">
+      <img src="./assets/gif/no-products-found.gif" alt="">
+      {{'noProductsFound' | translate}}
+    </div>
+    <div class="product-container" *ngIf="items.length < 1 && isLoading">
+      <zi-card-skeleton *ngFor="let item of [0,1,2,3,4,5,6,7,8,9]"></zi-card-skeleton>
+    </div>
+    <!-- Infinity Scrolling -->
+    <ion-infinite-scroll class="scroll-loading" loadingSpinner="bubbles" (ionInfinite)="onIonInfinite($event)"
+      *ngIf="items.length > 0">
+      <ion-infinite-scroll-content *ngIf="pageNumber <= pageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="pageNumber > pageCount && items.length > 10" (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+  </div>
+  <!-- Pull Down to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- Filter -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small" class="product-filter" (click)="openFashionFilterModal()">
+      <svg viewBox="0 0 24 18.018">
+        <g>
+          <path
+            d=" M 5.816 16.518 C 4.984 16.518 4.308 15.841 4.308 15.009 C 4.308 14.177 4.984 13.5 5.816 13.5 C 6.647 13.5 7.324 14.177 7.324 15.009 C 7.324 15.841 6.647 16.518 5.816 16.518 L 5.816 16.518 L 5.816 16.518 Z  M 18.741 10.518 C 17.909 10.518 17.232 9.841 17.232 9.009 C 17.232 8.177 17.909 7.5 18.741 7.5 C 19.573 7.5 20.25 8.177 20.25 9.009 C 20.25 9.841 19.573 10.518 18.741 10.518 L 18.741 10.518 L 18.741 10.518 Z  M 23.25 14.259 L 8.718 14.259 C 8.383 12.964 7.214 12 5.816 12 C 4.418 12 3.249 12.964 2.914 14.259 L 0.75 14.259 C 0.336 14.259 0 14.595 0 15.009 C 0 15.423 0.336 15.759 0.75 15.759 L 2.914 15.759 C 3.249 17.054 4.418 18.018 5.816 18.018 C 7.214 18.018 8.383 17.054 8.718 15.759 L 23.25 15.759 C 23.664 15.759 24 15.423 24 15.009 C 24 14.595 23.664 14.259 23.25 14.259 L 23.25 14.259 L 23.25 14.259 Z  M 23.25 8.259 L 21.644 8.259 C 21.308 6.964 20.14 6 18.741 6 C 17.342 6 16.174 6.964 15.839 8.259 L 0.75 8.259 C 0.336 8.259 0 8.595 0 9.009 C 0 9.423 0.336 9.759 0.75 9.759 L 15.839 9.759 C 16.174 11.054 17.342 12.018 18.741 12.018 C 20.14 12.018 21.308 11.054 21.644 9.759 L 23.25 9.759 C 23.664 9.759 24 9.423 24 9.009 C 24 8.595 23.664 8.259 23.25 8.259 L 23.25 8.259 L 23.25 8.259 Z  M 10.333 1.5 C 11.165 1.5 11.842 2.177 11.842 3.009 C 11.842 3.841 11.165 4.518 10.333 4.518 C 9.501 4.518 8.824 3.841 8.824 3.009 C 8.824 2.177 9.501 1.5 10.333 1.5 L 10.333 1.5 Z  M 0.75 3.759 L 7.43 3.759 C 7.766 5.054 8.934 6.018 10.333 6.018 C 11.732 6.018 12.9 5.054 13.236 3.759 L 23.25 3.759 C 23.664 3.759 24 3.423 24 3.009 C 24 2.595 23.664 2.259 23.25 2.259 L 13.236 2.259 C 12.9 0.964 11.732 0 10.333 0 C 8.934 0 7.766 0.964 7.43 2.259 L 0.75 2.259 C 0.336 2.259 0 2.595 0 3.009 C 0 3.423 0.336 3.759 0.75 3.759 L 0.75 3.759 Z "
+            fill-rule="evenodd" fill="#000" />
+        </g>
+      </svg>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

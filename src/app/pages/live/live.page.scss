@@ -1,0 +1,18 @@
+.live-padding {
+  --padding-top: 15px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-bottom: 60px;
+  --color: #000;
+  --background: #fff;
+}
+
+.empty-items{
+  height: calc(100% - 100px);
+}
+
+.empty-items img {
+  width: 250px;
+  height: 125px;
+  object-fit: cover;
+}

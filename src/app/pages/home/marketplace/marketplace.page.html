@@ -1,0 +1,296 @@
+<!-- Title bar -->
+<ion-toolbar class="home-toolbar">
+  <div class="home-toolbar-panel">
+    <button class="home-toolbar-button ion-activatable" title="Sell on ZiBox" routerLink="../sellonzibox">
+      <ion-icon name="storefront-outline" style="font-size: 18px;"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- Fake Search -->
+    <div title="Search">
+      <div class="button-search" routerLink="../search">
+        <svg class="button-search-icon" viewBox="0 0 512 512">
+          <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none"
+            stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
+          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"
+            d="M338.29 338.29L448 448" />
+        </svg>
+        <p>{{'search' | translate}}</p>
+      </div>
+    </div>
+    <button class="home-toolbar-button ion-activatable" title="Currency" (click)="otherService.openCurrency()">
+      {{otherService.currency}}
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <button class="home-toolbar-button ion-activatable" title="Notification" (click)="otherService.openNotifications()">
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+  </div>
+</ion-toolbar>
+<ion-content class="marketplace-padding">
+  <a id="top"></a> <!-- Back to Top When Click on Home Button -->
+  <!-- Marketplace Slideshow -->
+  <!-- Slide Images Height should be half of width for ex. width:500px, height should be 250px -->
+  <ion-slides pager="false" class="home-slideshow" *ngIf="slideshowItems.length < 1 || !showSlide">
+    <ion-skeleton-text [animated]="true" style="width: 100%;"></ion-skeleton-text>
+  </ion-slides>
+  <ion-slides pager="false" [options]="slideOption" class="home-slideshow"
+    *ngIf="slideshowItems.length > 0 && showSlide">
+    <ion-slide *ngFor="let item of slideshowItems" (click)="clickOnSlide(item)">
+      <ion-img class="home-slideshow-slide" src="{{item.image_path}}"></ion-img>
+    </ion-slide>
+  </ion-slides>
+  <!-- Section Brands -->
+  <div class="section-panel">
+    <div class="section-header ion-activatable" (click)="openBrands()">
+      <p class="section-title">{{'brands' | translate}}</p>
+      <button class="section-more">
+        {{'seeMore' | translate}}
+        <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </div>
+    <div class="section-categories" *ngIf="brandsItem.length > 0">
+      <div class="section-category-item" *ngFor="let item of brandsItem" (click)="openBrand(item)">
+        <div class="section-category-image">
+          <img src="{{item.image}}" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="section-categories" *ngIf="brandsItem.length < 1">
+      <div class="section-category-item" *ngFor="let item of [].constructor(4)">
+        <ion-skeleton-text class="section-category-image" [animated]="true" style="width: 100%;"></ion-skeleton-text>
+        <ion-skeleton-text class="section-category-title" [animated]="true" style="width: 60%;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+  <!-- Special Event -->
+  <div class="section-panel section-special-event" *ngIf="specialEventItems?.products?.length > 0">
+    <img [src]="specialEventItems.collection_image" alt="">
+    <div class="section-header" routerLink="event">
+      <p class="section-title"
+        style="--background: {{specialEventItems.collection_first_color}};--color: {{specialEventItems.collection_second_color}}">
+        {{specialEventItems.collection_name}}</p>
+      <button class="section-more ion-activatable">
+        {{'seeMore' | translate}}
+        <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </div>
+    <ion-slides [options]="specialEventSlidesOption">
+      <ion-slide *ngFor="let item of specialEventItems?.products">
+        <zi-card [item]="item"></zi-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- Newest Product -->
+  <div class="section-panel" *ngIf="newlyLoading || newestItems.length > 0">
+    <div class="section-header">
+      <p class="section-title">{{'newlyArrived' | translate}}</p>
+    </div>
+    <ion-slides [options]="productSlidesOption">
+      <ion-slide *ngFor="let item of newestItems">
+        <zi-card [item]="item"></zi-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="productSlidesOption" *ngIf="newestItems.length < 1">
+      <ion-slide *ngFor="let item of [].constructor(5)">
+        <zi-card-skeleton></zi-card-skeleton>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- Point Products -->
+  <div class="section-panel" *ngIf="pointLoading || pointItems.length > 0">
+    <div class="section-header ion-activatable" routerLink="../../menu/zi-credit"
+      style="color: var(--ion-color-primary);">
+      <p class="section-title">{{'shopByPoint' | translate}}</p>
+      <button class="section-more">
+        {{'seeMore' | translate}}
+        <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+      </button>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <ion-slides [options]="productSlidesOption">
+      <ion-slide *ngFor="let item of pointItems">
+        <zi-card [item]="item" [isPoint]="true"></zi-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="productSlidesOption" *ngIf="pointItems.length < 1">
+      <ion-slide *ngFor="let item of [].constructor(5)">
+        <zi-card-skeleton></zi-card-skeleton>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- Special Banar - 1 -->
+  <div class="banar-panel" *ngIf="banarItems.length > 0">
+    <img style="width: 100%;" [src]="banarItems[0].image_path" (click)="clickOnBanar(banarItems[0])">
+  </div>
+  <!-- Section Categories -->
+  <div class="section-panel">
+    <div class="section-header ion-activatable" (click)="openCategories()">
+      <p class="section-title">{{'categories' | translate}}</p>
+      <button class="section-more">
+        {{'platforms.all' | translate}}
+        <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+      </button>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="section-categories" *ngIf="categories.length > 0">
+      <div class="section-category-item" *ngFor="let item of categories" (click)="openCategory(item)"
+        style="--category-background-color: {{item.bg_color}}">
+        <div class="section-category-image">
+          <img src="{{item.icons || item.icon_square}}" alt="">
+        </div>
+        <label class="section-category-title">{{item.name}}</label>
+      </div>
+    </div>
+    <div class="section-categories" *ngIf="categories.length < 1">
+      <div class="section-category-item" *ngFor="let item of [].constructor(4)">
+        <ion-skeleton-text class="section-category-image" [animated]="true" style="width: 100%;"></ion-skeleton-text>
+        <ion-skeleton-text class="section-category-title" [animated]="true" style="width: 60%;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+  <!-- Discount Product -->
+  <div class="section-panel" *ngIf="discountLoading || discountItems.length > 0">
+    <div class="section-header ion-activatable" routerLink="discounts">
+      <p class="section-title">{{'discounts' | translate}}</p>
+      <button class="section-more">
+        {{'seeMore' | translate}}
+        <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+      </button>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <ion-slides [options]="discountSlidesOption" *ngIf="discountItems.length > 0">
+      <ion-slide *ngFor="let item of discountItems">
+        <zi-card [item]="item"></zi-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="productSlidesOption" *ngIf="discountItems.length < 1">
+      <ion-slide *ngFor="let item of [].constructor(5)">
+        <zi-card-skeleton></zi-card-skeleton>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- Section Fashion -->
+  <div class="section-panel" *ngIf="fashionLoading || fashionItems.length > 0">
+    <div class="section-header ion-activatable" routerLink="fashion">
+      <p class="section-title">{{'platforms.fashion' | translate}}</p>
+      <button class="section-more">
+        {{'seeMore' | translate}}
+        <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+      </button>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <ion-slides [options]="productSlidesOption">
+      <ion-slide *ngFor="let item of fashionItems">
+        <zi-card [item]="item"></zi-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="productSlidesOption" *ngIf="fashionItems.length < 1">
+      <ion-slide *ngFor="let item of [].constructor(5)">
+        <zi-card-skeleton></zi-card-skeleton>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- Special Banar - 2 -->
+  <div class="banar-panel" *ngIf="banarItems.length > 1">
+    <img style="width: 100%;" [src]="banarItems[1].image_path" (click)="clickOnBanar(banarItems[1])">
+  </div>
+  <!-- Special Box -->
+  <div class="section-panel" *ngIf="specialBoxLoading || specialBoxItems.length > 0">
+    <div class="section-header">
+      <p class="section-title">{{'specialBox' | translate}}</p>
+    </div>
+    <ion-slides [options]="productSlidesOption">
+      <ion-slide *ngFor="let item of specialBoxItems">
+        <zi-card [item]="item" [special]="true"></zi-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="productSlidesOption" *ngIf="specialBoxItems.length < 1">
+      <ion-slide *ngFor="let item of [].constructor(5)">
+        <zi-card-skeleton></zi-card-skeleton>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- Food Product -->
+  <div class="section-panel">
+    <div class="section-header ion-activatable" routerLink="grocery">
+      <p class="section-title">{{'food' | translate}}</p>
+      <button class="section-more">
+        {{'seeMore' | translate}}
+        <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+      </button>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <ion-slides [options]="productSlidesOption">
+      <ion-slide *ngFor="let item of foodItems">
+        <zi-card [item]="item"></zi-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="productSlidesOption" *ngIf="foodItems.length < 1">
+      <ion-slide *ngFor="let item of [].constructor(5)">
+        <zi-card-skeleton></zi-card-skeleton>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- Market Product -->
+  <div class="section-panel" *ngIf="marketLoading || marketItems.length > 0">
+    <div class="section-header ion-activatable" (click)="openShops()">
+      <p class="section-title">{{'platforms.markets' | translate}}</p>
+      <button class="section-more">
+        {{'seeMore' | translate}}
+        <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+      </button>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="section-markets" *ngIf="marketItems.length > 0">
+      <div class="section-market-item" *ngFor="let item of marketItems" (click)="openShop(item)">
+        <img [src]="item.logo? item.logo : './assets/avatar/avatar.svg'" class="section-market-image" alt="">
+        <label class="section-market-title">{{item.title}}</label>
+      </div>
+    </div>
+    <div class="section-markets" *ngIf="marketItems.length < 1">
+      <div class="section-market-item" *ngFor="let item of [].constructor(4)">
+        <ion-skeleton-text class="section-market-image" [animated]="true" style="width: 100%;"></ion-skeleton-text>
+        <ion-skeleton-text class="section-market-title" [animated]="true" style="width: 60%;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+  <!-- Special Banar - 3 -->
+  <div class="banar-panel" *ngIf="banarItems.length > 2" style="margin-bottom: 7px;">
+    <img style="width: 100%;" [src]="banarItems[2].image_path" (click)="clickOnBanar(banarItems[2])">
+  </div>
+  <!-- All Products -->
+  <div class="section-panel">
+    <div class="section-header ion-activatable" routerLink="products">
+      <p class="section-title">{{'products' | translate}}</p>
+      <button class="section-more">
+        {{'allProducts' | translate}}
+        <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+      </button>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="product-container" *ngIf="productItems.length > 0">
+      <zi-card *ngFor="let item of productItems" [item]="item"></zi-card>
+    </div>
+    <div class="product-container" *ngIf="productItems.length < 1">
+      <zi-card-skeleton *ngFor="let item of [0,1,2,3,4,5,6,7,8,9]"></zi-card-skeleton>
+    </div>
+    <!-- Infinity Scrolling -->
+    <ion-infinite-scroll class="scroll-loading" loadingSpinner="bubbles" (ionInfinite)="onIonInfinite($event)"
+      *ngIf="productItems.length > 0">
+      <ion-infinite-scroll-content *ngIf="pageNumber <= pageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="pageNumber > pageCount && productItems.length > 10" (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+  </div>
+  <!-- Pull Down to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>

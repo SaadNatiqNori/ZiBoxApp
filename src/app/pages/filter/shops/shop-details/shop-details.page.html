@@ -1,0 +1,96 @@
+<ion-content class="market-padding">
+  <div class="market-header">
+    <img class="market-cover" src="{{market.bg_image || './assets/avatar/avatar.svg'}}" #cover
+      (error)="cover.src='./assets/avatar/avatar.svg'">
+    <div class="market-profile">
+      <img src="{{market.logo || './assets/avatar/avatar.svg'}}" #logo (error)="logo.src='./assets/avatar/avatar.svg'">
+      <div class="market-information">
+        <div class="market-title">{{market.title}}</div>
+        <div class="market-meta">{{market.description}}</div>
+      </div>
+      <div class="market-details">
+        <div>
+          <span class="market-detail-number" *ngIf="products != null">{{otherService.comma(products)}}</span>
+          <ion-skeleton-text class="market-detail-number" *ngIf="products == null" [animated]="true"
+            style="width: 40%;">
+          </ion-skeleton-text>
+          <span class="market-detail-text">{{'products' | translate}}</span>
+        </div>
+        <div>
+          <span class="market-detail-number">{{otherService.comma(visitors)}}</span>
+          <span class="market-detail-text">{{'visitors' | translate}}</span>
+        </div>
+        <div>
+          <span class="market-detail-number">{{registerd}}</span>
+          <span class="market-detail-text">{{'registored' | translate}}</span>
+        </div>
+      </div>
+    </div>
+    <ion-button class="back-button" (click)="back()">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+    </ion-button>
+  </div>
+  <!-- Market Coupons -->
+  <div class="market-coupons" *ngIf="marketCoupons !== null" translate
+    [translateParams]="{ amount: otherService.comma(marketCoupons.amount), value: otherService.comma(marketCoupons.value) }">
+    marketCouponsMessage
+  </div>
+  <!-- Categories -->
+  <div class="section-panel" *ngIf="categories.length > 0 || isLoading">
+    <div class="section-header">
+      <p class="section-title">{{'categories' | translate}}</p>
+    </div>
+    <div class="section-categories" *ngIf="categories.length > 0">
+      <div class="section-category-item" *ngFor="let item of categories" (click)="openCategory(item)"
+        style="--category-background-color: {{item.bg_color}}">
+        <div class="section-category-image">
+          <img [src]="item.icon || item.icon_square || item.icon_rectangle  || './assets/avatar/avatar.svg'">
+        </div>
+        <label class="section-category-title">{{item.name}}</label>
+      </div>
+    </div>
+    <div class="section-categories" *ngIf="categories.length < 1">
+      <div class="section-category-item" *ngFor="let item of [].constructor(4)">
+        <ion-skeleton-text class="section-category-image" [animated]="true" style="width: 100%;"></ion-skeleton-text>
+        <ion-skeleton-text class="section-category-title" [animated]="true" style="width: 60%;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+  <hr class="gray-line">
+  <!-- Products -->
+  <div class="section-panel" id="productPanel">
+    <div class="section-header">
+      <p class="section-title">{{'products' | translate}}</p>
+      <select class="section-sort" #so (change)="filter(so.value)">
+        <option value="newly_arrived">{{'newlyArrived' | translate}}</option>
+        <option value="low_to_high">{{'lowToHigh' | translate}}</option>
+        <option value="high_to_low">{{'highToLow' | translate}}</option>
+      </select>
+    </div>
+    <div class="product-container" *ngIf="items.length > 0">
+      <zi-card *ngFor="let item of items" [item]="item" [ngClass]="item.discount ? 'red-color' : 'green-color'">
+      </zi-card>
+    </div>
+    <div class="product-container" *ngIf="items.length < 1 && isLoading">
+      <zi-card-skeleton *ngFor="let item of  [].constructor(6)"></zi-card-skeleton>
+    </div>
+    <ion-infinite-scroll class="scroll-loading" loadingSpinner="bubbles" (ionInfinite)="onIonInfinite($event)"
+      *ngIf="items.length > 0">
+      <ion-infinite-scroll-content *ngIf="pageNumber <= pageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="pageNumber > pageCount && items.length > 10" (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+    <!-- Not products found -->
+    <div class="empty-items" *ngIf="items.length == 0 && !isLoading">
+      <img src="./assets/gif/no-products-found.gif" alt="">
+      {{'noProductsFound' | translate}}
+    </div>
+  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>

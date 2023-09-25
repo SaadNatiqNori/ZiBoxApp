@@ -1,0 +1,71 @@
+<div class="card-panel">
+  <div class="img-panel">
+    <img alt="{{item.title}}" src="{{item.thumb}}" class="card-image" (click)="productDetails(item)" />
+    <img alt="{{item.title}}" src="./assets/images/special-box.png" class="card-special-box-image" *ngIf="special" />
+    <div class="card-favourite" *ngIf="!profileService.isLogin" (click)="otherService.openSign()">
+      <ion-icon name="heart-outline"></ion-icon>
+    </div>
+    <div class="card-favourite" *ngIf="profileService.isLogin" [class.on-my-favourite]="isFavorite"
+      (click)="favouriteProduct()">
+      <ion-icon name="heart-outline" *ngIf="!isFavorite"></ion-icon>
+      <ion-icon name="heart" *ngIf="isFavorite"></ion-icon>
+    </div>
+    <div class="out-of-stock" *ngIf="item.quantity == 0">
+      <div class="out-of-stock-text">{{'outOfStock' | translate}}</div>
+    </div>
+    <div class="card-color" *ngIf="color > 1" [class.card-color-stock]="item.quantity == 0">
+      <div>
+        <span></span>
+        <span></span>
+      </div>
+      <span>{{color}}</span>
+    </div>
+    <div class="special-for-selected-gender" *ngIf="item.is_censored">
+      {{'lingerie' | translate}}
+      <button (click)="item.is_censored = false">{{'show' | translate}}</button>
+    </div>
+  </div>
+  <div class="card-category">{{item?.category_name || ''}}</div>
+  <p class="card-title" [ngStyle]="{'text-align': special ? 'center' : 'start', 'direction': isRTL()? 'rtl' : 'ltr'}"
+    (click)="productDetails(item)">
+    {{item.title}}
+  </p>
+  <div class="price-panel" *ngIf="!special && !isPoint" (click)="productDetails(item)">
+    <p class="card-price" [class.remove-price]="item.dis_percentage">
+      {{otherService.comma(price, item.currency_id)}}<span>{{this.otherService.currency}}</span>
+    </p>
+    <div class="card-discount-ratio" *ngIf="item.dis_percentage">
+      <span>-</span>{{item.pro_percentage || item.dis_percentage}}<span>%</span>
+    </div>
+    <div class="card-rating" *ngIf="!item.dis_percentage">
+      <span *ngFor="let star of [1, 2, 3, 4, 5]">
+        <img *ngIf="star <= item.average_rating" src="./assets/images/ratings/star-fill.svg" alt="{{item.average_rating}}">
+        <img *ngIf="star> item.average_rating" src="./assets/images/ratings/star.svg" alt="{{item.average_rating}}">
+      </span>
+    </div>
+  </div>
+  <div class="discount-panel" *ngIf="!special && item.dis_percentage && !isPoint" (click)="productDetails(item)">
+    <p class="card-price">
+      {{calcDiscount(price, item.pro_percentage || item.dis_percentage, item.currency_id)}}
+      <span>{{this.otherService.currency}}</span>
+    </p>
+    <div class="card-rating">
+      <span *ngFor="let star of [1, 2, 3, 4, 5]">
+        <img *ngIf="star <= item.average_rating" src="./assets/images/ratings/star-fill.svg" alt="{{item.average_rating}}">
+        <img *ngIf="star> item.average_rating" src="./assets/images/ratings/star.svg" alt="{{item.average_rating}}">
+      </span>
+    </div>
+  </div>
+  <div class="point-panel" *ngIf="item.as_points" (click)="productDetails(item)">
+    <div class="card-point">{{item.zi_product_details[0].points_price}} pt.</div>
+    <div class="card-rating" *ngIf="isPoint">
+      <span *ngFor="let star of [1, 2, 3, 4, 5]">
+        <img *ngIf="star <= item.average_rating" src="./assets/images/ratings/star-fill.svg" alt="{{item.average_rating}}">
+        <img *ngIf="star> item.average_rating" src="./assets/images/ratings/star.svg" alt="{{item.average_rating}}">
+      </span>
+    </div>
+  </div>
+  <div class="special-for-selected-gender" style="background-color: transparent; backdrop-filter: none; z-index: 1;"
+    *ngIf="item.is_censored" (click)="privateProduct()">
+  </div>
+</div>

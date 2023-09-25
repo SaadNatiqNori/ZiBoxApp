@@ -1,0 +1,14 @@
+.custom-toolbar-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.reviews-paading {
+  --padding-top: 15px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-bottom: 10px;
+  --color: #000;
+  --background: #fff;
+}

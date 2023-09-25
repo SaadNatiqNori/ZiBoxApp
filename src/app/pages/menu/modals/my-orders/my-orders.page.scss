@@ -1,0 +1,609 @@
+.orders-padding {
+  --padding-top: 10px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-bottom: 65px;
+  --background: #f9f9f9;
+}
+
+// Tabs
+.tab-panel {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.tab-button {
+  position: relative;
+  display: block;
+  padding: 0 15px;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.tab-button::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0%;
+  height: 3px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--ion-color-primary);
+  transition: all 0.3s ease-in-out;
+}
+
+.tab-active {
+  color: var(--ion-color-primary);
+}
+
+.tab-active::after {
+  width: 100%;
+  color: var(--ion-color-primary);
+}
+
+// You have Order Return
+.return-panel {
+  position: relative;
+  display: flex;
+  place-items: center;
+  place-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  color: #9d9800;
+  border-radius: 10px;
+  border: 1px solid #ddd600;
+  background-color: #fffdbe;
+  cursor: pointer;
+}
+
+.return-panel ion-icon {
+  flex: 0 0 16px;
+}
+
+// My Order Items
+.orders-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  user-select: none;
+  overflow: hidden;
+}
+
+.order-header {
+  position: relative;
+  display: flex;
+  place-items: center;
+}
+
+.oredrs-title {
+  position: relative;
+  display: block;
+  width: 100%;
+  color: #000;
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.oredrs-meta {
+  color: #aaa;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.order-header img {
+  position: absolute;
+  display: block;
+  width: 64px;
+  top: -5px;
+}
+
+.order-information {
+  position: relative;
+  display: flex;
+  place-content: space-between;
+  width: 100%;
+  height: 40px;
+  margin-top: 15px;
+  border-radius: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.order-information>div {
+  display: grid;
+  place-items: center;
+  gap: 2px;
+}
+
+.order-information .order-detail-number {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 900;
+  color: #000;
+}
+
+.order-information .order-detail-number sub {
+  bottom: 0;
+  padding: 0 3px;
+}
+
+.order-information .order-detail-text {
+  color: #777;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.has-returnable-item {
+  margin-top: 5px;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+}
+
+.has-returnable-item span {
+  color: #ff3334;
+}
+
+// Order Modal
+.content {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f4;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.back-button {
+  z-index: 10;
+}
+
+.header-panel {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  color: #000;
+  padding-top: 90px;
+  padding-bottom: 15px;
+  border-radius: 0 0 15px 15px;
+  background-color: #fff;
+}
+
+.header-panel>.header-text {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  padding: 15px;
+}
+
+.header-title {
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.header-meta {
+  color: #aaa;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: capitalize;
+}
+
+.my-order-modal {
+  position: relative;
+  display: flex;
+  place-items: center;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  padding: 15px;
+}
+
+.modal-information {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.modal-detail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.modal-detail:last-child {
+  margin-bottom: 10px;
+}
+
+.modal-detail-text {
+  position: relative;
+  display: block;
+  color: #aaa;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.modal-detail-value {
+  position: relative;
+  display: block;
+  color: #000;
+  font-weight: 900;
+}
+
+.modal-detail-value sub {
+  bottom: 0;
+  padding: 0 3px;
+}
+
+.my-order-modal img {
+  position: absolute;
+  display: block;
+  height: 100px;
+  bottom: 25px;
+}
+
+.order-status {
+  position: relative;
+  display: block;
+  text-align: center;
+  margin-bottom: -35px;
+}
+
+.order-status span {
+  position: relative;
+  display: inline-flex;
+  place-items: center;
+  place-content: center;
+  min-width: 115px;
+  height: 40px;
+  padding: 0 15px;
+  color: #000;
+  border: 5px solid #f4f4f4;
+  border-radius: 50px;
+  background-color: #fff;
+}
+
+// Order Statuses
+.order-statuses {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  padding: 15px;
+  padding-top: 40px;
+}
+
+.order-status-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 80px;
+  padding: 18px 0;
+  color: #000;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-status-item img {
+  height: 44px;
+  z-index: 1;
+}
+
+.order-status-item .item-image {
+  width: 44px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.order-status-item p {
+  position: relative;
+  display: block;
+  width: calc(100% - 80px);
+  padding: 0 10px;
+  z-index: 1;
+}
+
+.order-status-item ion-icon {
+  z-index: 1;
+}
+
+.item-quantity {
+  position: relative;
+  display: block;
+  font-size: 12px;
+  color: #777;
+}
+
+.status-successfully {
+  color: #99cc00;
+}
+
+.order-status-active::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: -10px;
+  right: -10px;
+  bottom: 5px;
+  border-radius: 10px;
+  background-color: #e9e9e9;
+  z-index: 0;
+}
+
+// Order Products
+.order-products-panel {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  padding: 15px;
+  color: #000;
+}
+
+.order-products {
+  position: relative;
+  display: flex;
+  padding: 5px 0;
+  padding-bottom: 5px;
+  overflow-y: auto;
+}
+
+.order-product {
+  position: relative;
+  display: block;
+  width: 100px;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.order-product img {
+  width: 100%;
+  height: 80px;
+  border-radius: 5px;
+  object-fit: contain;
+}
+
+.order-product p {
+  margin: 5px 0px;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// Cancel Order
+.order-cancel {
+  padding: 15px 0 5px 0;
+}
+
+// Returnable Order Products
+.returnable-content {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding-top: 90px;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.returnable-product-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  padding: 15px;
+}
+
+.returnable-product {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #eee;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+// .returnable-product:last-child {
+//   border-bottom: none;
+// }
+
+.product-image {
+  position: relative;
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin-top: 2px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.product-action {
+  display: flex;
+  place-content: center;
+  place-items: center;
+  overflow: hidden;
+}
+
+.product-action-button {
+  position: relative;
+  display: block;
+  width: 26px;
+  height: 26px;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #000;
+}
+
+.product-action-disabled {
+  color: #999;
+  background-color: #ddd;
+}
+
+.product-action span {
+  position: relative;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.product-information {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 70px);
+  padding: 0 5px;
+}
+
+.products-header {
+  position: relative;
+  display: flex;
+  place-items: center;
+}
+
+.products-title {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 28px);
+}
+
+.products-name {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-weight: 900;
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.products-size {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  color: #bbb;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: start;
+}
+
+.delete-product {
+  position: absolute;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  width: 28px;
+  height: 28px;
+  top: 0;
+  right: -5px;
+  padding: 0 5px;
+  font-size: 20px;
+  border-radius: 5px;
+  color: #ff3334;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.product-price {
+  position: relative;
+  display: flex;
+  place-items: center;
+  height: 16px;
+  margin: 5px 0;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.product-price hr {
+  width: 1px;
+  height: 13px;
+  margin: 2px 8px;
+  border: none;
+  background-color: #ddd;
+}
+
+.product-discount {
+  color: #ff3334;
+}
+
+.product-point {
+  direction: ltr;
+  color: var(--ion-color-primary);
+}
+
+.product-total-price {
+  position: relative;
+  display: flex;
+  align-items: center;
+  place-content: space-between;
+  margin-top: 5px;
+  font-weight: 900;
+}
+
+.product-total-price p {
+  display: block;
+  width: calc(100% - 78px);
+  margin: 0;
+  font-size: 14px;
+  text-align: end;
+}
+
+.product-total-price span {
+  font-size: 14px;
+}
+
+.control-style {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.submit-returnable-order {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  margin-top: -25px;
+  padding: 15px;
+}
+
+.delete-button .button-loading {
+  background-color: #ff3334;
+}

@@ -1,0 +1,8 @@
+<div class="modal-panel">
+  <pinch-zoom [limit-zoom]="5" class="zoom-panel">
+    <img src="{{img}}" class="zoom-img" />
+  </pinch-zoom>
+  <ion-button class="back-button ios-top-margin" (click)="close()">
+    <ion-icon name="{{icons.closeIcon()}}"></ion-icon>
+  </ion-button>
+</div>

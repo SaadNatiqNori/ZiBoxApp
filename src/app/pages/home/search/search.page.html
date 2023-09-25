@@ -1,0 +1,76 @@
+<!-- Title bar -->
+<ion-toolbar class="home-toolbar">
+  <div class="home-toolbar-panel">
+    <!-- Back -->
+    <button class="home-toolbar-button ion-activatable" title="Sell on ZiBox" (click)="back()">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- Search -->
+    <div class="search-input">
+      <input type="search" id="search" class="search" placeholder="{{'search' | translate}}" [(ngModel)]="searchWord"
+        (keyup)="onSearch()" (keyup.enter)="searchGo(searchWord)" (change)="onSearch()" enterkeyhint="search">
+      <svg class="search-icon" viewBox="0 0 512 512">
+        <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none"
+          stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"
+          d="M338.29 338.29L448 448" />
+      </svg>
+      <div class="button-loading search-loading" *ngIf="searchIsLoading">
+        <svg viewBox="0 0 50 50">
+          <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+        </svg>
+      </div>
+    </div>
+    <button class="home-toolbar-button ion-activatable" title="Voice" (click)="startRecognition()">
+      <ion-icon name="mic-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- Clear Search History -->
+    <button class="home-toolbar-button ion-activatable" title="Clear Recent Search" (click)="clearRecentSearch()">
+      <ion-icon name="trash-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+  </div>
+</ion-toolbar>
+<ion-content class="search-padding">
+  <!-- Search Result -->
+  <div class="search-result-panel" *ngIf="searchResult.length > 0">
+    <label>{{'Search Result' | translate}}</label>
+    <div class="search-result-item ion-activatable" *ngFor="let item of searchResult" (click)="searchGo(item)">
+      {{item.title}}
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div>
+  <div class="search-result-panel search-result-not-found"
+    *ngIf="searchResult.length < 1 && !searchIsLoading && searchWord.length > 0">
+    {{'noProductsFound' | translate}}
+  </div>
+  <div class="search-result-panel" *ngIf="searchResult.length == 0 && searchWord.length < 1">
+    <label>{{'Recent Search' | translate}}</label>
+    <div class="recent-item" *ngFor="let item of recentSearch.slice().reverse()">
+      <div class="recent-item-text ion-activatable" (click)="searchGo(item)">
+        <ion-icon name="time-outline"></ion-icon>
+        {{item.title}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+      <button class="ion-activatable" (click)="deleteRecentSearch(item)" *ngIf="(recentSearch.slice()).length > 0">
+        <ion-icon name="close-outline"></ion-icon>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </div>
+  </div>
+  <!-- </div> -->
+  <!-- Voice Panel -->
+  <div class="voice-panel" [class.show-voice]="recording">
+    <div class="voice-result-panel">
+      <button class="close-voice-panel" (click)="closeVoiceModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+      <p>{{voiceWord}}</p>
+      <img src="./assets/gif/voice.gif" alt="">
+      <button id="voiceSearch" (click)="stopRecognition()" class="voice-search">{{'search' | translate}}</button>
+    </div>
+  </div>
+</ion-content>

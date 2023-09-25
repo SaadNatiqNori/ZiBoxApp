@@ -1,0 +1,13 @@
+<ion-content class="ion-padding">
+  <div class="wrapper">
+    <h1>{{'language' | translate}}</h1>
+    <ion-list lines="full">
+      <ion-item *ngFor="let lang of languages" (click)="setLanguage(lang)"
+        trigger="language-modal" button="true" detail="false">
+        <ion-icon name="checkmark" slot="end" color="primary" *ngIf="lang.code == selectedLanguage">
+        </ion-icon>
+        <ion-label>{{lang.label}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

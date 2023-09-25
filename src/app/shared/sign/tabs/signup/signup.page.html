@@ -1,0 +1,55 @@
+<div class="content">
+  <ion-button class="back-button ios-top-margin" (click)="signService.selectTab = null">
+    <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+  </ion-button>
+  <div class="sign-up-padding">
+    <form [formGroup]="registerForm" class="loginForm" autocomplete="off">
+      <h1 class="page-title">{{'signup' | translate}}</h1>
+      <div class="control-style">
+        <label class="control-title">{{'username' | translate}}</label>
+        <input class="control-input" type="text" formControlName="username" placeholder="ex. ZiBox User">
+      </div>
+      <div class="control-style">
+        <label class="control-title">{{'email' | translate}}</label>
+        <input class="control-input" type="email" formControlName="email" placeholder="ex. e-mail@zibox.io">
+      </div>
+      <div class="control-style">
+        <label class="control-title">{{'password' | translate}}</label>
+        <input class="control-input" id="signUpPassword" type="password" formControlName="password" placeholder="ex. P@$$w0rD">
+        <button class="control-password ion-activatable" (click)="passwordToggle()">
+          <img src="./assets/sign/password-{{showPassword == true? 'show' : 'hide'}}.svg" >
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </div>
+      <hr class="login-hr">
+      <p class="user-aggrement">
+        {{'signupAgreement' | translate}}
+        (<span (click)="openLegalInformationModals('privacy')">{{'privacy' | translate}}</span>
+        {{'and' | translate}}
+        <span (click)="openLegalInformationModals('termsOfUse')">{{'termsOfUse' | translate}}</span>)
+      </p>
+      <div class="checkbox-style">
+        <input type="checkbox" id="agreeReceiveEmail" checked>
+        <label for="agreeReceiveEmail"></label>
+        <label for="agreeReceiveEmail">{{'agreeReceiveEmail' | translate}}</label>
+      </div>
+      <button class="submit-button ion-activatable" (click)="confirm()" [disabled]="isLoading ||
+      !registerForm.valid">
+        {{'signup' | translate}}
+        <div class="button-loading" *ngIf="isLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+      <div class="split">
+        <span>{{'or' | translate}}</span>
+      </div>
+      <button class="sign-button ion-activatable" (click)="signService.selectTab = 'signin'">
+        {{'signin' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </form>
+  </div>
+</div>

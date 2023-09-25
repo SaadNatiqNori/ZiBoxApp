@@ -1,0 +1,244 @@
+.ion-padding {
+  --background: #f9f9f9;
+  --padding-top: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-bottom: 70px;
+}
+
+.back-button {
+  --color: #fff;
+  --background: rgba(0, 0, 0, 0.15);
+  --background-activated: rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.toolbar {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.toolbar-background {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 200px;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: url(../../../../../assets/menu/mask.png), var(--ion-color-primary);
+  background-size: 200px;
+}
+
+.points {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+  max-width: 250px;
+  height: 220px;
+  direction: ltr;
+  margin: auto;
+  top: 90px;
+  left: 0;
+  right: 0;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.my-points {
+  position: relative;
+  display: flex;
+  place-content: center;
+  place-items: end;
+  width: 100%;
+  height: 110px;
+}
+
+.my-points span {
+  flex: 0 0 22px;
+  font-size: 12px;
+  margin: 25px -67px;
+  color: var(--ion-color-primary);
+  z-index: 2;
+}
+
+.circle-panel {
+  position: relative;
+  display: block;
+  width: 160px;
+  height: 160px;
+  flex: 0 0 160px;
+  border-radius: 100%;
+  background-color: white;
+  overflow: hidden;
+}
+
+.circle-panel svg {
+  width: 300px;
+  height: 300px;
+  margin: -20px;
+}
+
+.points>label {
+  text-align: center;
+  font-weight: 900;
+  font-size: 14px;
+  color: #777;
+}
+
+.points>label span {
+  text-align: center;
+  font-size: 10px;
+}
+
+.how-to-get-button {
+  position: relative;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  min-width: 150px;
+  height: 40px;
+  margin-top: 15px;
+  padding: 0 20px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 10px;
+  background-color: var(--ion-color-primary);
+  overflow: hidden;
+}
+
+// Slides
+.point-slides {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 110px;
+  padding: 0 15px;
+  overflow: auto;
+}
+
+.point-slide {
+  position: relative;
+  display: block;
+  flex: 0 0 320px;
+  padding: 15px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.point-slide:nth-child(1) {
+  background: linear-gradient(90deg, #99CC00, #BCDC58);
+  border: 1px solid #99CC00;
+}
+
+.point-slide:nth-child(2) {
+  background: linear-gradient(90deg, #FF6600, #FF8636);
+  border: 1px solid #FF6600;
+}
+
+.point-slide:nth-child(3) {
+  background: linear-gradient(90deg, #7B8FC6, #98A9D6);
+  border: 1px solid #7B8FC6;
+}
+
+@media (min-width: 600px) {
+
+  .toolbar {
+    display: flex;
+    place-items: end;
+  }
+
+  .points {
+    flex: 0 0 225px;
+    margin: 0 15px;
+    top: 0;
+  }
+
+  .point-slides {
+    margin-top: 215px;
+  }
+}
+
+.section-point {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.point-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, auto));
+  gap: 10px;
+  padding: 0 15px;
+}
+
+.point-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.point-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.point-information {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.point-title {
+  min-height: 14px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.point-price {
+  position: relative;
+  display: inline-block;
+  min-height: 18px;
+  margin-top: 5px;
+  color: var(--ion-color-primary);
+  font-weight: 900;
+  direction: ltr;
+}
+
+@media (max-width: 500px) {
+  .point-panel {
+    grid-template-columns: repeat(auto-fill, minmax(110px, auto));
+  }
+
+  .point-card {
+    height: 150px;
+  }
+
+  .point-image {
+    height: 100px;
+  }
+
+  .point-information {
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 383px) {
+    .point-panel {
+      grid-template-columns: repeat(auto-fill, minmax(90px, auto));
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.category-padding {
+  --padding-top: 10px;
+  --padding-bottom: 75px;
+  --color: #000;
+  --background: #f5f5f5;
+}
+
+.custom-toolbar {
+  --padding-top: 0 !important;
+  --min-height: 30px !important;
+  --background: #fff;
+  z-index: 15;
+}
+
+.custom-toolbar-panel{
+  place-content: flex-start;
+}
+
+.custom-toolbar ion-title {
+  padding: 0 5px;
+  font-size: 14px;
+  text-align: end;
+}
+
+.gray-line{
+  margin-bottom: 10px;
+}

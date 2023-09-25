@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-Sign_In_Forget_Password_Verification_code_3">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Sign_In_Forget_Password_Verification_code_3" data-name="Sign In – Forget Password – Verification code – 3" clip-path="url(#clip-Sign_In_Forget_Password_Verification_code_3)">
+    <g id="Location" transform="translate(3.6 0)">
+      <path id="Path_34175" d="M4.238,1.124a8.267,8.267,0,0,1,8.442.07,8.8,8.8,0,0,1,4.12,7.52c-.06,3.049-1.736,5.914-3.831,8.13a22.472,22.472,0,0,1-4.03,3.384,1.409,1.409,0,0,1-.489.173.984.984,0,0,1-.469-.142A22.218,22.218,0,0,1,2.175,14.8,11.135,11.135,0,0,1,0,8.561H0l.006-.328A8.579,8.579,0,0,1,4.238,1.124ZM9.489,6.042a2.815,2.815,0,0,0-3.113.623,2.946,2.946,0,0,0-.623,3.169,2.853,2.853,0,0,0,2.637,1.8,2.807,2.807,0,0,0,2.02-.842,2.945,2.945,0,0,0-.921-4.747Z" transform="translate(0 0)"/>
+      <ellipse id="Ellipse_743" cx="6" cy="1" rx="6" ry="1" transform="translate(2.4 22)" opacity="0.4"/>
+    </g>
+  </g>
+</svg>

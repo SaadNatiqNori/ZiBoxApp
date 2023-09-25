@@ -1,0 +1,99 @@
+<!-- Custom Toolbar -->
+<ion-toolbar class="custom-toolbar">
+  <div class="custom-toolbar-panel">
+    <p class="custom-toolbar-title">{{"cart" | translate}}</p>
+  </div>
+</ion-toolbar>
+<!-- Cart -->
+<ion-content [fullscreen]="true" class="cart-padding">
+  <!-- If Have Items on card -->
+  <div class="shop-panel" *ngIf="cart.cart.length > 0">
+    <div class="shop-container" *ngFor="let shop of cart.cart">
+      <div class="shop-header">
+        <img class="shop-logo" #logo src="{{shop.market.logo}}" (click)="openShop(shop.market)"
+          (error)="logo.src = 'assets/avatar/avatar.svg'">
+        <div class="shop-title" (click)="openShop(shop.market)">
+          {{shop.market.title}}
+          <span>{{'products' | translate}} : {{shop.products.length}}</span>
+        </div>
+        <div class="shop-products-prcie">
+          {{cart.sumPrice(shop.products)}}
+          <span>{{otherService.currency}}</span>
+        </div>
+      </div>
+      <div class="shop-product-container">
+        <div class="market-product" *ngFor="let product of shop.products">
+          <img class="product-image" src="{{product.thumb}}" alt="" (click)="openProduct(product)">
+          <div class="product-information">
+            <div class="products-header">
+              <div class="products-title" (click)="openProduct(product)">
+                <span class="products-name">{{product.title}}</span>
+                <div class="products-size" *ngIf="product.choose_size">
+                  {{'size' | translate}} : {{product.choose_size}}
+                </div>
+              </div>
+              <button class="delete-product ion-activatable" (click)="cart.deleteShop(shop.market, product)">
+                <ion-icon name="close-outline"></ion-icon>
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </div>
+            <div (click)="openProduct(product)">
+              <span class="product-price">
+                <!-- Price -->
+                <span *ngIf="!product.discount">{{otherService.comma(product.price, product.currency_id)}}</span>
+                <!-- Discount -->
+                <span class="product-discount" *ngIf="product.discount">
+                  {{otherService.comma(cart.calcDiscount(product.price, product.percentage ||
+                  product.discount.percentage), product.currency_id)}}
+                </span>
+                <!-- Point -->
+                <hr *ngIf="product.point">
+                <span class="product-point" *ngIf="product.point">{{product.point}} pt.</span>
+              </span>
+            </div>
+            <div class="product-total-price">
+              <div class="product-action">
+                <button class="product-action-button" [class.product-action-disabled]="product.count == 1"
+                  [disabled]="product.count == 1" (click)="cart.changeCount(shop, product, '-')">
+                  <ion-icon name="remove-outline"></ion-icon>
+                </button>
+                <span>{{product.count}}</span>
+                <button class="product-action-button" (click)="cart.changeCount(shop, product, '+')"
+                  [class.product-action-disabled]="product.count >= product.quantity"
+                  [disabled]="product.count >= product.quantity">
+                  <ion-icon name="add-outline"></ion-icon>
+                </button>
+              </div>
+              <p *ngIf="!product.discount" (click)="openProduct(product)">
+                {{otherService.comma((product.price * product.count).toString(), product.currency_id)}}
+              </p>
+              <p class="product-total-price" *ngIf="product.discount">
+                {{otherService.comma(cart.calcDiscount((product.price * product.count).toString(), product.percentage ||
+                product.discount.percentage), product.currency_id)}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cart-bottom" *ngIf="cart.cart.length > 0">
+    <!-- If Price Less than 10,000 IQD -->
+    <div class="minimum-order-price" *ngIf="!cart.moreThanMinOrderPrice(+cart.totalPrices(), +minOrderPrice)">
+      <span>{{'note' | translate}}.</span>
+      <span translate
+        [translateParams]="{ value: otherService.comma(minOrderPrice, 4) + ' ' + otherService.currency }">
+        miniOrderPrice
+      </span>
+    </div>
+    <!-- If Price More than 10,000 IQD -->
+    <button class="ion-activatable" (click)="checkOut()"
+      *ngIf="cart.moreThanMinOrderPrice(+cart.totalPrices(), +minOrderPrice)">
+      {{'checkOut' | translate}} ({{otherService.comma(cart.totalPrices())}} {{otherService.currency}})
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+  </div>
+  <div class="empty-items" *ngIf="cart.cart.length < 1">
+    {{'cartIsEmpty' | translate}}
+  </div>
+</ion-content>

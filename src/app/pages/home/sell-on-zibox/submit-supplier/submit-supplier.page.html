@@ -1,0 +1,109 @@
+<ion-content class="submit-padding">
+  <div class="submit-become-supplier">
+    {{'becomeSupplierZiBox' | translate}}
+    <hr>
+    <span>{{'note' | translate}}. <span>*</span> {{'fieldIsRequired' | translate}}</span>
+  </div>
+  <ion-button class="back-button ios-top-margin" routerLink="../">
+    <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+  </ion-button>
+  <form [formGroup]="supplierForm" autocomplete="off">
+    <!-- Profile -->
+    <div class="profile-panel">
+      <!-- Profile -->
+      <ion-thumbnail>
+        <img alt="Avatar" *ngIf="marketLogo" [src]="marketLogo" />
+        <ion-text class="account-title" *ngIf="marketLogo == ''">
+          {{'marketLogo' | translate}}
+        </ion-text>
+        <input style="display: none;" type="file" (change)="fileChangeEvent($event)" #logo />
+        <ion-button class="edit-button" (click)="logo.click()">
+          <img src="./assets/images/edit.png" alt="">
+        </ion-button>
+      </ion-thumbnail>
+    </div>
+    <div class="login-input-style">
+      <input class="login-input-text" formControlName="market_name" tabindex="-1">
+      <label class="login-input-title">{{'marketName' | translate}} <span class="required">*</span></label>
+    </div>
+    <div class="login-input-style phone-input-style">
+      <input class="login-input-text" type="tel" formControlName="phone_number" tabindex="-1">
+      <label class="login-input-title">{{'phone' | translate}} <span class="required">*</span></label>
+      <span class="phone-code-style ion-activatable" id="address-phone-code-modal" expand="block">
+        {{phoneCode}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </span>
+    </div>
+    <div class="login-input-style">
+      <input class="login-input-text" type="email" formControlName="email" tabindex="-1">
+      <label class="login-input-title">{{'email' | translate}} <span class="required">*</span></label>
+    </div>
+    <!-- Country Phone Number Code -->
+    <ion-modal #modal trigger="address-phone-code-modal" [initialBreakpoint]="0.50"
+      [breakpoints]="[0, 0.25, 0.5, 0.75, 1]">
+      <ng-template>
+        <ion-content>
+          <ion-searchbar placeholder="Search" show-clear-button="focus" (click)="modal.setCurrentBreakpoint(1)"
+            (ionChange)="countryCodeChange($event)"></ion-searchbar>
+          <ion-list>
+            <ion-item *ngFor="let item of phoneCodeSearch" button="true" detail="false"
+              (click)="selectCountryCode(item)">
+              <ion-label class="country-information">
+                <p>{{item.name}}</p>
+                <p>{{item.code}}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+    <div class="login-input-style">
+      <input class="login-input-text" #productCat
+        (keyup.enter)="addProductCategory(productCat.value); productCat.value = ''" tabindex="-1" enterkeyhint="enter">
+      <label class="login-input-title">{{'productCategories' | translate}} <span class="required">*</span></label>
+      <p class="login-input-note">{{'note' | translate}}. {{'pressEnterToAddProductCategories' | translate}} </p>
+    </div>
+    <div>
+      <ion-chip color="dark" *ngFor="let item of productCategories">
+        <ion-label>{{item}}</ion-label>
+        <ion-icon name="close" (click)="deleteProductCategory(item)"></ion-icon>
+      </ion-chip>
+    </div>
+    <div class="login-input-style">
+      <input class="login-input-text" #brandCat (keyup.enter)="addBrandCategory(brandCat.value); brandCat.value = ''"
+        tabindex="-1" enterkeyhint="enter">
+      <label class="login-input-title">{{'brandCategories' | translate}} <span class="required">*</span></label>
+      <p class="login-input-note">{{'note' | translate}}. {{'pressEnterToAddProductCategories' | translate}} </p>
+    </div>
+    <div *ngIf="brandCategories.length > 0">
+      <ion-chip color="dark" *ngFor="let item of brandCategories">
+        <ion-label>{{item}}</ion-label>
+        <ion-icon name="close" (click)="deleteBrandCategory(item)"></ion-icon>
+      </ion-chip>
+    </div>
+    <div class="login-input-style">
+      <input class="login-input-text" formControlName="location" tabindex="-1">
+      <label class="login-input-title">{{'address' | translate}} <span class="required">*</span></label>
+    </div>
+    <div id="{{mapId}}" class="submit-supplier-map">
+      <ion-skeleton-text [animated]="true" *ngIf="isLoading"></ion-skeleton-text>
+    </div>
+  </form>
+  <button class="submit-supplier" (click)="confirm()"
+    [disabled]="!supplierForm.valid || productCategories.length < 1 || brandCategories.length < 1 || isLoading">
+    {{'send' | translate}}
+    <div class="button-loading" *ngIf="isLoading">
+      <svg viewBox="0 0 50 50">
+        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+      </svg>
+    </div>
+  </button>
+</ion-content>
+<!-- Send Animation -->
+<div class="success-animation" *ngIf="submitIsSend">
+  <svg class="checkmark" viewBox="0 0 52 52">
+    <circle cx="26" cy="26" r="25" fill="none" />
+    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+  </svg>
+  <p>{{'submitSupplier' | translate}}</p>
+</div>

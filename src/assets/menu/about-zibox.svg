@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-Sign_In_Forget_Password_Verification_code_5">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Sign_In_Forget_Password_Verification_code_5" data-name="Sign In – Forget Password – Verification code – 5" clip-path="url(#clip-Sign_In_Forget_Password_Verification_code_5)">
+    <g id="Group_3283" data-name="Group 3283" transform="translate(-8348.467 -5435.718)">
+      <path id="Path_602" data-name="Path 602" d="M15.1,14.1v11.88l9.811-5.165V8.935Z" transform="translate(8345.559 5433.091)"/>
+      <path id="Path_603" data-name="Path 603" d="M.659,20.817l9.727,5.163V14.1L.659,8.938Z" transform="translate(8349.806 5433.089)"/>
+      <path id="Path_604" data-name="Path 604" d="M15.1,14.1v11.88l9.811-5.165V8.935Z" transform="translate(8345.559 5433.091)" fill="#999"/>
+      <path id="Path_605" data-name="Path 605" d="M.659,20.817l9.727,5.163V14.1L.659,8.938Z" transform="translate(8349.806 5433.089)" fill="#999"/>
+      <path id="Path_606" data-name="Path 606" d="M.465,18.188V6.309l9.726,5.163V23.351Zm10.192-6.716,9.812-5.166V18.188l-9.812,5.166ZM10.467,0,0,5.536V18.467l10.191,5.41.124.066.11.057.232-.122,10.276-5.41V5.536Z" transform="translate(8349.999 5435.718)"/>
+    </g>
+  </g>
+</svg>

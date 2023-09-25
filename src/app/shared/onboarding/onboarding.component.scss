@@ -1,0 +1,516 @@
+/* #region Onboarding */
+.onboarding {
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.onboarding-fade-out {
+  opacity: 0;
+}
+
+/* #endregion Onboarding */
+
+/* #region Welcome */
+.welcome-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+}
+
+.welcome-panel p {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 36px;
+  opacity: 0;
+  color: #000;
+  top: 75%;
+  margin: 10px auto;
+  animation: text 5s ease-in-out var(--delay) forwards;
+}
+
+.welcome-zibox {
+  font-weight: 900;
+}
+
+@keyframes text {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+    top: 40%;
+  }
+
+  75% {
+    top: 40%;
+    opacity: 1;
+  }
+
+  100% {
+    top: 10%;
+    opacity: 0;
+  }
+
+}
+
+/* #endregion Welcome*/
+
+/* #region Language */
+.language-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+}
+
+.select-language {
+  position: absolute;
+  display: grid;
+  grid-template-rows: auto auto 1fr 44px;
+  justify-items: center;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  bottom: -75%;
+  padding: 15px;
+  background-color: #fff;
+  animation: language 1s ease-in-out 5s forwards;
+  overflow: auto;
+}
+
+@keyframes language {
+  0% {
+    bottom: -75%;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+.select-language h1 {
+  margin: 30px 0 0 0;
+  color: #000;
+}
+
+.select-language h3 {
+  color: #000;
+  font-size: 18px;
+  margin: 0 0 15px 0;
+}
+
+.language-content {
+  position: relative;
+  display: grid;
+  align-content: baseline;
+  width: 100%;
+  max-width: 350px;
+  height: 100%;
+  grid-gap: 10px;
+  gap: 10px;
+  overflow: auto;
+}
+
+.language-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-top: 55px;
+  margin-bottom: 8px;
+  opacity: 0;
+  color: #000;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: transparent;
+  animation: language-item 0.3s ease-in-out var(--delay) forwards;
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes language-item {
+  0% {
+    margin-top: 55px;
+    opacity: 0;
+  }
+
+  100% {
+    margin-top: 0px;
+    opacity: 1;
+  }
+}
+
+.language-item::after {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 1px;
+  width: 100%;
+  opacity: 0.1;
+  bottom: -10px;
+  background: linear-gradient(45deg, transparent, #000, transparent);
+}
+
+.language-item:last-child:after {
+  content: none;
+}
+
+.active-language {
+  font-weight: 900;
+  background-color: #eee;
+}
+
+.next-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  height: 100%;
+  padding: 10px 50px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: var(--ion-color-primary);
+}
+
+.next-button .button-loading {
+  border-radius: 50px;
+  background-color: var(--ion-color-primary);
+}
+
+.next-button:active {
+  position: relative;
+}
+
+.hide-language-panel {
+  animation: hide-language 0.5s ease-in-out forwards;
+}
+
+@keyframes hide-language {
+  0% {
+    opacity: 1;
+    bottom: 0;
+  }
+
+  100% {
+    opacity: 0;
+    bottom: 25%;
+  }
+}
+
+/* #endregion Language*/
+
+/* #region Permission */
+.permission-panel {
+  position: fixed;
+  display: grid;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+  opacity: 0;
+  background-color: transparent;
+  transition: all 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+.show-permission-panel {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.permission-background {
+  position: fixed;
+  top: -75%;
+  left: -75%;
+  right: -75%;
+  bottom: -75%;
+  background: url("../../../assets/first-launch/bg-pattern.jpg");
+  background-size: 500px;
+  -webkit-transform: rotate(45deg) translateX(-45px);
+  transform: rotate(45deg) translateX(-45px);
+}
+
+.permission-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(0deg, #fff, rgba(255, 255, 255, 0.95));
+}
+
+.permission-content {
+  position: fixed;
+  display: grid;
+  grid-template-rows: 1fr 40px 1fr 40px;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+  top: 15px;
+  left: 0;
+  right: 0;
+  bottom: 15px;
+  align-items: end;
+  justify-items: center;
+  pointer-events: none;
+}
+
+.show-panel {
+  pointer-events: all;
+}
+
+.permission-content img {
+  position: relative;
+  display: block;
+  width: 200px;
+  opacity: 0;
+  margin-bottom: 50px;
+  transition: all 0.5s ease-in-out;
+}
+
+.permission-content h1 {
+  position: relative;
+  display: block;
+  width: 100%;
+  opacity: 0;
+  margin-right: 150px;
+  text-align: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.permission-content p {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: calc(100% - 30px);
+  text-align: center;
+  margin-left: 150px;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.show-panel img {
+  margin-top: 0;
+  opacity: 1;
+}
+
+.show-panel h1 {
+  margin-right: 0;
+  opacity: 1;
+}
+
+.show-panel P {
+  margin-left: 0;
+  opacity: 1;
+}
+
+.permission-content .next-button {
+  position: relative;
+  display: block;
+  top: 75px;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.show-panel .next-button {
+  top: 0;
+  opacity: 1;
+  pointer-events: all;
+}
+
+// Dots
+.dots {
+  position: fixed;
+  display: flex;
+  place-content: center;
+  gap: 30px;
+  opacity: 0;
+  width: 100%;
+  height: 7px;
+  left: 0;
+  right: 0;
+  bottom: 75px;
+  transition: all 0.5s ease-in-out;
+}
+
+.show-permission-panel .dots {
+  gap: 10px;
+  opacity: 1;
+}
+
+.dot {
+  position: relative;
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 5px;
+  border: 1px solid var(--ion-color-primary);
+  transition: all 0.3s ease-in-out;
+}
+
+.active-dot {
+  width: 25px;
+  background-color: var(--ion-color-primary);
+}
+
+/* #endregion Permission */
+
+/* #region Loaction*/
+.location-panel,
+.notification-panel {
+  position: fixed;
+  display: grid;
+  place-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+  opacity: 0;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.show-location-panel,
+.show-notification-panel {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.location-panel .modal-content,
+.notification-panel .modal-content {
+  top: 200px;
+  opacity: 0;
+  z-index: 1;
+}
+
+.show-location-panel .modal-content,
+.show-notification-panel .modal-content {
+  animation: modal-content 0.75s ease-in-out 0.8s forwards;
+}
+
+@keyframes modal-content {
+  0% {
+    top: 150px;
+  }
+
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+
+}
+
+.onboarding-skip {
+  position: absolute;
+  display: inline-block;
+  width: auto;
+  height: 40px;
+  top: 10px;
+  right: 0;
+  padding: 10px 15px;
+  color: #999;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.show-location-panel .onboarding-skip,
+.show-notification-panel .onboarding-skip {
+  animation: skip 0.3s ease-in-out 1.5s forwards;
+  pointer-events: all;
+}
+
+@keyframes skip {
+  0% {
+    top: -70px;
+    opacity: 0;
+  }
+
+  100% {
+    top: 25px;
+    opacity: 1;
+  }
+
+}
+
+/* #endregion Loaction*/
+
+
+/* #region Modal*/
+.modal-content {
+  position: relative;
+  display: grid;
+  gap: 15px;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  padding: 15px;
+  background-color: #f5f5f5;
+  z-index: 1;
+  border-radius: 15px;
+}
+
+.modal-content>img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.welcome-modal-title {
+  margin: 0;
+  color: #000;
+  font-weight: 900;
+  text-align: center;
+}
+
+.welcome-modal-meta {
+  margin: 0;
+  color: #000;
+  text-align: center;
+}
+
+.welcome-modal-button {
+  position: relative;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  height: 46px;
+  padding: 15px 10px;
+  color: #fff;
+  font-size: 16px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #353e58;
+  overflow: hidden;
+}
+
+.welcome-modal-button .button-loading {
+  background-color: #353e58;
+}
+
+.welcome-modal-button:active {
+  background-color: #212a44;
+}
+
+.welcome-modal-button img {
+  padding-right: 10px;
+}
+
+/* #endregion Modal*/

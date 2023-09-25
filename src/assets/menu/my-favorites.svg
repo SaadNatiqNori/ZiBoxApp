@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-Sign_In_Forget_Password_Verification_code_2">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Sign_In_Forget_Password_Verification_code_2" data-name="Sign In – Forget Password – Verification code – 2" clip-path="url(#clip-Sign_In_Forget_Password_Verification_code_2)">
+    <g id="Heart" transform="translate(0 0.6)">
+      <path id="Path_34179" d="M11.727,22.6a43.509,43.509,0,0,1-7.594-5.949A15.2,15.2,0,0,1,.5,10.89C-.869,6.642.72,1.787,5.157.346A7.539,7.539,0,0,1,12,1.56h0A7.549,7.549,0,0,1,18.851.346c4.437,1.441,6.037,6.3,4.671,10.544a15.2,15.2,0,0,1-3.615,5.765A43.9,43.9,0,0,1,12.313,22.6l-.3.2Z" transform="translate(0.004 0)" opacity="0.4"/>
+      <path id="Path_34178" d="M12.013,22.8l-.282-.2a43.581,43.581,0,0,1-7.6-5.949A15.2,15.2,0,0,1,.469,10.89C-.886,6.642.7,1.787,5.14.346a7.555,7.555,0,0,1,6.873,1.227Z" transform="translate(0 0)"/>
+      <path id="Path_34180" d="M16.676,7.8h0a.862.862,0,0,1-.621-.333.982.982,0,0,1-.2-.71h0a1.976,1.976,0,0,0-1.193-1.908.945.945,0,0,1-.636-1.137.87.87,0,0,1,1.037-.688.461.461,0,0,1,.166.063A3.836,3.836,0,0,1,17.6,6.871a.969.969,0,0,1-.275.672A.849.849,0,0,1,16.676,7.8Z" transform="translate(2.8 0.6)"/>
+    </g>
+  </g>
+</svg>

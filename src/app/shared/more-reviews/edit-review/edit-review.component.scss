@@ -1,0 +1,192 @@
+.custom-toolbar-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.write-reviews-paading {
+  --padding-top: 35px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-bottom: 10px;
+  --color: #000;
+  --background: #fff;
+}
+
+.write-reviews-stars {
+  display: flex;
+  place-content: center;
+  gap: 20px;
+}
+
+.write-reviews-star img {
+  width: 30px;
+}
+
+.login-input-style {
+  position: relative;
+  margin: 40px 0 10px 0;
+}
+
+.login-two-input-style {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+}
+
+.login-input-title {
+  position: absolute;
+  display: grid;
+  align-content: center;
+  width: 100%;
+  height: 20px;
+  margin: auto;
+  top: 10px;
+  padding: 0 15px;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-input-text {
+  position: relative;
+  display: grid;
+  align-content: center;
+  width: 100%;
+  height: 200px;
+  top: 0;
+  bottom: 0;
+  padding: 10px 15px;
+  resize: none;
+  border: 1px solid #e7eaed;
+  border-radius: 5px;
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-input-text:focus {
+  border-color: var(--ion-color-primary);
+}
+
+.login-input-text:focus+.login-input-title,
+.login-input-text:valid+.login-input-title {
+  top: -20px;
+  padding: 0;
+  font-size: 12px;
+}
+
+.review-image-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-gap: 10px;
+}
+
+.review-image {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  background: #eee;
+}
+
+.review-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.review-image-delete {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  padding: 0;
+  color: #fff;
+  font-size: 18px;
+  backdrop-filter: blur(3px);
+  border-radius: 4px;
+  background-color: rgba(150, 0, 0, 0.7);
+}
+
+.review-image-upload {
+  margin: 15px 0;
+}
+
+.review-image-upload input {
+  display: none;
+}
+
+.button-loading {
+  background-color: var(--ion-color-primary);
+}
+
+// Footer
+
+// Footer
+.product-footer {
+  position: fixed;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  bottom: 0;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+}
+
+.product-footer-button {
+  display: flex;
+  place-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 40px;
+  --color: #fff;
+  --background: var(--ion-color-primary);
+  --background-hover: transparent;
+  --background-activated: var(--ion-color-primary);
+  --background-focused: transparent;
+  --border-radius: 5px;
+  --border-color: transparent;
+  --border-style: solid;
+  --border-width: 1px;
+  --box-shadow: none;
+  --padding-top: 5px;
+  --padding-bottom: 5px;
+  --padding-start: 5px;
+  --padding-end: 5px;
+  margin: 0;
+  transition: all 0.3s linear;
+}
+
+.product-footer-button svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  margin-inline-start: 10px;
+}
+
+.product-footer-button ion-icon {
+  margin-inline-start: 8px;
+}
+
+.product-on-your-cart {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  height: 40px;
+  margin: 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  border-radius: 5px;
+  background-color: #6d6d6d;
+  z-index: 1;
+}

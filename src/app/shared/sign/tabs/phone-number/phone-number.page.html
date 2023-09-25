@@ -1,0 +1,84 @@
+<div class="content">
+  <ion-button class="back-button ios-top-margin" (click)="back()">
+    <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+  </ion-button>
+  <!-- Phone Number -->
+  <div class="phone-padding" [ngStyle]="{'pointer-events': isActive? 'all' : 'none'}">
+    <form [formGroup]="phoneForm" class="loginForm" autocomplete="off">
+      <h1 class="page-title">{{'phone' | translate}}</h1>
+      <div class="control-style control-with-code">
+        <label class="control-title">{{'phone' | translate}}</label>
+        <div class="ion-activatable" id="phone-code-modal" expand="block">
+          +{{phoneCode}}
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+        <input class="control-input" type="tel" formControlName="phone" placeholder="7xx xxx xxxx">
+      </div>
+      <p class="user-aggrement">
+        {{'signupAgreement' | translate}}
+        (<span (click)="openLegalInformationModals('privacy')">{{'privacy' | translate}}</span>
+        {{'and' | translate}}
+        <span (click)="openLegalInformationModals('termsOfUse')">{{'termsOfUse' | translate}}</span>)
+      </p>
+      <button class="submit-button ion-activatable" (click)="sendCode()" [disabled]="sendCodeIsLoading ||
+      !phoneForm.valid || showVerficationCode || canResend == false">
+        {{'send' | translate}} {{durationToResend}}
+        <div class="button-loading" *ngIf="sendCodeIsLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </form>
+    <!-- Country Phone Number Code -->
+    <ion-modal #modal trigger="phone-code-modal" [initialBreakpoint]="0.50" [breakpoints]="[0, 0.25, 0.5, 0.75, 1]">
+      <ng-template>
+        <ion-content>
+          <ion-searchbar placeholder="Search" show-clear-button="focus" (click)="modal.setCurrentBreakpoint(1)"
+            (ionChange)="handleChange($event)"></ion-searchbar>
+          <ion-list>
+            <ion-item *ngFor="let item of phoneCodeSearch" button="true" detail="false" (click)="selectCountry(item)">
+              <ion-label class="country-information">
+                <p>{{item.name}}</p>
+                <p>+{{item.code}}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </div>
+  <!-- Verification Code -->
+  <div class="code-padding" [class.show-change]="!isActive" [class.change-rtl]="otherService.direction == 'rtl'">
+    <form [formGroup]="codeForm" class="loginForm" autocomplete="off">
+      <h1 class="page-title">{{'phone' | translate}}</h1>
+      <div class="show-phone-number ion-activatable" (click)="isActive = true">
+        {{phoneNumber}} <img src="./assets/images/edit.svg" alt="">
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+      <div class="control-style">
+        <label class="control-title">{{'writeVerificationCode' | translate}}</label>
+        <input class="control-input input-code" type="text" formControlName="code" placeholder="xxxxxx" minlength="6"
+          maxlength="6" (change)="autoSubmitCode()" (keyup)="autoSubmitCode()">
+      </div>
+      <button class="submit-button ion-activatable" (click)="submitCode()" [disabled]="submitCodeIsLoading ||
+      !codeForm.valid">
+        {{'submit' | translate}}
+        <div class="button-loading" *ngIf="submitCodeIsLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+      <div class="resend-panel">
+        {{'didnotReceiveCode'|translate}}
+        <button class="ion-activatable" (click)="resendCode()" [disabled]="!canResend || submitCodeIsLoading">
+          {{'resend'| translate}} {{durationToResend}}
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

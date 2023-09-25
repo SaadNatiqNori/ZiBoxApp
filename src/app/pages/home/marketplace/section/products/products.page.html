@@ -1,0 +1,45 @@
+<!-- Title bar -->
+<ion-toolbar class="products-toolbar">
+  <div class="products-toolbar-panel">
+    <button class="products-toolbar-button ion-activatable" title="Sell on ZiBox" routerLink="../">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <div class="products-toolbar-title">{{'allProducts' | translate}}</div>
+  </div>
+</ion-toolbar>
+<ion-content class="products-padding">
+  <div class="section-panel" id="productPanel">
+    <div class="section-header">
+      <p class="section-title">
+        <!-- {{'allProducts' | translate}} -->
+      </p>
+      <select class="section-sort" #so (change)="filter(so.value)">
+        <option value="newly_arrived">{{'newlyArrived' | translate}}</option>
+        <option value="low_to_high">{{'lowToHigh' | translate}}</option>
+        <option value="high_to_low">{{'highToLow' | translate}}</option>
+      </select>
+    </div>
+    <div class="product-container" *ngIf="items.length > 0">
+      <zi-card *ngFor="let item of items" [item]="item"></zi-card>
+    </div>
+    <div class="product-container" *ngIf="items.length < 1">
+      <zi-card-skeleton *ngFor="let item of [].constructor(8)"></zi-card-skeleton>
+    </div>
+    <!-- Infinity Scrolling -->
+    <ion-infinite-scroll class="scroll-loading" loadingSpinner="bubbles" (ionInfinite)="onIonInfinite($event)"
+      *ngIf="items.length > 0">
+      <ion-infinite-scroll-content *ngIf="pageNumber <= pageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="pageNumber > pageCount && items.length > 10" (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+  </div>
+  <!-- Pull Down to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>

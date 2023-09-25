@@ -1,0 +1,172 @@
+<ion-content [fullscreen]="true" class="menu-padding">
+  <div class="profile-header-background"></div>
+  <div class="profile-container">
+    <div class="profile-header">
+      <button class="header-currency ion-activatable" (click)="otherService.openCurrency()">
+        <img src="./assets/menu/currency-type.svg" alt="">
+        <p>1<span>$</span> = {{otherService.exchangeRate}}<span>IQD</span></p>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+      <button class="header-notification ion-activatable" (click)="otherService.openNotifications()">
+        <img src="./assets/menu/notification.svg" alt="">
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </div>
+    <div class="profile-panel">
+      <div class="profile-thumbnail" *ngIf="!profileService.isLogin" (click)="otherService.openSign()">
+        <img alt="Avatar" [src]="profileService.picture() || './assets/avatar/avatar.svg'" #img
+          (error)="img.src = './assets/avatar/avatar.svg'">
+      </div>
+      <div class="profile-title" *ngIf="!profileService.isLogin">
+        <button class="profile-button ion-activatable" (click)="otherService.openSign()">
+          {{'signin' | translate}} / {{'signup' | translate}}
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </div>
+      <div class="profile-thumbnail" *ngIf="profileService.isLogin">
+        <img alt="Avatar" [src]="profileService.picture() || './assets/avatar/avatar.svg'" #img
+          (error)="img.src = './assets/avatar/avatar.svg'">
+      </div>
+      <div class="profile-title" *ngIf="profileService.isLogin">
+        <p class="profile-name">{{profileService.fullname()}}</p>
+        <button class="profile-invitaion ion-activatable" (click)="share()">
+          <span>{{profileService.invitionCode()}}</span>
+          <img class="profile-share" src="./assets/menu/share.svg" alt="">
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+        <div class="profile-action" *ngIf="profileService.isLogin">
+          <button class="profile-button ion-activatable" (click)="openMyProfileModals()">
+            {{'editAccount' | translate}}
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Menu -->
+  <div class="menu-list">
+    <!-- My Orders -->
+    <button class="menu-button ion-activatable" *ngIf="!profileService.isLogin" (click)="otherService.openSign()">
+      <img src="./assets/menu/my-orders.svg">
+      <span>{{'myOrders' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <button class="menu-button ion-activatable" *ngIf="profileService.isLogin" (click)="goToURL('menu/my-orders')">
+      <img src="./assets/menu/my-orders.svg">
+      <span>{{'myOrders' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- My Favourites -->
+    <button class="menu-button ion-activatable" *ngIf="!profileService.isLogin" (click)="otherService.openSign()">
+      <img src="./assets/menu/my-favorites.svg">
+      <span>{{'myFavourites' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <button class="menu-button ion-activatable" *ngIf="profileService.isLogin" (click)="goToURL('menu/my-favourites')">
+      <img src="./assets/menu/my-favorites.svg">
+      <span>{{'myFavourites' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- My Reviews -->
+    <button class="menu-button ion-activatable" *ngIf="!profileService.isLogin" (click)="otherService.openSign()">
+      <img src="./assets/menu/my-reviews.svg">
+      <span>{{'myReviews' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <button class="menu-button ion-activatable" *ngIf="profileService.isLogin" (click)="goToURL('menu/my-reviews')">
+      <img src="./assets/menu/my-reviews.svg">
+      <span>{{'myReviews' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- My Addresses -->
+    <button class="menu-button ion-activatable" *ngIf="!profileService.isLogin" (click)="otherService.openSign()">
+      <img src="./assets/menu/my-addresses.svg">
+      <span>{{'myAddresses' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <button class="menu-button ion-activatable" *ngIf="profileService.isLogin" (click)="goToURL('menu/my-addresses')">
+      <img src="./assets/menu/my-addresses.svg">
+      <span>{{'myAddresses' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <hr class="gray-line">
+    <!-- ZiCredit -->
+    <button class="menu-button ion-activatable" *ngIf="!profileService.isLogin" (click)="otherService.openSign()">
+      <img src="./assets/menu/zi-credit.svg">
+      <span>{{'ziCredit' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <button class="menu-button ion-activatable" *ngIf="profileService.isLogin" (click)="goToURL('menu/zi-credit')">
+      <img src="./assets/menu/zi-credit.svg">
+      <span>{{'ziCredit' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- Refer a friend -->
+    <button class="menu-button ion-activatable" *ngIf="!profileService.isLogin" (click)="otherService.openSign()">
+      <img src="./assets/menu/refer-a-friend.svg">
+      <span>{{'referFriend' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <button class="menu-button ion-activatable" *ngIf="profileService.isLogin" (click)="openReferFriendModals()">
+      <img src="./assets/menu/refer-a-friend.svg">
+      <span>{{'referFriend' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- Who is Refering you -->
+    <button class="menu-button ion-activatable" *ngIf="profileService.isLogin && profileService.invitedBy() == null" (click)="openWhoReferYouModals()">
+      <img src="./assets/menu/who-refer-you.svg">
+      <span>{{'whoReferYou' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <hr class="gray-line">
+    <!-- Language -->
+    <button class="menu-dropdown ion-activatable" (click)="otherService.openLanguages()">
+      <img src="./assets/menu/languages.svg">
+      <span>{{'language' | translate}}</span>
+      <span>{{otherService.language}}</span>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- Currency -->
+    <button class="menu-dropdown ion-activatable" (click)="otherService.openCurrency()">
+      <img src="./assets/menu/currency-type.svg">
+      <span>{{'currency' | translate}}</span>
+      <span>{{otherService.currency}}</span>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <hr class="gray-line">
+    <!-- Legal Information -->
+    <button class="menu-button ion-activatable" (click)="openLegalInformationModals()">
+      <img src="./assets/menu/legal-Information.svg">
+      <span>{{'legalInformation' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <!-- About and helps -->
+    <button class="menu-button ion-activatable" (click)="openCompanyModals()">
+      <img src="./assets/menu/about-zibox.svg">
+      <span>{{'moreAboutZibox' | translate}}</span>
+      <img src="./assets/menu/more.svg" class="menu-more">
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+    <hr class="gray-line" *ngIf="profileService.isLogin">
+    <!-- Sign Out -->
+    <button class="menu-button ion-activatable" *ngIf="profileService.isLogin" (click)="logout()">
+      <img src="./assets/menu/sign-out.svg">
+      <span>{{'logout' | translate}}</span>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+  </div>
+</ion-content>

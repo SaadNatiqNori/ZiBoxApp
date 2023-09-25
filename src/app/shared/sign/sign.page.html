@@ -1,0 +1,46 @@
+<div class="sign-panel">
+  <ion-button class="back-button ios-top-margin" (click)="close()">
+    <ion-icon name="{{icons.closeIcon()}}"></ion-icon>
+  </ion-button>
+  <img class="logo" src="../../../assets/sign/logo.svg">
+  <p class="title">{{'signTitle' | translate}}</p>
+  <p class="meta">{{'signMeta' | translate}}</p>
+  <button class="sign-button ion-activatable" (click)="signService.selectTab = 'signin'">
+    <img src="../../../assets/sign/email.png">
+    <span>{{'continueEmail' | translate}}</span>
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+  <button class="sign-button ion-activatable" (click)="signService.selectTab = 'phone'">
+    <img src="../../../assets/sign/mobile.png">
+    <span>{{'continuePhone' | translate}}</span>
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+  <button class="sign-button ion-activatable" (click)="signInWithFacebook()">
+    <img src="../../../assets/sign/facebook.png">
+    <span>{{'continueFacebook' | translate}}</span>
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+  <button class="sign-button ion-activatable" (click)="signInWithGoogle()">
+    <img src="../../../assets/sign/google.png">
+    <span>{{'continueGmail' | translate}}</span>
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+  <button class="sign-button ion-activatable" (click)="signInWithApple()" *ngIf="platform.is('ios')">
+    <img src="../../../assets/sign/icloud.png">
+    <span>{{'continueICloud' | translate}}</span>
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+</div>
+<!-- Pages -->
+<zi-phone class="pages" [class.pages-rtl]="otherService.direction == 'rtl'"
+  [class.active-page]="signService.selectTab == 'phone'">
+</zi-phone>
+<zi-signin class="pages" [class.pages-rtl]="otherService.direction == 'rtl'"
+  [class.active-page]="signService.selectTab == 'signin'">
+</zi-signin>
+<zi-signup class="pages" [class.pages-rtl]="otherService.direction == 'rtl'"
+  [class.active-page]="signService.selectTab == 'signup'">
+</zi-signup>
+<zi-forgot-password class="pages" [class.pages-rtl]="otherService.direction == 'rtl'"
+  [class.active-page]="signService.selectTab == 'forgot'">
+</zi-forgot-password>

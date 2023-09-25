@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-Artboard_1">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_1" data-name="Artboard – 1" clip-path="url(#clip-Artboard_1)">
+    <g id="Iconly_Light-Outline_Arrow---Right-2" data-name="Iconly/Light-Outline/Arrow---Right-2" transform="translate(-2.85 -4.286)">
+      <g id="Arrow---Right-2" transform="translate(7.75 28.286) rotate(-90)">
+        <path id="Stroke-1" d="M.34.367A1.1,1.1,0,0,1,1.852.246l.13.121L12,11.174,22.018.367A1.1,1.1,0,0,1,23.53.246l.13.121A1.328,1.328,0,0,1,23.772,2l-.112.141L12.821,13.833a1.1,1.1,0,0,1-1.512.121l-.13-.121L.34,2.139A1.324,1.324,0,0,1,.34.367Z" transform="translate(0)"/>
+      </g>
+    </g>
+  </g>
+</svg>

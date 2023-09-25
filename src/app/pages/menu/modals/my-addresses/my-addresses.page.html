@@ -1,0 +1,46 @@
+<!-- Custom Toolbar -->
+<ion-toolbar class="custom-toolbar">
+  <div class="custom-toolbar-panel">
+    <ion-button class="custom-toolbar-button white-toolbar-button" routerLink="../">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+    </ion-button>
+    <p class="custom-toolbar-title">{{"myAddresses" | translate}}</p>
+  </div>
+</ion-toolbar>
+<!-- My Addresses Content -->
+<ion-content class="my-address-padding">
+  <!-- My Addresses -->
+  <div class="address-item ion-activatable" *ngFor="let item of items">
+    <div class="address-information" (click)="openEditModal(false, item)">
+      <div>
+        {{item.country}}, {{item.city}}, {{item.street}}
+        <div class="address-as-default" *ngIf="item.as_default">
+          <span>
+            {{'default' | translate}}
+          </span>
+        </div>
+      </div>
+      <img src="./assets/images/edit.svg" alt="">
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="address-delete ion-activatable" (click)="deleteAddress(item)">
+      <img src="./assets/images/delete.svg" alt="">
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div>
+  <!-- Loading -->
+  <div *ngIf="items.length < 1 && isLoading">
+    <ion-skeleton-text class="address-item" *ngFor="let item of [1, 2, 3, 4, 5]" [animated]="true"></ion-skeleton-text>
+  </div>
+  <!-- No Order -->
+  <div class="empty-items" *ngIf="items.length < 1 && !isLoading">
+    <img src="./assets/gif/my-addresses.gif" alt="">
+    {{'noAddresses' | translate}}
+  </div>
+  <!-- Add Address -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="items.length < 5 && !isLoading">
+    <ion-fab-button size="small" (click)="openEditModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

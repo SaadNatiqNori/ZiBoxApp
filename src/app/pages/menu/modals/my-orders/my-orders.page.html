@@ -1,0 +1,417 @@
+<!-- Custom Toolbar -->
+<ion-toolbar class="custom-toolbar">
+  <div class="custom-toolbar-panel">
+    <ion-button class="custom-toolbar-button white-toolbar-button" routerLink="../">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+    </ion-button>
+    <p class="custom-toolbar-title">{{(selectTab == 'myOrder'? "myOrders" : "myReturnProducts") | translate}}</p>
+  </div>
+</ion-toolbar>
+<!-- Tabs -->
+<div class="tab-panel">
+  <button class="tab-button" [class.tab-active]="selectTab == 'myOrder'" (click)="selectTab = 'myOrder'">
+    {{"myOrders" | translate}}
+  </button>
+  <button class="tab-button" [class.tab-active]="selectTab == 'myReturn'" (click)="selectTab = 'myReturn'">
+    {{"myReturnProducts" | translate}}
+  </button>
+</div>
+<!-- My Orders Content -->
+<ion-content class="orders-padding">
+  <!-- My Orders -->
+  <div *ngIf="selectTab == 'myOrder'">
+    <!-- My Orders Card -->
+    <div *ngFor="let item of items" class="orders-container ion-activatable" (click)="openOrderModal(item)">
+      <div class="order-header">
+        <div class="oredrs-title">
+          {{item.address.contact_name}}
+          <div class="oredrs-meta">{{item.address.country}}, {{item.address.city}}, {{item.address.street}}</div>
+        </div>
+        <img src="./assets/orders/processing.png" *ngIf="item.status == 5">
+        <img src="./assets/orders/preparing.png" *ngIf="item.status == 25">
+        <img src="./assets/orders/sending.png" *ngIf="item.status == 30">
+        <img src="./assets/orders/delivered.png" *ngIf="item.status == 40">
+        <img src="./assets/orders/canceled.png" *ngIf="item.status == 50">
+        <img src="./assets/orders/failed.png" *ngIf="item.status == 60">
+        <img src="./assets/orders/successfully.png" *ngIf="item.status == 100">
+      </div>
+      <div class="order-information">
+        <div>
+          <span class="order-detail-text">{{'orderNum' | translate}}</span>
+          <span class="order-detail-number">{{item.id}}</span>
+        </div>
+        <div>
+          <span class="order-detail-text">{{'items' | translate}}</span>
+          <span class="order-detail-number">{{item.products.length}}</span>
+        </div>
+        <div>
+          <span class="order-detail-text">{{'price' | translate}}</span>
+          <span class="order-detail-number">{{totalPrices(item.price_coins)}}<sub>{{otherService.currency}}</sub></span>
+        </div>
+      </div>
+      <div class="has-returnable-item" *ngIf="item.returnable">
+        <span>{{'note' | translate}}</span>.
+        {{'someProductIsReturnable' | translate}}
+      </div>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <!-- Loading -->
+    <div *ngIf="items.length == 0 && isLoading">
+      <div class="orders-container" *ngFor="let item of [0, 1, 2, 3]">
+        <div class="oredrs-title">
+          <ion-skeleton-text [animated]="true" style="width:125px;"></ion-skeleton-text>
+          <span class="order-status">
+            <ion-skeleton-text [animated]="true" style="width:50px;"></ion-skeleton-text>
+          </span>
+        </div>
+        <div class="oredrs-meta">
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </div>
+        <div class="order-information">
+          <div>
+            <span class="order-detail-text">{{'orderNum' | translate}}</span>
+            <span class="order-detail-number">
+              <ion-skeleton-text [animated]="true" style="width:40px;"></ion-skeleton-text>
+            </span>
+          </div>
+          <div>
+            <span class="order-detail-text">{{'items' | translate}}</span>
+            <span class="order-detail-number">
+              <ion-skeleton-text [animated]="true" style="width:20px;"></ion-skeleton-text>
+            </span>
+          </div>
+          <div>
+            <span class="order-detail-text">{{'price' | translate}}</span>
+            <span class="order-detail-number">
+              <ion-skeleton-text [animated]="true" style="width:50px;"></ion-skeleton-text>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- No Order -->
+    <div class="empty-items" *ngIf="items.length < 1 && !isLoading">
+      <img src="./assets/gif/my-orders.gif" alt="">
+      {{'noOrders' | translate}}
+    </div>
+    <!-- Order Modal -->
+    <ion-modal [isOpen]="isOrderOpen" (willDismiss)="closeOrderModal()" [swipeToClose]="true">
+      <ng-template>
+        <div class="content">
+          <ion-button class="back-button ios-top-margin" (click)="close()">
+            <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+          </ion-button>
+          <div class="header-panel">
+            <div class="header-text">
+              <h1 class="header-title">{{selectData.address.contact_name}}</h1>
+              <div class="header-meta">
+                {{selectData.address.country}}, {{selectData.address.city}}, {{selectData.address.street}}
+              </div>
+            </div>
+            <div class="my-order-modal">
+              <div class="modal-information">
+                <div class="modal-detail">
+                  <span class="modal-detail-text">{{'orderNum' | translate}}</span>
+                  <span class="modal-detail-value">{{selectData.id}}</span>
+                </div>
+                <div class="modal-detail">
+                  <span class="modal-detail-text">{{'price' | translate}}</span>
+                  <span
+                    class="modal-detail-value">{{totalPrices(selectData.price_coins)}}<sub>{{otherService.currency}}</sub></span>
+                </div>
+                <div class="modal-detail">
+                  <span class="modal-detail-text">{{'orderDate' | translate}}</span>
+                  <span class="modal-detail-value">{{selectData.ctime}}</span>
+                </div>
+              </div>
+              <img src="./assets/orders/processing.png" *ngIf="selectData.status == 5">
+              <img src="./assets/orders/preparing.png" *ngIf="selectData.status == 25">
+              <img src="./assets/orders/sending.png" *ngIf="selectData.status == 30">
+              <img src="./assets/orders/delivered.png" *ngIf="selectData.status == 40">
+              <img src="./assets/orders/canceled.png" *ngIf="selectData.status == 50">
+              <img src="./assets/orders/failed.png" *ngIf="selectData.status == 60">
+              <img src="./assets/orders/successfully.png" *ngIf="selectData.status == 100">
+            </div>
+            <div class="order-status"><span>{{'statuses.code_' + selectData.status | translate}}</span></div>
+          </div>
+          <div class="order-statuses">
+            <div class="order-status-item" *ngFor="let status of statuses"
+              [class.order-status-active]="status == selectData.status">
+              <!-- Status Icon -->
+              <img src="./assets/orders/processing.png" *ngIf="status == 5">
+              <img src="./assets/orders/preparing.png" *ngIf="status == 25">
+              <img src="./assets/orders/sending.png" *ngIf="status == 30">
+              <img src="./assets/orders/delivered.png" *ngIf="status == 40">
+              <!-- Status Text -->
+              <p class="order-status-title">{{'statuses.code_' + status | translate}}</p>
+              <!-- Status Mark -->
+              <ion-icon name="checkmark-done-outline" *ngIf="selectData.status > status"
+                class="status-successfully"></ion-icon>
+              <ion-icon name="time-outline" *ngIf="selectData.status == status"></ion-icon>
+            </div>
+            <!-- Last Status -->
+            <div class="order-status-item">
+              <img *ngIf="selectData.status == 100" src="./assets/orders/successfully.png" alt="">
+              <img *ngIf="selectData.status == 50" src="./assets/orders/canceled.png">
+              <img *ngIf="selectData.status == 60" src="./assets/orders/failed.png">
+              <img *ngIf="selectData.status != 50 && selectData.status != 60 && selectData.status != 100"
+                src="./assets/orders/none.png">
+              <p class="order-status-title">
+                <span *ngIf="selectData.status < 50">
+                  {{'statuses.code_50' | translate}} / {{'statuses.code_60' | translate}} / {{'statuses.code_100' |
+                  translate}}
+                </span>
+                <span *ngIf="selectData.status >= 50">{{'statuses.code_' + selectData.status | translate}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="order-products-panel">
+            <h4>{{'products' | translate}} : {{selectData.products.length}}</h4>
+            <div class="order-products">
+              <div class="order-product" *ngFor="let item of selectData.products" (click)="openProduct(item)">
+                <img src="{{item.thumb}}" alt="{{item.p_title}}">
+                <p>{{item.p_title}}</p>
+                <p>({{item.count}}x) {{otherService.comma(item.price || item.price_coins)}} د.ع</p>
+              </div>
+            </div>
+            <div class="order-cancel" *ngIf="selectData.status == 5">
+              <button class="section-delete delete-button ion-activatable" (click)="cancelOrder()">
+                {{'cancel' | translate}}
+              </button>
+            </div>
+            <div class="order-cancel" *ngIf="selectData.returnable">
+              <button class="section-delete submit-button ion-activatable" (click)="returnOrderOpen = true;">
+                {{'returnSomeProduct' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+    <!-- Ruturnable Order Products Modal -->
+    <ion-modal [isOpen]="returnOrderOpen" (willDismiss)="returnOrderOpen = false" [swipeToClose]="true">
+      <ng-template>
+        <div class="returnable-content">
+          <ion-button class="back-button ios-top-margin" (click)="returnOrderOpen = false">
+            <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+          </ion-button>
+          <div class="returnable-product-container">
+            <div class="returnable-product" *ngFor="let product of returnProducts">
+              <img class="product-image" src="{{product.thumb}}">
+              <div class="product-information">
+                <div class="products-header">
+                  <div class="products-title" (click)="openProduct(product)">
+                    <span class="products-name">{{product.title}}</span>
+                    <div class="products-size" *ngIf="product.details">
+                      {{'size' | translate}} : {{product.details.split(',')[1]}}
+                    </div>
+                  </div>
+                  <button class="delete-product ion-activatable" (click)="deleteProduct(product)">
+                    <ion-icon name="close-outline"></ion-icon>
+                    <ion-ripple-effect></ion-ripple-effect>
+                  </button>
+                </div>
+                <div (click)="openProduct(product)">
+                  <span class="product-price">
+                    <!-- Price -->
+                    <span>{{calcPrice(product) | number}}</span>
+                    <!-- Point -->
+                    <hr *ngIf="product.point">
+                    <span class="product-point" *ngIf="product.point">{{product.point}} pt.</span>
+                  </span>
+                </div>
+                <div class="product-total-price">
+                  <div class="product-action">
+                    <button class="product-action-button" [class.product-action-disabled]="product.count == 1"
+                      [disabled]="product.count == 1" (click)="changeCount(product, '-')" *ngIf="product.max_count > 1">
+                      <ion-icon name="remove-outline"></ion-icon>
+                    </button>
+                    <span *ngIf="product.max_count > 1">{{product.count}}</span>
+                    <button class="product-action-button" (click)="changeCount(product, '+')"
+                      [class.product-action-disabled]="product.count >= product.max_count"
+                      [disabled]="product.count >= product.max_count" *ngIf="product.max_count > 1">
+                      <ion-icon name="add-outline"></ion-icon>
+                    </button>
+                  </div>
+                  <p>{{totalPrice(product) | number}} {{otherService.currency}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="control-style">
+              <label class="control-title">{{'note' | translate}} <span class="required">*</span></label>
+              <textarea class="control-textarea" [(ngModel)]="note"></textarea>
+            </div>
+          </div>
+          <div class="submit-returnable-order" *ngIf="returnProducts.length > 0">
+            <button class="section-delete submit-button ion-activatable" (click)="submitReturnOrder()">
+              {{'submit' | translate}}
+              <div class="button-loading" *ngIf="isLoading">
+                <svg viewBox="0 0 50 50">
+                  <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+    <!-- Infinity Scrolling -->
+    <ion-infinite-scroll class="scroll-loading" loadingSpinner="bubbles" (ionInfinite)="onIonInfinite($event)"
+      *ngIf="items.length > 0">
+      <ion-infinite-scroll-content *ngIf="pageNumber <= pageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="pageNumber > pageCount && items.length > 10" (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+    <!-- Pull Down to Refresh -->
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  </div>
+  <!-- My Returned Products -->
+  <div *ngIf="selectTab == 'myReturn'">
+    <div *ngFor="let item of returnItems" class="orders-container ion-activatable" (click)="openReturnOrderModal(item)">
+      <div class="order-header">
+        <div class="oredrs-title">
+          {{item.note}}
+          <div class="oredrs-meta">{{item.ctime}}</div>
+        </div>
+        <img src="./assets/orders/processing.png" *ngIf="item.status == 10">
+        <img src="./assets/orders/canceled.png" *ngIf="item.status == 20">
+        <img src="./assets/orders/successfully.png" *ngIf="item.status == 30">
+      </div>
+      <div class="order-information">
+        <div>
+          <span class="order-detail-text">{{'id' | translate}}</span>
+          <span class="order-detail-number">{{item.id}}</span>
+        </div>
+        <div>
+          <span class="order-detail-text">{{'items' | translate}}</span>
+          <span class="order-detail-number">{{item.products.length}}</span>
+        </div>
+        <div>
+          <span class="order-detail-text">{{'status' | translate}}</span>
+          <span class="order-detail-number" *ngIf="item.status == 10">{{'waiting' | translate}}</span>
+          <span class="order-detail-number" *ngIf="item.status == 20">{{'rejected' | translate}}</span>
+          <span class="order-detail-number" *ngIf="item.status == 30">{{'approved' | translate}}</span>
+        </div>
+      </div>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <!-- Loading -->
+    <div *ngIf="returnItems.length == 0 && returnIsLoading">
+      <div class="orders-container" *ngFor="let item of [0, 1, 2, 3]">
+        <div class="oredrs-title">
+          <ion-skeleton-text [animated]="true" style="width:125px;"></ion-skeleton-text>
+          <span class="order-status">
+            <ion-skeleton-text [animated]="true" style="width:50px;"></ion-skeleton-text>
+          </span>
+        </div>
+        <div class="oredrs-meta">
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </div>
+        <div class="order-information">
+          <div>
+            <span class="order-detail-text">{{'id' | translate}}</span>
+            <span class="order-detail-number">
+              <ion-skeleton-text [animated]="true" style="width:40px;"></ion-skeleton-text>
+            </span>
+          </div>
+          <div>
+            <span class="order-detail-text">{{'items' | translate}}</span>
+            <span class="order-detail-number">
+              <ion-skeleton-text [animated]="true" style="width:20px;"></ion-skeleton-text>
+            </span>
+          </div>
+          <div>
+            <span class="order-detail-text">{{'status' | translate}}</span>
+            <span class="order-detail-number">
+              <ion-skeleton-text [animated]="true" style="width:50px;"></ion-skeleton-text>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- No Order -->
+    <div class="empty-items" *ngIf="returnItems.length < 1 && !returnIsLoading">
+      <img src="./assets/gif/my-orders.gif" alt="">
+      {{'noReturnedProducs' | translate}}
+    </div>
+    <!-- Infinity Scrolling -->
+    <ion-infinite-scroll class="scroll-loading" loadingSpinner="bubbles" (ionInfinite)="returnOnIonInfinite($event)"
+      *ngIf="items.length > 0">
+      <ion-infinite-scroll-content *ngIf="returnPageNumber <= returnPageCount">
+        {{'pleaseWait' | translate}}
+      </ion-infinite-scroll-content>
+      <button class="back-to-top" *ngIf="returnPageNumber > returnPageCount && returnItems.length > 10" (click)="backToTop()">
+        {{'backToTop' | translate}}
+        <ion-icon name="arrow-up-outline"></ion-icon>
+      </button>
+    </ion-infinite-scroll>
+    <!-- Pull Down to Refresh -->
+    <ion-refresher slot="fixed" (ionRefresh)="returnHandleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <!-- My Ruturn Order Products Modal -->
+    <ion-modal [isOpen]="isReturnOrderOpen" (willDismiss)="isReturnOrderOpen = false" [swipeToClose]="true">
+      <ng-template>
+        <div class="content">
+          <ion-button class="back-button ios-top-margin" (click)="close()">
+            <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+          </ion-button>
+          <div class="header-panel">
+            <div class="header-text">
+              <h1 class="header-title">{{selectReturnData.note}}</h1>
+            </div>
+            <div class="my-order-modal">
+              <div class="modal-information">
+                <div class="modal-detail">
+                  <span class="modal-detail-text">{{'id' | translate}}</span>
+                  <span class="modal-detail-value">{{selectReturnData.id}}</span>
+                </div>
+                <div class="modal-detail">
+                  <span class="modal-detail-text">{{'items' | translate}}</span>
+                  <span class="modal-detail-value">{{selectReturnData.products.length}}</span>
+                </div>
+                <div class="modal-detail">
+                  <span class="modal-detail-text">{{'orderDate' | translate}}</span>
+                  <span class="modal-detail-value">{{selectReturnData.ctime}}</span>
+                </div>
+              </div>
+              <img src="./assets/orders/processing.png" *ngIf="selectReturnData.status == 10">
+              <img src="./assets/orders/canceled.png" *ngIf="selectReturnData.status == 20">
+              <img src="./assets/orders/successfully.png" *ngIf="selectReturnData.status == 30">
+            </div>
+            <div class="order-status">
+              <span class="order-detail-number" *ngIf="selectReturnData.status == 10">{{'waiting' | translate}}</span>
+              <span class="order-detail-number" *ngIf="selectReturnData.status == 20">{{'rejected' | translate}}</span>
+              <span class="order-detail-number" *ngIf="selectReturnData.status == 30">{{'approved' | translate}}</span>
+            </div>
+          </div>
+          <div class="order-statuses">
+            <div class="order-status-item" *ngFor="let item of selectReturnData.products" (click)="openProduct(item)">
+              <img class="item-image" src="{{item.thumb}}" alt="{{item.title}}">
+              <p>
+                {{item.title}}
+                <span class="item-quantity">{{item.qty}}x</span>
+              </p>
+            </div>
+            <div class="order-cancel" *ngIf="selectReturnData.status == 10">
+              <button class="delete-button ion-activatable" (click)="deleteReturnedRequest()">
+                {{'delete' | translate}}
+                <div class="button-loading" *ngIf="deleteLoading">
+                  <svg viewBox="0 0 50 50">
+                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+  </div>
+</ion-content>

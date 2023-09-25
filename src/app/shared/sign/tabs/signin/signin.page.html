@@ -1,0 +1,45 @@
+<div class="content">
+  <ion-button class="back-button ios-top-margin" (click)="signService.selectTab = null">
+    <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+  </ion-button>
+  <div class="sign-in-padding">
+    <form [formGroup]="loginForm" class="loginForm" autocomplete="off">
+      <h1 class="page-title">{{'signin' | translate}}</h1>
+      <div class="control-style">
+        <label class="control-title">{{'email' | translate}}</label>
+        <input class="control-input" type="email" formControlName="phone" placeholder="ex. e-mail@zibox.io">
+      </div>
+      <div class="control-style">
+        <label class="control-title">{{'password' | translate}}</label>
+        <input class="control-input" id="password" type="password" formControlName="password" placeholder="ex. P@$$w0rD">
+        <button class="control-password ion-activatable" (click)="passwordToggle()">
+          <img src="./assets/sign/password-{{showPassword == true? 'show' : 'hide'}}.svg" >
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </div>
+      <div class="forgot-password">
+        <div (click)="changeTab('forgot')" class="forgot-password-button ion-activatable">
+          {{'forgotPassword' | translate}}
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+      </div>
+      <button class="submit-button ion-activatable" (click)="confirm()" [disabled]="isLoading ||
+      !loginForm.valid">
+        {{'signin' | translate}}
+        <div class="button-loading" *ngIf="isLoading">
+          <svg viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+      <div class="split">
+        <span>{{'or' | translate}}</span>
+      </div>
+      <button class="sign-button ion-activatable" (click)="signService.selectTab = 'signup'">
+        {{'signup' | translate}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </form>
+  </div>
+</div>

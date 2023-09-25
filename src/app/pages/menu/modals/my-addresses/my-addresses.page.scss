@@ -1,0 +1,98 @@
+.my-address-padding {
+  --padding-top: 10px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-bottom: 10px;
+  --color: #000;
+  --background: #fff;
+}
+
+.address-item {
+  position: relative;
+  display: flex;
+  place-items: center;
+  min-height: 45px;
+  margin-bottom: 15px;
+}
+
+.address-information {
+  position: relative;
+  display: flex;
+  place-items: center;
+  width: calc(100% - 50px);
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.address-information>div {
+  width: calc(100% - 60px);
+  padding: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.address-information>img {
+  position: relative;
+  display: grid;
+  place-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.address-delete {
+  position: relative;
+  display: grid;
+  place-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  border-radius: 5px;
+  background-color: #eb5354;
+  overflow: hidden;
+}
+
+.address-delete img {
+  width: 16px;
+  height: 16px;
+  filter: invert(1);
+}
+
+.address-as-default {
+  align-items: center;
+  font-size: 12px;
+  font-weight: 900;
+  margin-top: 5px;
+}
+
+.address-as-default span {
+  font-size: 12px;
+  font-weight: 900;
+  margin-top: 5px;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 3px;
+  background-color: var(--ion-color-primary);
+}
+
+ion-fab{
+  bottom: 75px;
+}
+
+ion-fab-button {
+  --background: var(--ion-color-primary);
+  --background-activated: #242d46;
+  --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, .3), 0px 1px 3px 1px rgba(0, 0, 0, .15);
+  --color: #fff;
+}
+
+.empty-items img {
+  width: 175px;
+  height: 50px;
+  object-fit: cover;
+}

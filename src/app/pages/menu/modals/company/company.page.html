@@ -1,0 +1,25 @@
+<!-- Custom Toolbar -->
+<ion-toolbar class="custom-toolbar">
+  <div class="custom-toolbar-panel">
+    <ion-button class="custom-toolbar-button white-toolbar-button" (click)="close()">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+    </ion-button>
+    <p class="custom-toolbar-title">{{"moreAboutZibox" | translate}}</p>
+  </div>
+</ion-toolbar>
+<ion-content class="company-padding">
+  <ion-list class="company-section" lines="full">
+    <div class="company-title">{{'getToKnowUs'|translate}}</div>
+    <ion-item button="true" detail="false" *ngFor="let item of abuot" (click)="openLegalInformationModals(item)">
+      <ion-label>{{item | translate}}</ion-label>
+      <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-list class="company-section" lines="full">
+    <div class="company-title">{{'letUsHelpYou'|translate}}</div>
+    <ion-item button="true" detail="false" *ngFor="let item of helps" (click)="openLegalInformationModals(item)">
+      <ion-label>{{item | translate}}</ion-label>
+      <ion-icon name="{{icons.detailIcon()}}" class="detail" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

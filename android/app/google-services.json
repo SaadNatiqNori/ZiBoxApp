@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "691527637295",
+    "firebase_url": "https://zibox-prod.firebaseio.com",
+    "project_id": "zibox-prod",
+    "storage_bucket": "zibox-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691527637295:android:4c06a5a994373cdcb469da",
+        "android_client_info": {
+          "package_name": "com.ionicframework.zitrade271041"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691527637295-amd6caoadirt6etq26ehru6mnohtdk0v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionicframework.zitrade271041",
+            "certificate_hash": "9bda2d83cbf1ff07152a9cc071cc4fa432d4fa40"
+          }
+        },
+        {
+          "client_id": "691527637295-mtf75qie98vh6anl9g9c200vgver2hnn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsxrHzEzXXSZQZanSonqg91HAsJH17CkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691527637295-280dl992d8h6uqtajbv094h1k5c4dn48.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "691527637295-dnvkvjaotgjc3e0l2i96o7g19nc62taf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ionicframework.zitrade271041"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

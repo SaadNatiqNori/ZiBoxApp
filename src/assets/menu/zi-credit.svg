@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-Zi_Credit">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Zi_Credit" data-name="Zi Credit" clip-path="url(#clip-Zi_Credit)">
+    <g id="Iconly_Bulk_Wallet" data-name="Iconly/Bulk/Wallet" transform="translate(-2 -1.8)">
+      <g id="Wallet" transform="translate(2 3)">
+        <path id="Fill-1" d="M17.417,0C21.552,0,24,2.374,24,6.405h0V6.45H18.914a4.24,4.24,0,0,0-4.285,4.178,4.238,4.238,0,0,0,4.285,4.19H24v.367c0,4.031-2.444,6.415-6.579,6.415H6.58C2.444,21.6,0,19.216,0,15.185H0V6.405C0,2.374,2.444,0,6.58,0H17.417ZM12.46,4.65H5.687a.9.9,0,1,0,0,1.791h6.781A.9.9,0,1,0,12.46,4.65Z"/>
+        <path id="Fill-4" d="M14.045,9.776A2.421,2.421,0,0,0,16.439,11.7h3.9a.871.871,0,0,0,.861-.88V7.781a.874.874,0,0,0-.861-.881H16.347A2.382,2.382,0,0,0,14,9.312a2.442,2.442,0,0,0,.045.464" transform="translate(2.8 1.38)" opacity="0.4"/>
+        <circle id="Oval" cx="1.2" cy="1.2" r="1.2" transform="translate(18 9.48)"/>
+      </g>
+    </g>
+  </g>
+</svg>

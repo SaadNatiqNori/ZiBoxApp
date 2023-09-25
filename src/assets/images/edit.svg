@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <clipPath id="clip-Artboard_1">
+      <rect width="18" height="18"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_1" data-name="Artboard – 1" clip-path="url(#clip-Artboard_1)">
+    <g id="Iconly_Curved_Edit" data-name="Iconly/Curved/Edit" transform="translate(-3.571 -3.601)">
+      <g id="Edit" transform="translate(4.25 4.25)">
+        <line id="Stroke-1" x2="6.864" transform="translate(9.779 16.422)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Stroke-3" d="M13.459,1.405h0a3.274,3.274,0,0,0-4.583.653L1.609,11.74c-1.872,2.495-.1,5.586-.1,5.586s3.491.8,5.336-1.656l7.267-9.681A3.274,3.274,0,0,0,13.459,1.405Z" transform="translate(-0.75 -0.75)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" fill-rule="evenodd"/>
+        <line id="Stroke-5" x2="5.235" y2="3.93" transform="translate(6.732 3.187)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>

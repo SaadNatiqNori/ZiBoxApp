@@ -1,0 +1,95 @@
+.brands-padding {
+  --padding-bottom: 75px;
+  --background: #f9f9f9;
+}
+
+// Search
+.search-panel {
+  position: sticky;
+  display: block;
+  height: 60px;
+  padding: 15px;
+  top: 0;
+  z-index: 10;
+  background: #f9f9f9;
+}
+
+.search-panel .search {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0 34px;
+  color: #000;
+  outline: none;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-panel .search-icon {
+  position: absolute;
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: auto 0;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  bottom: 0;
+}
+
+.search-panel .search-loading {
+  position: absolute;
+  width: 45px;
+  left: calc(100% - 55px);
+  right: calc(100% - 55px);
+  background: transparent;
+}
+
+.search-loading svg {
+  width: 20px;
+  height: 20px;
+}
+
+.search-loading svg * {
+  stroke: var(--ion-color-primary);
+}
+
+// Brand Section
+.section-panel {
+  background-color: transparent;
+  user-select: none;
+}
+
+.section-title {
+  color: #000;
+}
+
+.brand-container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+}
+
+.brand-item {
+  position: relative;
+  display: block;
+  width: 110px;
+  margin: 5px;
+  padding: 10px;
+  color: #000;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.brand-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 90px;
+}

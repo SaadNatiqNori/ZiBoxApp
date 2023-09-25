@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.ionicframework.zitrade271041",
+      "sha256_cert_fingerprints": [
+        "99:6e:08:45:f8:6e:39:9e:01:ad:bf:93:cb:1e:61:23:90:5c:e4:4e:4d:11:f6:ba:4b:cc:ac:4a:0e:75:00:74"
+      ]
+    }
+  }
+]

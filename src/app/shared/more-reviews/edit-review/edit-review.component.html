@@ -1,0 +1,53 @@
+<!-- Custom Toolbar -->
+<ion-toolbar class="custom-toolbar">
+  <div class="custom-toolbar-panel">
+    <ion-button class="custom-toolbar-button white-toolbar-button"  (click)="close()">
+      <ion-icon name="{{icons.backIcon()}}"></ion-icon>
+    </ion-button>
+    <p class="custom-toolbar-title">{{productName}}</p>
+  </div>
+</ion-toolbar>
+<ion-content class="write-reviews-paading">
+  <div class="write-reviews-stars">
+    <div class="write-reviews-star" *ngFor="let num of [1,2,3,4,5]" (click)="rating = num">
+      <img *ngIf="rating >= num" src="./assets/images/ratings/star-fill.svg" alt="{{num}}">
+      <img *ngIf="rating < num" src="./assets/images/ratings/star.svg" alt="{{num}}">
+    </div>
+  </div>
+  <div class="login-input-style">
+    <textarea class="login-input-text" maxlength="250" required [(ngModel)]="description"></textarea>
+    <label class="login-input-title">{{'writeYourReview' | translate}}</label>
+  </div>
+  <div class="review-image-panel">
+    <div class="review-image" *ngFor="let img of images">
+      <img src="{{img}}">
+      <button (click)="deleteImage(img)" class="review-image-delete">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </div>
+  </div>
+  <div class="review-image-upload">
+    <input id="file" #file type="file" class="form-control" multiple (change)="onFileChange($event)">
+  </div>
+</ion-content>
+<footer class="product-footer">
+  <ion-button class="product-footer-button" (click)="file.click()" [disabled]="isLoading">
+    {{'uploadImages' | translate}}
+    <svg viewBox="0 0 90 89.991" style="width: 18px; height: 18px;">
+      <g>
+        <path
+          d="M64.5,0c7.252,0,13.507,2.422,18.085,7.008,4.785,4.79,7.41,11.757,7.4,19.623l.007,31.553a3.515,3.515,0,0,1,0,.364l-.011,4.816c0,15.924-10.251,26.627-25.508,26.627H25.486C10.242,89.991,0,79.289,0,63.364V26.627C0,10.7,10.242,0,25.486,0Zm1.247,48.853c-2.652,0-5.764,4.388-8.519,8.262C53.45,62.437,49.54,67.943,43.65,67.943c-3.982,0-7.631-1.533-10.846-2.891-5.114-2.156-7.432-2.846-9.7-.979-4.541,3.742-9.028,10.556-11.09,13.909,3.254,3.355,7.877,5.243,13.473,5.243H64.479c11.388,0,18.743-7.793,18.743-19.862v-3.6l-.1-.11C79.17,55.584,72.352,48.853,65.749,48.853ZM64.5,6.765H25.486c-11.369,0-18.721,7.8-18.721,19.862V63.364a24.328,24.328,0,0,0,1.325,8.19c2.61-3.941,6.551-9.276,10.715-12.7,5.646-4.645,11.726-2.093,16.624-.032,2.882,1.213,5.606,2.359,8.222,2.359,2.4,0,5.407-4.239,8.068-7.978,3.694-5.213,7.888-11.112,14.03-11.112,6.741,0,12.846,4.143,17.478,8.254l0-23.715c.009-6.147-1.867-11.279-5.421-14.838C74.518,8.5,69.922,6.765,64.5,6.765ZM30.925,18.894A11.728,11.728,0,0,1,42.633,30.6v0A11.708,11.708,0,1,1,30.925,18.894Zm0,6.765a4.941,4.941,0,1,0,4.947,4.947A4.944,4.944,0,0,0,30.92,25.659Z"
+          fill="#fff" />
+      </g>
+    </svg>
+  </ion-button>
+  <ion-button class="product-footer-button" (click)="sendReview()" [disabled]="isLoading || rating == 0 || description == ''">
+    {{'send' | translate}}
+    <ion-icon name="{{icons.buyIcon()}}"></ion-icon>
+    <div class="button-loading" *ngIf="isLoading">
+      <svg viewBox="0 0 50 50">
+        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+      </svg>
+    </div>
+  </ion-button>
+</footer>
